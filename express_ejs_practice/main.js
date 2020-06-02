@@ -1,30 +1,17 @@
 'use strict';
 
 const express = require('express');
-const app = express();
-app.set('port', process.env.PORT || 3000);
-
-const expresslayouts = require('express-ejs-layouts');
-app.set('view engine', 'ejs');
-app.use(expresslayouts);
-
-app.use(express.static('public'));
-
-const topController = require('./controllers/topController');
+const app = express(); // Express.js適応
+app.set('port', process.env.PORT || 3000); // port選択、セット
+app.set('view engine', 'ejs'); // EJS適応
+const expresslayouts = require('express-ejs-layouts'); 
+app.use(expresslayouts); // express-ejs-laypots適応
+app.use(express.static('public')); // 静的ファイルの供給
+const homeController = require('./controllers/homeController');
 
 // 経路
-app.get('/', (req, res) => {
-    res.send('ようこそ');
-});
-
-app.get('/top', topController.topPage);
-
-// HTTPリクエスト解析
-app.use(express.urlencoded({
-    extended: false
-})
-);
-app.use(expres.json);
+app.get('/top', homeController.fixedPage);
+app.get('/personalinfo', homeController.personalInfoPage)
 
 //
 app.listen(app.get('port'), () => {
