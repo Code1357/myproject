@@ -1,23 +1,23 @@
-li {
-  float: left;
-}
-
 ul {
-  width: 1000px;
-  margin: 0px;
-  padding: 4px;
+  width: 1024px;
+  height: 15px;
+  margin: 2px;
+  padding: 10px;
   overflow: hidden;
+  border: solid;
+  border-color: lightseagreen;
 }
 
 li {
   float: left;
-  width: 100px;
+  width: 70px;
   list-style-type: none;
 }
 
 a {
   display: inline-block;
-  padding: 2px;
+  margin: 0px;
+  padding: 1px;
   text-align: center;
   font-weight: bold;
   text-decoration: none;

@@ -1,5 +1,6 @@
 body {
   width: 100%;
+  min-width: 480px;
   max-width: 1024px;
   margin: auto;
   margin-top: 330px;
@@ -11,8 +12,24 @@ a {
   text-decoration: none;
 }
 
+/*　画面サイズ480px以上　*/
+@media screen and (min-width:480px) { 
+
 .entrance {
-  font-size: 30px;
+  font-size: 20px;
   font-family: "M PLUS 1p";
   color: #33272a;
+}
+
+}
+
+/*画面サイズ768px以上,　1024px以下*/
+@media screen and (min-width:768px) {
+
+.entrance {
+  font-size: 40px;
+  font-family: "M PLUS 1p";
+  color: #33272a;
+}
+
 }
