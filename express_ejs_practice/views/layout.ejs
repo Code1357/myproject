@@ -6,17 +6,24 @@
 body
 ・viewsにある.ejsが適応される
 -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/layout.css">
+</head>
 
 <body>
     <header>
-        <div>
+        <div class=header >
         <%- include('partials/header'); %> 
         </div>
     </header>
     
-    <div><%- include('partials/sideinfo'); %> </div>
+    <div class=sidedata ><%- include('partials/sideinfo'); %> </div>
     
-    <%- body %>
+    <div class="changebody"> <%- body %> </div>
 
     <footer>
     <div>
@@ -24,3 +31,5 @@ body
         </div>
     </footer>
 </body>
+
+</html>
