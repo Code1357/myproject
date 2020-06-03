@@ -8,10 +8,19 @@ body
 -->
 
 <body>
-    <header>ヘッダー箇所
-        <li class="menulist"><a href="http://localhost:3000/personalinfo" class="link">MENU1</a></li>
+    <header>
+        <div>
+        <%- include('partials/header'); %> 
+        </div>
     </header>
+    
     <div><%- include('partials/sideinfo'); %> </div>
+    
     <%- body %>
-    <footer>フッター箇所</footer>
+
+    <footer>
+    <div>
+        <%- include('partials/footer'); %> 
+        </div>
+    </footer>
 </body>

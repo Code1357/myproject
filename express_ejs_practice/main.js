@@ -10,7 +10,8 @@ app.use(express.static('public')); // 静的ファイルの供給
 const homeController = require('./controllers/homeController');
 
 // 経路
-app.get('/top', homeController.fixedPage);
+app.use('/top', homeController.topPage);
+app.get('/fixed', homeController.fixedPage);
 app.get('/personalinfo', homeController.personalInfoPage)
 
 //

@@ -1,6 +1,10 @@
 'use strict';
 
-// 経路のコントロール
+// 経路コントローラ
+exports.topPage = (req, res) => {
+    res.sendFile('./public/top.html', {root: './'});
+};
+
 exports.fixedPage = (req, res) => {
     res.render('index');
 };
