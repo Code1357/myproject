@@ -20,12 +20,13 @@ app.use(express.static('public')); // 静的ファイルの供給
 
 
 // 経路
-app.get('/', homeController.topPage);
-app.get('/index', homeController.index);
-app.get('/personalinfo', homeController.personalInfoPage);
-app.get('/carerecord', homeController.careRecord);
-app.get('/contactus',homeController.contactUs);
+router.get('/', homeController.topPage);
+router.get('/index', homeController.index);
+router.get('/personalinfo', homeController.personalInfoPage);
+router.get('/carerecord', homeController.careRecord);
+router.get('/contactus',homeController.contactUs);
 
+app.use("/", router);　// appの変わりにrouterを使えという命令
 
 //
 app.listen(app.get('port'), () => {
