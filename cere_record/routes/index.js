@@ -5,6 +5,7 @@ const router = require('express').Router(); // ExpressとRouterをload
 // const apiRoutes = require('./apiRoutes');
 const managerRoutes = require('./managerRoutes');
 const staffRoutes = require('./staffRoutes');
+const careRecordRoutes = require('./careRecordRoutes');
 const errorRoutes = require('./errorRoutes');
 const homeRoutes = require('./homeRoutes');
 
@@ -12,6 +13,7 @@ const homeRoutes = require('./homeRoutes');
 // router.use('/api',apiRoutes); // home,errorより上に記述必要
 router.use('/managers', managerRoutes);
 router.use('/staffs', staffRoutes);
+router.use('/careRecords', careRecordRoutes);
 router.use('/', homeRoutes);
 router.use('/', errorRoutes);
 
