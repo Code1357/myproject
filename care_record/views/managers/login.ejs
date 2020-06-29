@@ -1,0 +1,14 @@
+<%# 経路イメージ, routes -> controllers（処理） -> ejsへのパス指定で到着,表示 %> 
+
+  <div class="m_data_form">
+    <form action="/managers/login" method="POST">
+      <h1>管理者ログイン</h1>
+      <label for="username">社員番号</label>
+      <input type="text" class="m_form" name="username" id="username" placeholder="例.123456">
+
+      <label for="m_password">Password</label>
+      <input type="password" class="m_form" name="password" id="m_password" placeholder="例.password">
+      
+      <button type="submit" class="m_btn">login</button>
+    </form>
+  </div>

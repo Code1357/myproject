@@ -12,6 +12,10 @@
 <body>
   <header>
     <%# header作成スペース %>
+    <div class=header>
+      <%- include('partials/m_header.ejs'); %>
+      <%- include('partials/s_header.ejs'); %>
+    </div>
   </header>
 
   <div class="container">
@@ -20,10 +24,13 @@
 
   <footer>
     <%# footer作成スペース %>
+    <div>
+      <%- include('partials/footer.ejs'); %>
+    </div>
   </footer>
 </body>
 
 </html>
 
 <%# ejs活用参考URL：https://ejs.co %>
-<%# Expressではres.localsに格納する事でビューに表示させれる %> 
+<%# Expressではres.localsに格納する事でビューに表示させれる %>
