@@ -1,6 +1,6 @@
 'use strict';
 
-const mysql = require('mysql');
+const con = require('../db/mysql');
 
 // mysql(DB)での個別処理を記述
 

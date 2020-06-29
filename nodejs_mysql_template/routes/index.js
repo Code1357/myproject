@@ -4,7 +4,7 @@ const router = require('express').Router(); // ExpressとRouterをload
 
 // const apiRoutes = require('./apiRoutes');
 const userRoutes = require('./userRoutes');
-const errorRoutes = require('./errorRoutes.js');
+const errorRoutes = require('./errorRoutes');
 const homeRoutes = require('./homeRoutes');
 
 // 名前空間
