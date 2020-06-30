@@ -11,7 +11,13 @@ module.exports = {
   },
   authenticate: passport.authenticate('local',
     {
-      successRedirect: '/',
-      failureRedirect: '/login'
-    })
+      successRedirect: '/managers/info',
+      successFlash: 'ログインに成功しました',
+      failureRedirect: '/managers/login',
+      failureFlash: 'ログインに失敗しました,社員番号かパスワードが間違っています。確認してください'
+    }),
+  info: (req, res) => {
+    res.render('managers/info');
+  }
+
 };

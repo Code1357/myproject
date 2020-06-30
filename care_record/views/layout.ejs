@@ -13,8 +13,23 @@
   <header>
     <%# header作成スペース %>
     <div class=header>
-      <%- include('partials/m_header.ejs'); %>
-      <%- include('partials/s_header.ejs'); %>
+      <%- include('partials/m_header'); %>
+      <%- include('partials/s_header'); %>
+      <h1>layout header</h1>
+    </div>
+
+    <div class="flash">
+    <% if (flashMessages) { %>
+		<% if (flashMessages.success) { %>
+		<div class="flash success">
+			<%= flashMessages.success %>
+		</div>
+		<% } else if (flashMessages.error) { %>
+		<div class="flash error">
+			<%= flashMessages.error %>
+		</div>
+		<% } %>
+		<% } %>
     </div>
   </header>
 
@@ -25,8 +40,9 @@
   <footer>
     <%# footer作成スペース %>
     <div>
-      <%- include('partials/footer.ejs'); %>
+      <%- include('partials/footer'); %>
     </div>
+    <h1>layout footer</h1>
   </footer>
 </body>
 
