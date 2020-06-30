@@ -1,20 +1,28 @@
 'use strict';
 
 // モジュールloadでうまくいかず
-const mysql = require('mysql');
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'choko7',
-  database: 'care_record'
+const knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host: 'localhost',
+    user: 'root',
+    password: 'choko7',
+    database: 'care_record'
+  }
+});
+const bookshelf = require('bookshelf')(knex);
+const MyDate = bookshelf.model('MyDate', {
+  tableName: 'staff_lists'
 });
 
-// mysql(DB)での個別処理を記述
+const bcrypt = require('bcrypt');
+
 module.exports = {
 
   // sqlを絡めた処理
-  selectPass:
-  con.query('select employee_id, hash from staff_lists', function (err, users) {
-    if (err) throw err;
-  })
+/*   bcrypt.hash(password, 10) function (err, hash) {
+    new MyDate(req. body).save().then((model) => {
+
+    })
+  }) */
 };
