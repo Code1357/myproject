@@ -49,7 +49,7 @@ passport.use(new LocalStrategy({
   passwordFiled: 'password'
 },
 function (username, password, done) {
-  if (username == 'test' && password == 123456) { // DBとの照合処理の記述が必要
+  if (username == 'username' && password == 'password') { // DBとの照合処理の記述が必要
     return done(null, username);
   }
   return done(null, false, { message: '無効です' });
