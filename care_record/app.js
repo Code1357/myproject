@@ -18,6 +18,32 @@ con.connect((err) => {
   console.log('mysqlに接続できました');
 });
 
+/* const selectHash = 'select hash from staff_lists';
+con.query(selectHash, (err, result, fields) => {
+  if (err) throw err;
+  const hash = result;
+  console.log(hash);
+});
+const selectID = 'select employee_id from staff_lists';
+con.query(selectID, (err, result, fields) => {
+  if (err) throw err;
+  const hash = result;
+  console.log(hash);
+}); */
+
+const selectHash = 'select hash from staff_lists';
+con.query(selectHash, (err, result, fields) => {
+  if (err) throw err;
+  const hash = result;
+  console.log(hash);
+});
+const selectID = 'select employee_id from staff_lists';
+con.query(selectID, (err, result, fields) => {
+  if (err) throw err;
+  const id = result;
+  console.log(id);
+});
+
 // set
 app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 3000);
@@ -44,16 +70,17 @@ passport.deserializeUser(function (username, done) {
   done(null, { name: username });
 });
 
-passport.use(new LocalStrategy({
-  usernameFiled: 'username',
-  passwordFiled: 'password'
-},
-function (username, password, done) {
-  if (username == 'username' && password == 'password') { // DBとの照合処理の記述が必要
-    return done(null, username);
+passport.use(new LocalStrategy(
+  /* {
+    usernameFiled: 'username',
+    passwordFiled: 'password'
+  }, */
+  function (username, password, done) {
+    if (username == 'id' && password == 'test') { // DBとの照合処理の記述が必要
+      return done(null, username);
+    }
+    return done(null, false, { message: '無効です' });
   }
-  return done(null, false, { message: '無効です' });
-}
 ));
 
 // passport(FlashMessageに記述必須)

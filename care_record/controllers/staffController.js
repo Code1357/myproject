@@ -1,27 +1,15 @@
 'use strict';
 
-/* 捨てコード
-const knex = require('knex')({
-  client: 'mysql',
-  connection: {
-    host: 'localhost',
-    user: 'root',
-    password: 'choko7',
-    database: 'care_record'
-  }
-});
-const bookshelf = require('bookshelf')(knex);
-const MyDate = bookshelf.model('MyDate', {
-  tableName: 'staff_lists'
-}); */
-const mysql = require('mysql');
+const con = require('../db/mysql');
 
+/* 捨てコード // const mysql = require('mysql');
 const con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'choko7', // mysqlで設定しているrootに対してのPassword
   database: 'care_record' // DB名を記述
-});
+}); */
+
 const Staff = require('../models/staff'); // ../models/userをload
 
 const bcrypt = require('bcrypt');
