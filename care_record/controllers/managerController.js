@@ -13,16 +13,19 @@ module.exports = {
     res.render('managers/login');
   },
   input: (req, res, next) => {
-    const password = req.body.password.toString();
+    const password = req.body.password;
+    const emproyeeId = req.body.username;
     const sql = 'select hash from staff_lists where employee_id = ?';
-    con.query(sql, req.body.username, function (err, result, fields) {
-      console.log(req.body.username);
-      console.log(password);
+    con.query(sql, emproyeeId, function (err, result, fields) {
+      // console.log(req.body.username);
+      // console.log(password);
       if (err) throw err;
-      const selectHash = result; // selectしたhash
-      console.log(selectHash);
-      const hashos = bcrypt.compareSync(password, selectHash); // =>ture
-      console.log(hashos);
+      const hashObj = result; // selectしたhash
+      const hashArray = hashObj.map(value => value.hash);
+      hashArray.forEach(value => { // 照合できるレベルに変換
+        const hash = value;
+        bcrypt.compareSync(password, hash); // hashと入力passを照合,trueかfalse
+      });
       next();
     });
   },
