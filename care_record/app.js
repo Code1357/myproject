@@ -11,6 +11,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const router = require('./routes/index'); // ./routes/indexをload
+const bcrypt = require('bcrypt');
 
 // mysql -> databaseに接続
 con.connect((err) => {
@@ -43,25 +44,38 @@ passport.serializeUser(function (username, done) {
 passport.deserializeUser(function (username, done) {
   done(null, { name: username });
 });
+//
+const ps = 'hoge'; // pass
+const has = bcrypt.hashSync(ps, 10);
+console.log(has);
 
-const selectHash = 'select employee_id, hash from staff_lists';
+const hashos = bcrypt.compareSync(ps, has); // =>ture
+console.log(hashos);
+const hashas = bcrypt.compareSync('fake_hoge', has); // =>false
+console.log(hashas);
+//
+/*
+const hashos = bcrypt.compareSync(password, selectHas); // =>ture
+console.log(hashos);
+*/
+
+/* const selectHash = 'select employee_id, hash from staff_lists';
 con.query(selectHash, (err, result, fields) => {
-  if (err) throw err;
-  const hash = result;
-  const map1 = hash.map(value => value.employee_id.toString());
-  const map2 = hash.map(value => value.hash);
-  console.log(map1);
-  console.log(map2);
-
-  passport.use(new LocalStrategy(
-    function (username, password, done) {
-      if (map1.includes(username) && map2.includes(password)) { // username,password紐付きはinputのname
-        return done(null, username);
-      }
-      return done(null, false, {});
+  if (err) throw err; */
+/*  const hash = result;
+ const map1 = hash.map(value => value.employee_id.toString());
+ const map2 = hash.map(value => value.hash); */
+// console.log(map1);
+// console.log(map2);
+passport.use(new LocalStrategy(
+  function (username, password, done) {
+    if (username.includes(username) && password.includes(password)) { // username,password紐付きはinputのname
+      return done(null, username);
     }
-  ));
-});
+    return done(null, false, {});
+  }
+));
+/* }); */
 
 // passport(FlashMessageに記述必須)
 app.use(passport.initialize());
