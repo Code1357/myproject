@@ -11,7 +11,6 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const router = require('./routes/index'); // ./routes/indexをload
-const { hash } = require('bcrypt');
 
 // mysql -> databaseに接続
 con.connect((err) => {
@@ -48,30 +47,25 @@ passport.deserializeUser(function (username, done) {
 
 passport.use(new LocalStrategy(
   (username, password, done) => {
-    const selectHash = 'select employee_id, hash from staff_lists';
-    con.query(selectHash, (err, result, fields) => {
+    const nameHash = 'select employee_id, hash from staff_lists where employee_id = ?';
+    con.query(nameHash, username, (err, result, fields) => {
       if (err) throw err;
-      const hash = result;
-      const map1 = hash.map(value => value.employee_id.toString());
-      const map2 = hash.map(value => value.hash);
-      console.log(map1); // DBのemployee_idを取得,配列
-      console.log(map2); // DBのpassを取得,配列
-    });
-    console.log(map2);
-  }));
+      const nameHash = result;
+      const employeeid = nameHash.map(value => value.employee_id).toString();
+      const password = nameHash.map(value => value.hash);
+      // const eId = employeeid[0];
+      const pass = password[0];
+      console.log(employeeid);
+      console.log(pass);
 
-/* passport.use(new LocalStrategy(
-  function (username, password, done) { // username,password紐付きはinputのname
-    const eId = 'select employee_id from staff_lists';
-    con.query(eId, username, function (err, result, fields) {
-      const emId = result;
-      const emIdObj = emId.map(value => value.emId);
-      console.log(emId);
-      console.log(username);
-      console.log(password);
-      if (err) throw err;
+      if (username === employeeid && password == pass) {
+        return done(null, username);
+      } else {
+        console.log('Login Error');
+        return done(null, false, { message: 'パスワードが正しくありません' });
+      }
     });
-  })); */
+  }));
 
 // passport(FlashMessageに記述必須)
 app.use(passport.initialize());

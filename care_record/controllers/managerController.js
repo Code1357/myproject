@@ -17,17 +17,13 @@ module.exports = {
     const emproyeeId = req.body.username;
     const sql = 'select hash from staff_lists where employee_id = ?';
     con.query(sql, emproyeeId, function (err, result, fields) {
-      // console.log(req.body.username);
-      // console.log(password);
       if (err) throw err;
-      const hashObj = result; // selectしたhash
+      const hashObj = result;
       const hashArray = hashObj.map(value => value.hash);
-      hashArray.forEach(value => { // 照合できるレベルに変換
-        const hash = value;
-        bcrypt.compareSync(password, hash); // hashと入力passを照合,trueかfalse
-      });
-      next();
+      const hash = hashArray[0];
+      bcrypt.compareSync(password, hash); // hashと入力passを照合,trueかfalse
     });
+    next();
   },
   authenticate: passport.authenticate('local',
     {
