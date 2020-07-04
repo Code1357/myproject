@@ -12,19 +12,17 @@ module.exports = {
   login: (req, res) => {
     res.render('managers/login');
   },
-  input: (req, res, next) => {
-    const password = req.body.password;
-    const emproyeeId = req.body.username;
-    const sql = 'select hash from staff_lists where employee_id = ?';
-    con.query(sql, emproyeeId, function (err, result, fields) {
+  /* selectH: (req, res, next) => {
+    const selectHash = 'select employee_id, hash from staff_lists where employee_id = ?';
+    con.query(selectHash, req.body.username, (err, result, fields) => {
       if (err) throw err;
-      const hashObj = result;
-      const hashArray = hashObj.map(value => value.hash);
-      const hash = hashArray[0];
-      bcrypt.compareSync(password, hash); // hashと入力passを照合,trueかfalse
+      const hash = result;
+      const map1 = hash.map(value => value.employee_id.toString());
+      const map2 = hash.map(value => value.hash);
+      console.log(map1);
+      console.log(map2);
     });
-    next();
-  },
+  }, */
   authenticate: passport.authenticate('local',
     {
       successRedirect: '/managers/info',

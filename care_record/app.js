@@ -11,6 +11,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const router = require('./routes/index'); // ./routes/indexをload
+const bcrypt = require('bcrypt');
 
 // mysql -> databaseに接続
 con.connect((err) => {
@@ -46,25 +47,27 @@ passport.deserializeUser(function (username, done) {
 //
 
 passport.use(new LocalStrategy(
-  (username, password, done) => {
-    const nameHash = 'select employee_id, hash from staff_lists where employee_id = ?';
-    con.query(nameHash, username, (err, result, fields) => {
+  function (username, password, done) {
+    const selectHash = 'select employee_id, hash from staff_lists where employee_id = ?';
+    con.query(selectHash, username, (err, result, fields) => {
       if (err) throw err;
-      const nameHash = result;
-      const employeeid = nameHash.map(value => value.employee_id).toString();
-      const password = nameHash.map(value => value.hash);
-      // const eId = employeeid[0];
-      const pass = password[0];
-      console.log(employeeid);
-      console.log(pass);
+      const hash = result;
+      const map1 = hash.map(value => value.employee_id.toString());
+      const map2 = hash.map(value => value.hash);
+      console.log(map1);
+      console.log(map2);
 
-      if (username === employeeid && password == pass) {
+      const hashd = map2[0];
+      console.log(hashd);
+      const te = bcrypt.compareSync(password, hashd); // hashと入力passを照合,trueかfalse
+      console.log(te);
+
+      if (map1.includes(username) && te === true) { // username,password紐付きはinputのname
         return done(null, username);
-      } else {
-        console.log('Login Error');
-        return done(null, false, { message: 'パスワードが正しくありません' });
       }
-    });
+      return done(null, false, {});
+    }
+    );
   }));
 
 // passport(FlashMessageに記述必須)
