@@ -11,6 +11,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
+const expressValidator = require('express-validator');
 const router = require('./routes/index'); // ./routes/indexをload
 
 // mysql -> databaseに接続
@@ -27,6 +28,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(methodOverride('_method', { methods: ['POST', 'GET'] })); // method-overrideの処理
 app.use(layouts);
 app.use(express.static('public')); // 静的ファイル供給
+app.use(expressValidator());
 app.use(express.urlencoded({ extended: false })); // body-parser同じ
 app.use(express.json()); // body-parser同じ
 app.use(session({

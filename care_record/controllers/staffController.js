@@ -3,10 +3,7 @@
 const con = require('../db/mysql');
 
 const Staff = require('../models/staff'); // ../models/userをload
-const validator = require('express-validator');
-
 const bcrypt = require('bcrypt');
-const { body, check, validationResult } = require('express-validator');
 const saltRounds = 10;
 
 // staffRoutesへ個別モジュールとしてexportするオブジェクト
@@ -16,18 +13,42 @@ module.exports = {
   new: (req, res) => {
     res.render('staffs/new');
   },
-  validate: [
-    check('hash', '5文字でお願いするのですよ').isLength({
-      min: 5,
-      max: 5
-    })],
-    (req, res, next) => {
-      const result = validationResult(req);
-      // チェック項目があった場合
-      if(!result.isEmpty()) {
-        console.log('問題あるよ');
-      } 
-    }
+  validate: (req, res, next) => {
+    req.check('password')
+      .trim() // 左右両側の空白を除去
+    req.check('employee_id', '半角数字,6文字で必ず入力してください')
+      .isInt()
+      .isLength({
+        min: 5,
+        max: 6
+      })
+      .isEmpty(),
+      req.check('hire_data', '必ず入力してください')
+        .isEmpty(),
+      req.check('staff_name', '必ず入力してください')
+        .isEmpty(),
+      req.check('password', 'パスワードを空にする事はできません')
+        .isEmpty(),
+      req.check('birthday', '必ず入力してください')
+        .isEmpty(),
+      req.check('genders_gender_id', '1~3の範囲で入力してください')
+        .isInt()
+        .isLength({
+          min: 1,
+          max: 1
+        });
+    req.getValidationResult().then(error => {
+      if (!error.isEmpty()) {
+        let messages = error.array().map(e => e.msg);
+        req.skip = true;
+        console.log(error);
+        req.flash('error', messages.join('and'));
+        res.locals.redirect = '/';
+        next();
+      } else {
+        next();
+      }
+    });
   },
   create: (req, res, next) => {
     const pass = req.body.hash;
