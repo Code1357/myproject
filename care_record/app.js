@@ -10,8 +10,8 @@ const layouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const router = require('./routes/index'); // ./routes/indexをload
 const bcrypt = require('bcrypt');
+const router = require('./routes/index'); // ./routes/indexをload
 
 // mysql -> databaseに接続
 con.connect((err) => {
@@ -54,15 +54,10 @@ passport.use(new LocalStrategy(
       const hash = result;
       const map1 = hash.map(value => value.employee_id.toString());
       const map2 = hash.map(value => value.hash);
-      console.log(map1);
-      console.log(map2);
-
       const hashd = map2[0];
-      console.log(hashd);
-      const te = bcrypt.compareSync(password, hashd); // hashと入力passを照合,trueかfalse
-      console.log(te);
+      const authenticationHash = bcrypt.compareSync(password, hashd); // hashと入力passを照合,trueかfalse
 
-      if (map1.includes(username) && te === true) { // username,password紐付きはinputのname
+      if (map1.includes(username) && authenticationHash === true) { // username,password紐付きはinputのname
         return done(null, username);
       }
       return done(null, false, {});
