@@ -1,3 +1,9 @@
+'use strict';
+
+module.exports = {
+
+};
+
 /* 'use strict';
 
 validator6.6.0でうまくいかず
