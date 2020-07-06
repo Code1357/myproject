@@ -2,7 +2,7 @@
   <form class="form-signin" action="/staffs/create" method="POST">
     <h2 class="form-signin-heading">Staff 新規登録</h2>
     <label for="inputEmployee">社員番号</label>
-    <input type="number" name="employee_id" id="inputEmployee" class="form-control" placeholder="社員番号" autofocus>
+    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control" placeholder="社員番号" autofocus>
     <br />
     <label for="inputHereDate">入社日</label>
     <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" required>
@@ -25,4 +25,3 @@
     <br />
     <button class="btn" type="submit">登録</button>
   </form>
-</div>

@@ -5,6 +5,7 @@ const con = require('../db/mysql');
 const Staff = require('../models/staff'); // ../models/userをload
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const validateOption = require('../models/validateOption');
 // const validateOption = require('../models/validateOption');
 
 // staffRoutesへ個別モジュールとしてexportするオブジェクト
@@ -15,22 +16,30 @@ module.exports = {
     res.render('staffs/new');
   },
   validate: (req, res, next) => {
-    req.check('employee_id', '半角数字,6文字で必ず入力してください')
+    req.check('employee_id')
+      .isLength(
+        {
+          min: 6,
+          max: 6
+        }).withMessage('社員番号は6文字で入力してください')
+      .not().isEmpty().withMessage('社員番号は、必ず入力してください');
+    req.check('hire_data')
+      .not().isEmpty().withMessage('入社日は、必ず入力してください');
+    req.check('staff_name')
+      .not().isEmpty().withMessage('社員名は、必ず入力してください');
+    req.check('hash')
+      .matches(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,15}$/i).withMessage('半角英字を1文字以上、数字を1つ以上含む、8~15文字の間で作成してください')
+      .not().isEmpty().withMessage('パスワードは必ず入力してください');
+    req.check('birthday')
+      .isBefore().withMessage('未来の誕生日は入力できません')
+      .not().isEmpty().withMessage('誕生日は、必ず入力してください');
+    req.check('genders_gender_id', '性別は1か2の半角数字で入力してください') // プルダウンにする
       .isInt()
       .isLength({
-        min: 5,
-        max: 6
-      })
-      .isEmpty();
-    req.check('hire_data', '必ず入力してください')
-      .isEmpty();
-    req.check('staff_name', '必ず入力してください')
-      .isEmpty();
-    req.check('password', 'パスワードを空にする事はできません')
-      .isEmpty();
-    req.check('birthday', '必ず入力してください')
-      .isEmpty();
-    req.check('genders_gender_id', '1~3の範囲で入力してください')
+        min: 1,
+        max: 1
+      });
+    req.check('position_lists_position_id', '役職は1〜3の半角数字で入力してください') // プルダウンにする
       .isInt()
       .isLength({
         min: 1,
@@ -39,15 +48,23 @@ module.exports = {
     req.getValidationResult().then(error => {
       if (!error.isEmpty()) {
         // console.log(error.isEmpty()); // true or false
-        // console.log(error.array()); // error結果のオブジェクト,オブジェクト,([{location: 'body',param: 'employee_id',msg: '半角数字,6文字で必ず入力してください'value: '537724737537'},......])
-        // console.log(error.mapped()); // error結果オブジェクト,オブジェクト,({{location: 'body',param: 'employee_id',msg: '半角数字,6文字で必ず入力してください'value: '537724737537'},......})
-        // console.log(error.formatWith()); // error全体の関数オブジェクト{isEmpty: [Function],array: [Function],mapped: [Function],formatWith: [Function],throw: [Function]}
-        // console.log(error.throw()); // errorを起こした時のerrorそのものの内容
-        // req.flash('error', messages);
-        // res.redirect('/');
+        console.log(error.array());
+        const messages = error.array().map(e => e.msg); // error配列オブジェクトを配列に吐き出す
+        req.flash('error', messages);
+        res.redirect('/staffs/new');
+        next('route');
+      } else {
         next();
       }
     });
+  },
+  newConfirmation: (req, res) => {
+    console.log(req.body);
+    const Confirmation = JSON.stringify(req.body);
+    console.log(Confirmation);
+    const newConfirmation = JSON.parse(Confirmation);
+    res.locals.newConfirmation = newConfirmation;
+    res.render('staffs/newConfirmation');
   },
   create: (req, res, next) => {
     const pass = req.body.hash;
@@ -56,7 +73,7 @@ module.exports = {
     const sql = 'insert into staff_lists set ?';
     con.query(sql, req.body, (error, results) => {
       if (error) {
-        req.flash('error', '登録できませんでした');
+        req.flash('error', '登録できませんでした,既に登録されている社員IDです');
         res.redirect('/staffs/new');
         next();
       } else {
@@ -71,3 +88,8 @@ module.exports = {
     res.render('staffs/update');
   }
 };
+
+/* const str = 'ssshoko1211';
+const regex = RegExp(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,15}$/i);
+console.log(regex.test(str)); */
+// 半角英字と半角数字それぞれ1文字以上含む8文字以上100文字以下の文字列,/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,15}$/i
