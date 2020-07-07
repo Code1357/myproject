@@ -41,9 +41,9 @@
     <%# footer作成スペース %>
 
 <div class="ccc">
-      <% if ( gender ) { %>
+      <% if ( locals.newConfirmation ) { %>
      <div class="C">
-        <%-  include('partials/newC');%>
+        <%-  include('partials/newConfirmation');%>
       </div>
       <% } %>
     </div>

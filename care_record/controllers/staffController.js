@@ -77,7 +77,7 @@ module.exports = {
       res.locals.positionId = '見習い';
     };
     res.locals.newConfirmation = newConfirmation;
-    res.render('staffs/newConfirmation');
+    // res.json('staffs/new');
   },
   create: (req, res, next) => {
     const pass = req.body.hash;
