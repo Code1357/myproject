@@ -58,9 +58,6 @@ module.exports = {
     });
   },
   newConfirmation: (req, res) => {
-    // console.log(req.body);
-    // const Confirmation = JSON.stringify(req.body);
-    // console.log(Confirmation);
     const newConfirmation = JSON.parse(JSON.stringify(req.body));
     const numGenderId = Number(req.body.genders_gender_id);
     const positionId = Number(req.body.position_lists_position_id);
@@ -77,7 +74,7 @@ module.exports = {
       res.locals.positionId = '見習い';
     };
     res.locals.newConfirmation = newConfirmation;
-    // res.json('staffs/new');
+    res.render('staffs/new', { newConfirmation: newConfirmation });
   },
   create: (req, res, next) => {
     const pass = req.body.hash;

@@ -1,8 +1,11 @@
 'use strict';
 
-const btn = document.getElementById('btn').value;
+const btn = document.getElementById('btn');
+btn.addEventListener('click', makeRequest);
 
-btn.addEventListener('click', function () {
-const xhr = new XMLHttpRequest();
-xhr.open('POST', 'newConfirmation.ejs', true);
-});
+function makeRequest () {
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('POST', 'newConfirmation.ejs');
+  xhr.send();
+}
