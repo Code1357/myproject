@@ -1,11 +1,29 @@
 <div>
-<h1>新規登録確認ページ</h1>
-<div><p>登録内容はこちらで良いですか？</p></div>
+  <h1>新規登録確認ページ</h1>
+  <div>
+    <p>登録内容に間違いはありませんか？</p>
+  </div>
 </div>
 <div>
- <tr>
-    <th>社員ID:
-      <td><%= newConfirmation.employee_id %></td>
-    </th>
+  <tr>
+    <th>社員番号:<%= newConfirmation.employee_id %></th><br>
+  </tr>
+  <tr>
+    <th>入社日:<%= newConfirmation.hire_data %></th><br>
+  </tr>
+  <tr>
+    <th>名前:<%= newConfirmation.staff_name %></th><br>
+  </tr>
+  <tr>
+    <th>Password:<%= newConfirmation.hash %></th><br>
+  </tr>
+  <tr>
+    <th>生年月日:<%= newConfirmation.birthday %></th><br>
+  </tr>
+  <tr>
+    <th>性別:<%=  gender%></th><br>
+  </tr>
+  <tr>
+    <th>役職:<%=  positionId%></th><br>
   </tr>
 </div>

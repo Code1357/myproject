@@ -5,7 +5,6 @@ const con = require('../db/mysql');
 const Staff = require('../models/staff'); // ../models/userをload
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const validateOption = require('../models/validateOption');
 // const validateOption = require('../models/validateOption');
 
 // staffRoutesへ個別モジュールとしてexportするオブジェクト
@@ -59,10 +58,24 @@ module.exports = {
     });
   },
   newConfirmation: (req, res) => {
-    console.log(req.body);
-    const Confirmation = JSON.stringify(req.body);
-    console.log(Confirmation);
-    const newConfirmation = JSON.parse(Confirmation);
+    // console.log(req.body);
+    // const Confirmation = JSON.stringify(req.body);
+    // console.log(Confirmation);
+    const newConfirmation = JSON.parse(JSON.stringify(req.body));
+    const numGenderId = Number(req.body.genders_gender_id);
+    const positionId = Number(req.body.position_lists_position_id);
+    if (numGenderId === 1) {
+      res.locals.gender = '男';
+    } else {
+      res.locals.gender = '女';
+    };
+    if (positionId === 1) {
+      res.locals.positionId = '管理職';
+    } else if (positionId === 2) {
+      res.locals.positionId = '一般';
+    } else {
+      res.locals.positionId = '見習い';
+    };
     res.locals.newConfirmation = newConfirmation;
     res.render('staffs/newConfirmation');
   },
