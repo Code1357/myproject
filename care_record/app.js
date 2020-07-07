@@ -12,6 +12,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const expressValidator = require('express-validator');
+const staffsController = require('./controllers/staffController');
 const router = require('./routes/index'); // ./routes/indexをload
 
 // mysql -> databaseに接続

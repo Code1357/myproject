@@ -39,6 +39,15 @@
 
   <footer>
     <%# footer作成スペース %>
+
+<div class="ccc">
+      <% if ( gender ) { %>
+     <div class="C">
+        <%-  include('partials/newC');%>
+      </div>
+      <% } %>
+    </div>
+
     <div>
       <%- include('partials/footer'); %>
     </div>
