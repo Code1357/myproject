@@ -2,7 +2,7 @@
 
 const con = require('../db/mysql');
 
-const Staff = require('../models/staff'); // ../models/userをload
+// const Staff = require('../models/staff'); // ../models/userをload
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 // const validateOption = require('../models/validateOption');
@@ -57,7 +57,11 @@ module.exports = {
       }
     });
   },
-  newConfirmation: (req, res, next) => {
+  newConfirmation: (req, res) => {
+    const newConfirmation = JSON.parse(JSON.stringify(req.body));
+    res.render('staffs/new2', { newCon: newConfirmation });
+  },
+  newConfirmation2: (req, res, next) => {
     const newConfirmation = JSON.parse(JSON.stringify(req.body));
     const numGenderId = Number(req.body.genders_gender_id);
     const positionId = Number(req.body.position_lists_position_id);
@@ -74,7 +78,7 @@ module.exports = {
       res.locals.positionId = '見習い';
     };
     res.locals.newConfirmation = newConfirmation;
-    // res.render('staffs/newConfirmation');
+    // console.log(newConfirmation);
     next();
   },
   create: (req, res) => {
@@ -89,10 +93,7 @@ module.exports = {
       } else {
         req.flash('success', '登録できました');
         res.render('staffs/newConfirmation');
-        // res.redirect('/staffs/update');
       }
-      // console.log(req.body);
-      // next();
     });
   },
   update: (req, res) => {

@@ -24,7 +24,7 @@ module.exports = {
   logout: (req, res, next) => {
     req.logout(); // passportのメソッド
     req.flash('success', 'ログアウトしました');
-    res.locals.redirect = '/';
+    res.redirect('/');
     next();
   }
 
