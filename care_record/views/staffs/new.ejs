@@ -1,37 +1,28 @@
-
-<head>
-        <title>example</title>
-        <script type="text/javascript" src="newConfirmation.js"></script>
-    </head>
-
 <div class="data-form">
   <form class="form-signin" action="/staffs/create" method="POST">
     <h2 class="form-signin-heading">Staff 新規登録</h2>
     <label for="inputEmployee">社員番号</label>
-    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control" placeholder="社員番号" value="<%= locals.newConfirmation.employee_id %>" autofocus>
+    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control" placeholder="社員番号" autofocus>
     <br />
     <label for="inputHereDate">入社日</label>
-    <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" value="<%- locals.newConfirmation.hire_data %>" required>
+    <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" required>
     <br />
     <label for="inputUsername">名前</label>
-    <input type="text" name="staff_name" id="inputUsername" class="form-control" placeholder="名前" value="<%- locals.newConfirmation.staff_name %>">
+    <input type="text" name="staff_name" id="inputUsername" class="form-control" placeholder="名前">
     <br />
     <label for="inputPassword">Password</label>
-    <input type="password" name="hash" id="inputPassword" class="form-control" placeholder="password"  value="<%- locals.newConfirmation.hash %>" required>
+    <input type="password" name="hash" id="inputPassword" class="form-control" placeholder="password" required>
     <br />
     <label for="inputBirthday">生年月日</label>
-    <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" value="<%- locals.newConfirmation.birthday %>"
-    required>
+    <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" required>
     <br />
     <label for="inputGender">性別</label>
-    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" placeholder="性別" value="<%- locals.newConfirmation.genders_gender_id %>" required>
+    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" placeholder="性別" required>
     <br />
     <label for="inputPosition">役職</label>
-    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" placeholder="役職" value="<%- locals.newConfirmation.position_lists_position_id %>" required>
+    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" placeholder="役職" required>
 
-    <br />
-    <button class="btn" type="submit">登録</button>
+    <br/>
+<button class="btn" type="submit">最終登録</button>
 
   </form>
-
-<button id="btn" class="button" type="button">最新のコース</button>  

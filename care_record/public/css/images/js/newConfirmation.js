@@ -1,11 +1,13 @@
-'use strict';
+/* 'use strict';
 
 const btn = document.getElementById('btn');
-btn.addEventListener('click', makeRequest);
+const xhr = new XMLHttpRequest();
+xhr.open('POST', '/staffs/create');
+btn.addEventListener('click', (e) => {
+  const newConfirmation = JSON.pars((xhr.responseText));
+  const a = newConfirmation[0].employee_id;
+  document.getElementById('employee_id').innerHTML = a;
+});
 
-function makeRequest () {
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('POST', 'newConfirmation.ejs');
-  xhr.send();
-}
+xhr.send();
+ */

@@ -20,6 +20,12 @@ module.exports = {
     }),
   info: (req, res) => {
     res.render('managers/info');
+  },
+  logout: (req, res, next) => {
+    req.logout(); // passportのメソッド
+    req.flash('success', 'ログアウトしました');
+    res.locals.redirect = '/';
+    next();
   }
 
 };
