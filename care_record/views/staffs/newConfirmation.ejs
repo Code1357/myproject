@@ -21,8 +21,19 @@
     <th>生年月日:<%= newConfirmation.birthday %></th><br>
   </tr>
   <tr>
-    <th>性別:<%=  newConfirmation.genders_gender_id%></th><br>
+    <% if (newConfirmation.genders_gender_id == 1) { %>
+    <th>性別:男性</th>
+    <% } else { %>
+    <th>性別:女性</th>
+    <% }; %>
+    <br>
   </tr>
   <tr>
-    <th>役職:<%=  newConfirmation.position_lists_position_id%></th><br>
+    <% if (newConfirmation.position_lists_position_id == 1) { %>
+    <th>役職:管理職</th>
+    <% } else if (newConfirmation.position_lists_position_id == 2) { %>
+    <th>役職:一般</th>
+    <% } else { %>
+    <th>役職:見習い</th>
+    <% }; %><br>
   </tr>

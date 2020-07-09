@@ -13,25 +13,25 @@
     <h2 class="form_signin_heading">Staff 新規登録</h2>
     <label for="inputEmployee">社員番号</label>
     <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control"
-      placeholder="社員番号" value="" autofocus>
+      placeholder="社員番号" value="<%- newConfirmation.employee_id %>" autofocus>
     <br />
     <label for="inputHereDate">入社日</label>
-    <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" required>
+    <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" value="<%- newConfirmation.hire_data %>" required>
     <br />
     <label for="inputUsername">名前</label>
-    <input type="text" name="staff_name" id="inputUsername" class="form-control" placeholder="名前" value="">
+    <input type="text" name="staff_name" id="inputUsername" class="form-control" placeholder="名前" value="<%- newConfirmation.staff_name %>">
     <br />
     <label for="inputPassword">Password</label>
-    <input type="password" name="hash" id="inputPassword" class="form-control" placeholder="password" required>
+    <input type="password" name="hash" id="inputPassword" class="form-control" placeholder="password" value="<%- newConfirmation.hash %>" required>
     <br />
     <label for="inputBirthday">生年月日</label>
-    <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" required>
+    <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" value="<%- newConfirmation.birthday %>" required>
     <br />
     <label for="inputGender">性別</label>
-    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" placeholder="性別" required>
+    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" placeholder="性別" value="<%- newConfirmation.genders_gender_id %>" required>
     <br />
     <label for="inputPosition">役職</label>
-    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" placeholder="役職"
+    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" value="<%- newConfirmation.position_lists_position_id %>" placeholder="役職"
       required>
     <br />
     <button class="btn" type="">モーダルウィンドウ無しで登録</button>
@@ -46,7 +46,7 @@
       <p id="outputGender"></p>
       <p id="outputPosition"></p>
 
-      <button id="close" class="btn">戻る</button>
+      <button id="close" class="btn" name='action2' value="ぼたん2だよ">戻る</button>
       <button class="btn" name='action' value="ぼたんだよ" >登録</button>
     </section>
   </form>

@@ -12,6 +12,8 @@ module.exports = {
 
   // modelより個別処理を受け取り,経路別処理実行を記述
   new: (req, res) => {
+    const newConfirmation = JSON.parse(JSON.stringify(req.body));
+    res.locals.newConfirmation = newConfirmation;
     res.render('staffs/new');
   },
   validate: (req, res, next) => {
@@ -58,59 +60,28 @@ module.exports = {
     });
   },
   newConfirmation: (req, res, next) => {
-    if (!req.body.action) {
+    if (req.body.action2) {
+      console.log(req.body);
+      delete req.body.action2;
+      console.log(req.body);
       const newConfirmation = JSON.parse(JSON.stringify(req.body));
-      /* const numGenderId = Number(req.body.genders_gender_id);
-      const positionId = Number(req.body.position_lists_position_id);
-      if (numGenderId === 1) {
-        res.locals.gender = '男';
-      } else {
-        res.locals.gender = '女';
-      };
-      if (positionId === 1) {
-        res.locals.positionId = '管理職';
-      } else if (positionId === 2) {
-        res.locals.positionId = '一般';
-      } else {
-        res.locals.positionId = '見習い';
-      };
       res.locals.newConfirmation = newConfirmation;
-      console.log(req.body.action);
-      next(); */
-      // } else {
-      // const newConfirmation = JSON.parse(JSON.stringify(req.body));
+      res.render('staffs/new');
+    } else if (!req.body.action) {
+      delete req.body.action;
+      // console.log(req.body);
+      const newConfirmation = JSON.parse(JSON.stringify(req.body));
       res.render('staffs/new2', { newConfirmation: newConfirmation });
     } else {
-      const checkedBody = delete req.body.action;
-      console.log(req.body);
+      delete req.body.action;
+      // console.log(req.body);
       const newConfirmation = JSON.parse(JSON.stringify(req.body));
       res.locals.newConfirmation = newConfirmation;
       next();
     };
-    // next();
-  /*  if (!req.body.action) {
-     res.render('staffs/new2', { newCon: newConfirmation });
-   } else {
-     res.render('staffs/new2', { newCon: newConfirmation });
-     next('route');
-   }; */
   },
   newConfirmation2: (req, res, next) => {
     const newConfirmation = JSON.parse(JSON.stringify(req.body));
-   /*  const numGenderId = Number(req.body.genders_gender_id);
-    const positionId = Number(req.body.position_lists_position_id);
-    if (numGenderId === 1) {
-      res.locals.gender = '男';
-    } else {
-      res.locals.gender = '女';
-    };
-    if (positionId === 1) {
-      res.locals.positionId = '管理職';
-    } else if (positionId === 2) {
-      res.locals.positionId = '一般';
-    } else {
-      res.locals.positionId = '見習い';
-    }; */
     res.locals.newConfirmation = newConfirmation;
     // console.log(newConfirmation);
     next();
