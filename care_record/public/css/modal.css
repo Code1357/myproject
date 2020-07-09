@@ -5,18 +5,14 @@ body {
   font-size: 16px;
 }
 
-#open,
-#close {
+/* #open{
   cursor: pointer;
   width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   text-align: center;
   padding: 12px;
   margin: 16px auto 0;
-  background: lightcoral;
   color: white;
-}
+} */
 
 /* 背景全体を暗くして、操作できないようにする */
 #mask {

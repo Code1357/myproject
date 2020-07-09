@@ -1,0 +1,57 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/modal.css" rel="stylesheet">
+</head>
+
+<div id="mask" class="hidden"></div> <!-- 背景全体を暗くする -->
+
+
+<div class="data_form">
+
+  <form class="signin" action="/staffs/create1" method="POST">
+    <h2 class="form_signin_heading">Staff 新規登録</h2>
+    <label for="inputEmployee">社員番号</label>
+    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control"
+      placeholder="社員番号" value="" autofocus>
+    <br />
+    <label for="inputHereDate">入社日</label>
+    <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" required>
+    <br />
+    <label for="inputUsername">名前</label>
+    <input type="text" name="staff_name" id="inputUsername" class="form-control" placeholder="名前" value="">
+    <br />
+    <label for="inputPassword">Password</label>
+    <input type="password" name="hash" id="inputPassword" class="form-control" placeholder="password" required>
+    <br />
+    <label for="inputBirthday">生年月日</label>
+    <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" required>
+    <br />
+    <label for="inputGender">性別</label>
+    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" placeholder="性別" required>
+    <br />
+    <label for="inputPosition">役職</label>
+    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" placeholder="役職"
+      required>
+    <br />
+    <button class="btn" type="">モーダルウィンドウ無しで登録</button>
+    
+    <section id="modal" class="hidden">
+      <h3>こちらの内容で登録しますか？</h3>
+      <p id="outputEmployee"></p>
+      <p id="outputHereDate"></p>
+      <p id="outputUsername"></p>
+      <p id="outPassword"></p>
+      <p id="outputBirthday"></p>
+      <p id="outputGender"></p>
+      <p id="outputPosition"></p>
+
+      <button id="close" class="btn">戻る</button>
+      <button class="btn" name='action' value="ぼたんだよ" >登録</button>
+    </section>
+  </form>
+  <div id="open">
+    <button>モーダルウィンドウで登録</button>
+  </div>
+
+  <script src="/js/modal.js"></script>

@@ -5,25 +5,25 @@
   <form class="form_signin" action="/staffs/create2" method="POST">
     <h2 class="form_signin_heading">Staff 新規登録</h2>
     <label for="inputEmployee">社員番号</label>
-    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control" placeholder="社員番号" value="<%- newCon.employee_id %>" autofocus>
+    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control" placeholder="社員番号" value="<%- newConfirmation.employee_id %>" autofocus>
     <br />
     <label for="inputHereDate">入社日</label>
-    <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" value="<%- newCon.hire_data %>" required>
+    <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" value="<%- newConfirmation.hire_data %>" required>
     <br />
     <label for="inputUsername">名前</label>
-    <input type="text" name="staff_name" id="inputUsername" class="form-control" placeholder="名前" value="<%- newCon.staff_name %>">
+    <input type="text" name="staff_name" id="inputUsername" class="form-control" placeholder="名前" value="<%- newConfirmation.staff_name %>">
     <br />
     <label for="inputPassword">Password</label>
-    <input type="password" name="hash" id="inputPassword" class="form-control" placeholder="password" value="<%- newCon.hash %>" required>
+    <input type="password" name="hash" id="inputPassword" class="form-control" placeholder="password" value="<%- newConfirmation.hash %>" required>
     <br />
     <label for="inputBirthday">生年月日</label>
-    <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" value="<%- newCon.birthday %>" required>
+    <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" value="<%- newConfirmation.birthday %>" required>
     <br />
     <label for="inputGender">性別</label>
-    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" placeholder="性別" value="<%- newCon.genders_gender_id %>" required>
+    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" placeholder="性別" value="<%- newConfirmation.genders_gender_id %>" required>
     <br />
     <label for="inputPosition">役職</label>
-    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" placeholder="役職" value="<%- newCon.position_lists_position_id %>" required>
+    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" placeholder="役職" value="<%- newConfirmation.position_lists_position_id %>" required>
 
     <br/>
 <button class="btn" type="submit">これで登録します</button>

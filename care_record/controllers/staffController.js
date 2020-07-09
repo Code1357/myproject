@@ -47,23 +47,57 @@ module.exports = {
     req.getValidationResult().then(error => {
       if (!error.isEmpty()) {
         // console.log(error.isEmpty()); // true or false
-        console.log(error.array());
+        // console.log(error.array());
         const messages = error.array().map(e => e.msg); // error配列オブジェクトを配列に吐き出す
         req.flash('error', messages);
         res.redirect('/staffs/new');
-        next('route');
+        // next('route');
       } else {
         next();
       }
     });
   },
-  newConfirmation: (req, res) => {
-    const newConfirmation = JSON.parse(JSON.stringify(req.body));
-    res.render('staffs/new2', { newCon: newConfirmation });
+  newConfirmation: (req, res, next) => {
+    if (!req.body.action) {
+      const newConfirmation = JSON.parse(JSON.stringify(req.body));
+      /* const numGenderId = Number(req.body.genders_gender_id);
+      const positionId = Number(req.body.position_lists_position_id);
+      if (numGenderId === 1) {
+        res.locals.gender = '男';
+      } else {
+        res.locals.gender = '女';
+      };
+      if (positionId === 1) {
+        res.locals.positionId = '管理職';
+      } else if (positionId === 2) {
+        res.locals.positionId = '一般';
+      } else {
+        res.locals.positionId = '見習い';
+      };
+      res.locals.newConfirmation = newConfirmation;
+      console.log(req.body.action);
+      next(); */
+      // } else {
+      // const newConfirmation = JSON.parse(JSON.stringify(req.body));
+      res.render('staffs/new2', { newConfirmation: newConfirmation });
+    } else {
+      const checkedBody = delete req.body.action;
+      console.log(req.body);
+      const newConfirmation = JSON.parse(JSON.stringify(req.body));
+      res.locals.newConfirmation = newConfirmation;
+      next();
+    };
+    // next();
+  /*  if (!req.body.action) {
+     res.render('staffs/new2', { newCon: newConfirmation });
+   } else {
+     res.render('staffs/new2', { newCon: newConfirmation });
+     next('route');
+   }; */
   },
   newConfirmation2: (req, res, next) => {
     const newConfirmation = JSON.parse(JSON.stringify(req.body));
-    const numGenderId = Number(req.body.genders_gender_id);
+   /*  const numGenderId = Number(req.body.genders_gender_id);
     const positionId = Number(req.body.position_lists_position_id);
     if (numGenderId === 1) {
       res.locals.gender = '男';
@@ -76,7 +110,7 @@ module.exports = {
       res.locals.positionId = '一般';
     } else {
       res.locals.positionId = '見習い';
-    };
+    }; */
     res.locals.newConfirmation = newConfirmation;
     // console.log(newConfirmation);
     next();
