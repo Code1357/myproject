@@ -77,6 +77,7 @@ module.exports = {
       // console.log(req.body);
       const newConfirmation = JSON.parse(JSON.stringify(req.body));
       res.locals.newConfirmation = newConfirmation;
+      console.log(newConfirmation);
       next();
     };
   },

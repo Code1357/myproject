@@ -1,6 +1,6 @@
 'use strict';
 
-const Manager = require('../models/manager'); // ../models/userをload
+const manager = require('../models/manager'); // ../models/userをload
 const con = require('../db/mysql');
 const passport = require('passport');
 

@@ -40,13 +40,17 @@
   <footer>
     <%# footer作成スペース %>
 
+<% if ('a') { %>
+			<div class="logged">
+					<%= locals.selectLoggedId %>
+          </div>
+          <% }; %>
 
 <div class="log_out">
 <form class="form_reset" action="./logout" method=>
-<button class="btn" type="submit">Log out</button>
+<button class="btn" type="submit">Log outっす</button>
 </form>
-
-
+</div>
 
     <div>
       <%- include('partials/footer'); %>

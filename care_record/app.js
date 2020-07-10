@@ -58,7 +58,6 @@ passport.use(new LocalStrategy(
       const map2 = hash.map(value => value.hash);
       const hashd = map2[0];
       const authenticationHash = bcrypt.compareSync(password, hashd); // hashと入力passを照合,trueかfalse
-
       if (map1.includes(username) && authenticationHash === true) { // username,password紐付きはinputのname
         return done(null, username);
       }
@@ -74,6 +73,8 @@ app.use(passport.session());
 app.use(connectFlash()); // FlashMessageの箱
 app.use((req, res, next) => {
   res.locals.flashMessages = req.flash();
+  res.locals.loggedIn = req.isAuthenticated();
+  console.log(req.isAuthenticated());
   next();
 });
 
