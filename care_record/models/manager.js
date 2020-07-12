@@ -10,12 +10,16 @@ module.exports = {
     con.query(selectLoggedId, req.body.username, (err, result, fields) => {
       if (err) throw err;
       // const selectLoggedId = JSON.stringify(result); // [object Object]から特定の値取得
-      const selectLoggedId = result[0];
-      // console.log(result);
-      console.log(JSON.stringify(selectLoggedId));
-      res.locals.selectLoggedId = selectLoggedId;
-      // console.log('なんと' + a);
+      const selectLoggedId = result;
+      console.log(selectLoggedId);
+      const string = JSON.parse(JSON.stringify(selectLoggedId));
+      const obj = string[0];
+      const obj2 = obj.staff_name;
+      // console.log(obj2);
     });
+    console.log(selectLoggedId);
+    const b = '丹次郎';
+    res.render('managers/info', { b: b, selectLoggedId: selectLoggedId });
     next();
   }
 

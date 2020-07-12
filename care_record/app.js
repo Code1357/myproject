@@ -64,7 +64,8 @@ passport.use(new LocalStrategy(
       return done(null, false, {});
     }
     );
-  }));
+  }
+));
 
 // passport(FlashMessageに記述必須)
 app.use(passport.initialize());
@@ -74,7 +75,9 @@ app.use(connectFlash()); // FlashMessageの箱
 app.use((req, res, next) => {
   res.locals.flashMessages = req.flash();
   res.locals.loggedIn = req.isAuthenticated();
-  console.log(req.isAuthenticated());
+  // console.log('あれそれ' + req.isAuthenticated());
+  res.locals.user = req.user;
+  // res.locals.currentUser = req.user;
   next();
 });
 

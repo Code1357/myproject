@@ -18,6 +18,14 @@
       <h1>layout header</h1>
     </div>
 
+
+<div class="login">
+			<% if (loggedIn) { %>
+				<p>ログイン中の担当者は
+        <%= user.name %> 
+			<% } %>
+
+
     <div class="flash">
       <% if (flashMessages) { %>
       <% if (flashMessages.success) { %>
@@ -39,12 +47,6 @@
 
   <footer>
     <%# footer作成スペース %>
-
-<% if ('a') { %>
-			<div class="logged">
-					<%= locals.selectLoggedId %>
-          </div>
-          <% }; %>
 
 <div class="log_out">
 <form class="form_reset" action="./logout" method=>
