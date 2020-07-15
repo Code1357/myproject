@@ -1,0 +1,14 @@
+<%# 経路イメージ, routes -> controllers（処理） -> ejsへのパス指定で到着,表示 %> 
+
+  <div class="s_data_form">
+    <form action="./login" method="POST">
+      <h1>Care Staff ログイン</h1>
+      <label for="s_employee_number">社員番号</label>
+      <input type="text" class="s_form" name="employee_number" id="employee_number" placeholder="例.123456">
+
+      <label for="s_password">Pass</label>
+      <input type="password" class="s_form" name="s_password" id="s_password" placeholder="例.password">
+      
+      <button type="submit" class="s_btn">login</button>
+    </form>
+  </div>

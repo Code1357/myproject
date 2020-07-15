@@ -13,6 +13,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const expressValidator = require('express-validator');
 const router = require('./routes/index'); // ./routes/indexをload
+const manager = require('./models/manager');
 
 // mysql -> databaseに接続
 con.connect((err) => {
@@ -43,6 +44,7 @@ app.use(session({
 passport.serializeUser(function (username, done) {
   done(null, username);
 });
+
 passport.deserializeUser(function (username, done) {
   done(null, { name: username });
 });
@@ -73,11 +75,17 @@ app.use(passport.session());
 
 app.use(connectFlash()); // FlashMessageの箱
 app.use((req, res, next) => {
+  // const username2 = 777777;
+  // console.log(username2);
+  /* con.query('select * from staff_lists where employee_id = ?', username, (err, result, fields) => {
+    if (err) throw err;
+    const g = result;
+    console.log(g);
+    next();
+  }); */
   res.locals.flashMessages = req.flash();
   res.locals.loggedIn = req.isAuthenticated();
-  // console.log('あれそれ' + req.isAuthenticated());
-  res.locals.user = req.user;
-  // res.locals.currentUser = req.user;
+  res.locals.staffs = req.user;
   next();
 });
 

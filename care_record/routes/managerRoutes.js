@@ -2,11 +2,11 @@
 
 const router = require('express').Router();
 const managerController = require('../controllers/managerController');
-const manager = require('../models/manager');
+const ejsValue = require('../models/ejsController');
 
 // リクエストをパスを受付、処理実行を記述
-router.get('/login', managerController.login);
-router.post('/login', /* managerController.moon, */ managerController.authenticate);
+router.get('/login', ejsValue.offLogin, managerController.login);
+router.post('/login', managerController.authenticate);
 router.get('/logout', managerController.logout);
 router.get('/info', managerController.info);
 

@@ -1,0 +1,36 @@
+<head>
+	<link href="/css/header.css" rel="stylesheet">
+</head>
+
+<div class=header>
+	<h1 class="m_title"> Web Care 管理システム</h1>
+	<p class="border"></p>
+</div>
+
+
+<div class="header_wrapper">
+<div class="">
+
+	<% if (loggedIn) { %>
+<ul class="nav2">
+		<li class="nav-title"><a>管理者 Page - スタッフ情報</a></li>
+		<li><a href="#">/ 新規登録</a></li>
+		<li><a href="#">/ 更新登録</a></li>
+	</ul>
+	<% } else { %>
+<ul class="nav1">
+		<li class="nav-title"><a>管理者 - ログイン</a></li>
+	</ul>
+		<% } %>
+</div>
+
+<div class="m_login">
+	<% if (loggedIn) { %>
+	<p class="staff_id">社員ID:<%= staffs.name %></p><br>
+	<form class="form_reset" action="./logout" method=>
+		<button class="btn" type="submit">Log out</button>
+	</form>
+	<% } %>
+
+</div>
+</div>

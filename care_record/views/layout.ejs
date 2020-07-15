@@ -7,24 +7,16 @@
   <title>Document</title>
   <%# 必要に応じてcssをloadする %>
   <%#  必要に応じてscriptをloadする %>
+  <link href="/css/layout.css" rel="stylesheet">
 </head>
 
 <body>
   <header>
     <%# header作成スペース %>
-    <div class=header>
+    <div class="header-include">
       <%- include('partials/m_header'); %>
       <%- include('partials/s_header'); %>
-      <h1>layout header</h1>
     </div>
-
-
-<div class="login">
-			<% if (loggedIn) { %>
-				<p>ログイン中の担当者は
-        <%= user.name %> 
-			<% } %>
-
 
     <div class="flash">
       <% if (flashMessages) { %>
@@ -48,9 +40,6 @@
   <footer>
     <%# footer作成スペース %>
 
-<div class="log_out">
-<form class="form_reset" action="./logout" method=>
-<button class="btn" type="submit">Log outっす</button>
 </form>
 </div>
 
