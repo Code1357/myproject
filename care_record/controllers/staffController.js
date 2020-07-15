@@ -1,3 +1,14 @@
+// 経路の確認する！！！
+
+
+
+
+
+
+
+
+
+
 'use strict';
 
 const con = require('../db/mysql');
