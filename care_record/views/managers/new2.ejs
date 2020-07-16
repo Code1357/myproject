@@ -1,9 +1,8 @@
 
-<p>以下の内容で登録して良いでしょうか？ </p>
+<p class="data_from_flash">以下の内容で登録して良いでしょうか？ </p>
 
-<div class="data_form">
-  <form class="form_signin" action="/managers/create2" method="POST">
-    <h2 class="form_signin_heading">Staff 新規登録</h2>
+<div class="data_form2">
+  <form class="signup" action="/managers/create2" method="POST">
     <label for="inputEmployee">社員番号</label>
     <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control" placeholder="社員番号" value="<%- newConfirmation.employee_id %>" autofocus>
     <br />
@@ -20,17 +19,21 @@
     <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" value="<%- newConfirmation.birthday %>" required>
     <br />
     <label for="inputGender">性別</label>
-    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" placeholder="性別" value="<%- newConfirmation.genders_gender_id %>" required>
+    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" value="<%- newConfirmation.genders_gender_id %>" min="1" max="2" required>
     <br />
     <label for="inputPosition">役職</label>
-    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" placeholder="役職" value="<%- newConfirmation.position_lists_position_id %>" required>
+    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" value="<%- newConfirmation.position_lists_position_id %>" min="1" max="3" required>
 
     <br/>
-<button class="btn" type="submit">これで登録します</button>
+    <div class="signup_btn">
+<button type="submit">登録</button>
+</div>
   </form>
 
-<div>
-<form class="form_reset" action="/staffs/new" method=>
-<button class="btn" type="submit">リセット</button>
+<div class="reset">
+<form action="/managers/new" method=>
+<div class="reset_btn">
+<button type="submit">リセット</button>
+</div>
 </form>
 </div>

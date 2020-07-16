@@ -2,6 +2,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="/css/modal.css" rel="stylesheet">
+ 
 </head>
 
 <div id="mask" class="hidden"></div> <!-- 背景全体を暗くする -->
@@ -9,8 +10,7 @@
 
 <div class="data_form">
 
-  <form class="signin" action="/managers/create1" method="POST">
-    <h2 class="form_signin_heading">Staff 新規登録</h2>
+  <form class="signup" action="/managers/create1" method="POST">
     <label for="inputEmployee">社員番号</label>
     <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control"
       placeholder="社員番号" value="<%- newConfirmation.employee_id %>" autofocus>
@@ -28,13 +28,14 @@
     <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" value="<%- newConfirmation.birthday %>" required>
     <br />
     <label for="inputGender">性別</label>
-    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" placeholder="性別" value="<%- newConfirmation.genders_gender_id %>" required>
+    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" value="<%- newConfirmation.genders_gender_id %>" min="1" max="2" required>
     <br />
     <label for="inputPosition">役職</label>
-    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" value="<%- newConfirmation.position_lists_position_id %>" placeholder="役職"
-      required>
-    <br />
-    <button class="btn" type="">モーダルウィンドウ無しで登録</button>
+    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" value="<%- newConfirmation.position_lists_position_id %>" min="1" max="3" required>
+    <br/>
+    <div class="modal_off_btn">
+    <button type="">モーダル無しで登録</button>
+     </div>
     
     <section id="modal" class="hidden">
       <h3>こちらの内容で登録しますか？</h3>
@@ -51,7 +52,9 @@
     </section>
   </form>
   <div id="open">
-    <button>モーダルウィンドウで登録</button>
+   <div class="modal_on_btn">
+    <button id="open_modal">モーダルで登録</button>
+     </div>
   </div>
 
   <script src="/js/modal.js"></script>

@@ -13,7 +13,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const expressValidator = require('express-validator');
 const router = require('./routes/index'); // ./routes/indexをload
-const manager = require('./models/manager');
 
 // mysql -> databaseに接続
 con.connect((err) => {

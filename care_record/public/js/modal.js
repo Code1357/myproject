@@ -1,6 +1,6 @@
 'use strict';
 {
-  const open = document.getElementById('open');
+  const open = document.getElementById('open_modal');
   const close = document.getElementById('close');
   const modal = document.getElementById('modal');
   const mask = document.getElementById('mask');
@@ -15,7 +15,7 @@
   });
 }
 
-const oBtn = document.getElementById('open');
+const oBtn = document.getElementById('open_modal');
 
 oBtn.addEventListener('click', (e) => {
   const inputEmployee = document.getElementById('inputEmployee').value;

@@ -1,0 +1,23 @@
+<h2 class="center">Users Table</h2>
+<div class="center">
+  <a class="button" href="/users/new">Create User</a>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Zip Code</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(staffsList => { %>
+    <tr>
+      <td>
+        <a href="<%=`/staffsList/${staffsList._id}`%>">
+          <%= staffsList.staffs_name%>
+    <% }); %>
+  </tbody>
+</table>

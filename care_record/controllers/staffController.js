@@ -1,14 +1,3 @@
-// 経路の確認する！！！
-
-
-
-
-
-
-
-
-
-
 'use strict';
 
 const con = require('../db/mysql');
@@ -25,7 +14,7 @@ module.exports = {
   new: (req, res) => {
     const newConfirmation = JSON.parse(JSON.stringify(req.body));
     res.locals.newConfirmation = newConfirmation;
-    res.render('staffs/new');
+    res.render('managers/new');
   },
   validate: (req, res, next) => {
     req.check('employee_id')
@@ -63,7 +52,7 @@ module.exports = {
         // console.log(error.array());
         const messages = error.array().map(e => e.msg); // error配列オブジェクトを配列に吐き出す
         req.flash('error', messages);
-        res.redirect('/staffs/new');
+        res.redirect('/managers/new');
         // next('route');
       } else {
         next();
@@ -77,12 +66,12 @@ module.exports = {
       console.log(req.body);
       const newConfirmation = JSON.parse(JSON.stringify(req.body));
       res.locals.newConfirmation = newConfirmation;
-      res.render('staffs/new');
+      res.render('managers/new');
     } else if (!req.body.action) {
       delete req.body.action;
       // console.log(req.body);
       const newConfirmation = JSON.parse(JSON.stringify(req.body));
-      res.render('staffs/new2', { newConfirmation: newConfirmation });
+      res.render('managers/new2', { newConfirmation: newConfirmation });
     } else {
       delete req.body.action;
       // console.log(req.body);
@@ -106,22 +95,28 @@ module.exports = {
     con.query(sql, req.body, (error, results) => {
       if (error) {
         req.flash('error', '登録できませんでした,既に登録されている社員IDです');
-        res.redirect('/staffs/new');
+        res.redirect('/managers/new');
       } else {
-        req.flash('success', '登録できました');
-        res.render('staffs/newConfirmation');
+        res.render('managers/newConfirmation');
       }
     });
   },
   update: (req, res) => {
-    res.render('staffs/update');
+    res.render('managers/update');
   },
-  index: (req, res) => {
-    const staff = 'スタッフ情報';
-    // console.log(req);
-    const name = req.user;
-    const rename = (name['name']);
-    res.render('staffs/index');
+  staffsList: (req, res) => {
+    function staffsList (options) {
+      return function (req, res, next) {
+        con.query('select * from staff_lists', (err, result, fields) => {
+          if (err) throw err;
+          const staffsList = result;
+          console.log(staffsList);
+          res.locals.staffsList = staffsList;
+          res.render('staffsList');
+          next();
+        });
+      };
+    }
   }
 };
 

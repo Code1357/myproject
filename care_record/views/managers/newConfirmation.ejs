@@ -1,10 +1,14 @@
-<div>
-  <h1>登録内容</h1>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/layout.css" rel="stylesheet">
+</head>
+
+<div class="newConfirmation_employee">
   <div>
-    <p>こちらの内容で登録しました</p>
+    <p class="newConfirmation">こちらの内容で登録しました</p>
   </div>
-</div>
-<div>
+<div class="newConfirmation_list">
   <tr>
     <th>社員番号:<%= newConfirmation.employee_id %></th><br>
   </tr>
@@ -37,3 +41,4 @@
     <th>役職:見習い</th>
     <% }; %><br>
   </tr>
+  </div>
