@@ -1,11 +1,12 @@
 'use strict';
 
 const xhr = new XMLHttpRequest();
-xhr.open('GET', '/userList');
-xhr.addEventListener('load', (e) => {
-  const users = JSON.parse((xhr.responseText));
-  const d = [users[0].email];
+const staffInfo = document.getElementById('staff_info');
+xhr.open('GET', '/managers/staffs/:id');
+xhr.addEventListener('click', (e) => {
+  const staff = JSON.parse((xhr.responseText));
+  const d = [staff[0].staff_name];
   console.log(d);
-  document.querySelector('#ajax4').innerHTML = d;
+  document.querySelector('#staff_info').innerHTML = d;
 });
 xhr.send();

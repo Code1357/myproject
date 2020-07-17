@@ -1,23 +1,20 @@
-<h2 class="center">Users Table</h2>
-<div class="center">
-  <a class="button" href="/users/new">Create User</a>
+ 
+<head>
+    <link href="/css/list.css" rel="stylesheet">
+</head>
+ 
+ <div class="staff_list">
+ <div class="staff_list_in">
+ <% staffList.forEach(staffList => { %>
+ <ul>
+ <li id="staff_list">
+ <a href="<%=`/managers/staffs/${staffList.staff_id}`%>">
+<%= staffList.staff_id %></a>
+</li>
+</ul>
+<% }); %>
 </div>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Zip Code</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% users.forEach(staffsList => { %>
-    <tr>
-      <td>
-        <a href="<%=`/staffsList/${staffsList._id}`%>">
-          <%= staffsList.staffs_name%>
-    <% }); %>
-  </tbody>
-</table>
+</div>
+
+
+<p id="staff_info"></p>

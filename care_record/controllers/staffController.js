@@ -105,18 +105,22 @@ module.exports = {
     res.render('managers/update');
   },
   staffsList: (req, res) => {
-    function staffsList (options) {
-      return function (req, res, next) {
-        con.query('select * from staff_lists', (err, result, fields) => {
-          if (err) throw err;
-          const staffsList = result;
-          console.log(staffsList);
-          res.locals.staffsList = staffsList;
-          res.render('staffsList');
-          next();
-        });
-      };
-    }
+    con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
+      if (err) throw err;
+      const staffList = result;
+      console.log(staffList);
+      res.locals.staffList = staffList;
+      res.render('managers/staffsList');
+    });
+  },
+  staffsGet: (req, res) => {
+    const staffId = req.params.staff_id;
+    con.query('select * from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+      if (err) throw err;
+      console.log(req.params);
+      const staffInfo = result;
+      res.locals.staffInfo = staffInfo;
+    });
   }
 };
 
