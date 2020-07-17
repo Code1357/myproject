@@ -1,6 +1,6 @@
 'use strict';
 
-const xhr = new XMLHttpRequest();
+/* const xhr = new XMLHttpRequest();
 const staffInfo = document.getElementById('staff_info');
 xhr.open('GET', '/managers/staffs/:id');
 xhr.addEventListener('click', (e) => {
@@ -10,3 +10,4 @@ xhr.addEventListener('click', (e) => {
   document.querySelector('#staff_info').innerHTML = d;
 });
 xhr.send();
+ */

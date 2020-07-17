@@ -108,18 +108,20 @@ module.exports = {
     con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
       if (err) throw err;
       const staffList = result;
-      console.log(staffList);
       res.locals.staffList = staffList;
       res.render('managers/staffsList');
     });
   },
-  staffsGet: (req, res) => {
+  staffsGet: (req, res, next) => {
     const staffId = req.params.staff_id;
     con.query('select * from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
       if (err) throw err;
-      console.log(req.params);
+      console.log(staffId);
       const staffInfo = result;
+      console.log(staffInfo);
       res.locals.staffInfo = staffInfo;
+      res.render('managers/staffInfo');
+      next();
     });
   }
 };
