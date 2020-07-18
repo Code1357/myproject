@@ -1,6 +1,36 @@
+
+ 
+<head>
+    <link href="/css/list.css" rel="stylesheet">
+</head>
+ 
+ <div class="staff_list">
+ <div class="staff_list_in">
+ <% staffList.forEach(staffList => { %>
+ <ul>
+ <li id="staff_list">
+ <a href="<%=`/managers/staffs/${staffList.staff_id}`%>">
+<%= staffList.staff_id %></a>
+</li>
+</ul>
+<% }); %>
+</div>
+</div>
+
+
 <% staffInfo.forEach(staffInfo => { %>
-<% staffInfo.staff_id %>
-<%= staffInfo.staff_id %>
-<% const st = staffInfo.staff_id %>
-<%= st %>
+<table>
+  <tr>
+    <td>社員番号：</td> <td><%= staffInfo.employee_id %> </td>
+  </tr>
+  <tr>
+    <td>名前：</td> <td><%= staffInfo.staff_name %> </td>
+  </tr>
+  <tr>
+    <td>誕生日</td> <td><%= staffInfo.birthday %> </td>
+  </tr>
+  <tr>
+    <td>性別</td> <td><%= staffInfo.genders_gender_id %> </td>
+  </tr>
+</table>
 <% }); %>

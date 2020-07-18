@@ -112,16 +112,21 @@ module.exports = {
       res.render('managers/staffsList');
     });
   },
-  staffsGet: (req, res, next) => {
+  staffsGet: (req, res) => {
     const staffId = req.params.staff_id;
+    // 名前取得だけのselect文に変更
     con.query('select * from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
       if (err) throw err;
-      console.log(staffId);
       const staffInfo = result;
-      console.log(staffInfo);
       res.locals.staffInfo = staffInfo;
-      res.render('managers/staffInfo');
-      next();
+      con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
+        if (err) throw err;
+        const staffList = result;
+        res.locals.staffList = staffList;
+        // 誕生日(日付変換)のselect文を記述
+        // 外部キーでの性別取得のselect文作成
+        res.render('managers/staffInfo');
+      });
     });
   }
 };
