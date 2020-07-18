@@ -14,3 +14,22 @@ text-align: left;
 .staff_list_in {
   margin-left: 20px;
 }
+
+.staffInfo {
+  display: inline-block;
+  width: 70%;
+  height: 200px;
+}
+
+table {
+  
+  width: 100%;
+}
+
+.item {
+text-align: right;
+}
+
+.info {
+  text-align: left;
+}

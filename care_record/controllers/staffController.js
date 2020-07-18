@@ -61,9 +61,9 @@ module.exports = {
   },
   newConfirmation: (req, res, next) => {
     if (req.body.action2) {
-      console.log(req.body);
+      // console.log(req.body);
       delete req.body.action2;
-      console.log(req.body);
+      // console.log(req.body);
       const newConfirmation = JSON.parse(JSON.stringify(req.body));
       res.locals.newConfirmation = newConfirmation;
       res.render('managers/new');
@@ -77,7 +77,7 @@ module.exports = {
       // console.log(req.body);
       const newConfirmation = JSON.parse(JSON.stringify(req.body));
       res.locals.newConfirmation = newConfirmation;
-      console.log(newConfirmation);
+      // console.log(newConfirmation);
       next();
     };
   },
@@ -101,8 +101,14 @@ module.exports = {
       }
     });
   },
-  update: (req, res) => {
-    res.render('managers/update');
+  updatePage: (req, res, next) => {
+    const staffId = req.params.staff_id;
+    con.query('select * from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+      if (err) throw err;
+      const staffUpdate = result;
+      res.locals.staffUpdate = staffUpdate;
+      res.render('managers/update');
+    });
   },
   staffsList: (req, res) => {
     con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
@@ -122,33 +128,35 @@ module.exports = {
         con.query('select employee_id from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
           if (err) throw err;
           const staffEmployeeId = result;
-          console.log(staffEmployeeId);
+          // console.log(staffEmployeeId);
           res.locals.staffEmployeeId = staffEmployeeId[0].employee_id;
-          console.log(res.locals.staffEmployeeId);
+          res.locals.staffId = staffId;
 
           con.query('select staff_name from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
             if (err) throw err;
             const staffName = result;
-            console.log(staffName);
+            // console.log(staffName);
             res.locals.staffName = staffName[0].staff_name;
-            console.log(res.locals.staffName);
+            // console.log(res.locals.staffName);
 
             con.query('select birthday from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
               if (err) throw err;
-              const birthday = result;
-              console.log(birthday);
-              const str = birthday[0].birthday;
-              console.log(str);
+              const birthdayDate = result[0].birthday;
+              const birthday = `${birthdayDate.getUTCFullYear()}年${birthdayDate.getUTCMonth() + 1}月${birthdayDate.getUTCDate()}日`;
               res.locals.birthday = birthday;
 
-              con.query('select genders_gender_id from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+              con.query('select s.staff_name, p.position from staff_lists as s join position_lists as p on s.position_lists_position_id = p.position_id where staff_id = ?', staffId, (err, result, fields) => {
                 if (err) throw err;
-                const gender = result;
-                console.log(gender);
-                res.locals.gender = gender;
-                // 誕生日(日付変換)のselect文を記述
-                // 外部キーでの性別取得のselect文作成
-                res.render('managers/staffInfo');
+                const position = result[0].position;
+                res.locals.position = position;
+
+                con.query('select s.staff_name, g.gender from staff_lists as s join genders as g on s.genders_gender_id = g.gender_id where staff_id = ?', staffId, (err, result, fields) => {
+                  if (err) throw err;
+                  // console.log(result);
+                  const gender = result[0].gender;
+                  res.locals.gender = gender;
+                  res.render('managers/staffInfo');
+                });
               });
             });
           });

@@ -14,8 +14,8 @@ router.get('/info', managerController.info);
 router.get('/new', staffController.new);
 router.post('/create1', staffController.validate, staffController.newConfirmation, staffController.create);
 router.post('/create2', staffController.validate, staffController.newConfirmation2, staffController.create);
-router.get('/update', staffController.update);
 router.get('/staffsList', staffController.staffsList);
 router.get('/staffs/:staff_id', staffController.staffsGet);
+router.get('/update/:staff_id', staffController.updatePage, // この後、updeteのクエリが必要/入社日staffInfo抜けている);
 
 module.exports = router; // routes/index.jsにloadさせる
