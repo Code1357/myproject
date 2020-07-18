@@ -113,24 +113,50 @@ module.exports = {
     });
   },
   staffsGet: (req, res) => {
-    const staffId = req.params.staff_id;
-    // 名前取得だけのselect文に変更
-    con.query('select * from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+    con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
       if (err) throw err;
-      const staffInfo = result;
-      res.locals.staffInfo = staffInfo;
-      con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
-        if (err) throw err;
-        const staffList = result;
-        res.locals.staffList = staffList;
-        // 誕生日(日付変換)のselect文を記述
-        // 外部キーでの性別取得のselect文作成
-        res.render('managers/staffInfo');
-      });
+      const staffList = result;
+      res.locals.staffList = staffList;
+      {
+        const staffId = req.params.staff_id;
+        con.query('select employee_id from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+          if (err) throw err;
+          const staffEmployeeId = result;
+          console.log(staffEmployeeId);
+          res.locals.staffEmployeeId = staffEmployeeId[0].employee_id;
+          console.log(res.locals.staffEmployeeId);
+
+          con.query('select staff_name from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+            if (err) throw err;
+            const staffName = result;
+            console.log(staffName);
+            res.locals.staffName = staffName[0].staff_name;
+            console.log(res.locals.staffName);
+
+            con.query('select birthday from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+              if (err) throw err;
+              const birthday = result;
+              console.log(birthday);
+              const str = birthday[0].birthday;
+              console.log(str);
+              res.locals.birthday = birthday;
+
+              con.query('select genders_gender_id from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+                if (err) throw err;
+                const gender = result;
+                console.log(gender);
+                res.locals.gender = gender;
+                // 誕生日(日付変換)のselect文を記述
+                // 外部キーでの性別取得のselect文作成
+                res.render('managers/staffInfo');
+              });
+            });
+          });
+        });
+      }
     });
   }
 };
-
 /* const str = 'ssshoko1211';
 const regex = RegExp(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,15}$/i);
 console.log(regex.test(str)); */

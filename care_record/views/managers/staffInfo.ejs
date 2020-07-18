@@ -10,7 +10,7 @@
  <ul>
  <li id="staff_list">
  <a href="<%=`/managers/staffs/${staffList.staff_id}`%>">
-<%= staffList.staff_id %></a>
+<%= staffList.staff_name %></a>
 </li>
 </ul>
 <% }); %>
@@ -18,19 +18,18 @@
 </div>
 
 
-<% staffInfo.forEach(staffInfo => { %>
+
 <table>
   <tr>
-    <td>社員番号：</td> <td><%= staffInfo.employee_id %> </td>
+    <td>社員番号：</td> <td><%= staffEmployeeId %> </td>
   </tr>
   <tr>
-    <td>名前：</td> <td><%= staffInfo.staff_name %> </td>
+    <td>名前：</td> <td><%=  staffName%> </td>
   </tr>
   <tr>
-    <td>誕生日</td> <td><%= staffInfo.birthday %> </td>
+    <td>誕生日</td> <td><%=  %> </td>
   </tr>
   <tr>
-    <td>性別</td> <td><%= staffInfo.genders_gender_id %> </td>
+    <td>性別</td> <td><%=  %> </td>
   </tr>
 </table>
-<% }); %>
