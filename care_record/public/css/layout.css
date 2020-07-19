@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-  height: 600px;
+  height: auto;
   margin-top: 40px;
 }
 

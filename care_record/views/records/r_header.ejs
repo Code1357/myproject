@@ -4,18 +4,17 @@
 
 <% if (!locals.top) { %>
 <div class=header>
-	<h1 class="m_title"> Web Care 管理システム</h1>
+	<h1 class="m_title"> Web Care システム</h1>
 	<p class="border"></p>
 </div>
 <% } %>
-
 
 <div class="header_wrapper">
 	<div class="">
 
 		<% if (loggedIn) { %>
 		<ul class="nav2">
-			<li class="nav-title"><a>管理者 Page - スタッフ情報</a></li>
+			<li class="nav-title"><a>Cera Staff Page - スタッフ情報</a></li>
 			<li><a href="/managers/new">/ 新規登録</a></li>
 			<li><a href="/managers/staffsList">/ リスト</a></li>
 		</ul>
@@ -30,11 +29,7 @@
 
 	<div class="m_login">
 		<% if (loggedIn) { %>
-		<p class="staff_id">社員ID:<%= staffs.name %></p><br>
-		<form class="form_reset" action="./logout" method=>
-			<button class="btn" type="submit">Log out</button>
-		</form>
+		<p class="staff_id">社員ID:<%= staffs.name %></p>
 		<% } %>
-
 	</div>
 </div>

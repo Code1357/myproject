@@ -2,6 +2,8 @@
 
 const con = require('../db/mysql');
 
+// memo
+
 module.exports = {
 
   // sqlを絡めた処理

@@ -2,15 +2,12 @@
 
 const con = require('../db/mysql');
 
-// const Staff = require('../models/staff'); // ../models/userをload
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-// const validateOption = require('../models/validateOption');
 
 // staffRoutesへ個別モジュールとしてexportするオブジェクト
 module.exports = {
 
-  // modelより個別処理を受け取り,経路別処理実行を記述
   new: (req, res) => {
     const newConfirmation = JSON.parse(JSON.stringify(req.body));
     res.locals.newConfirmation = newConfirmation;
@@ -118,16 +115,28 @@ module.exports = {
       res.render('managers/update');
     });
   },
-  // 
   update: (req, res) => {
     const staffId = req.params.staff_id;
-   /*  con.query('update staff_lists set ? where id = ?', staffId, req.body.staff_name, function (err, result, fields) {
-      if (err) throw err; */
-      console.log(req.body);
-      console.log(req.body.staff_name);
-      console.log(req.body.position_lists_position_id);
-   /*  }); */
-   // 一度、インサートの時のconsoleを確かめる
+    const name = req.body.staff_name;
+    const position = req.body.position_lists_position_id;
+    con.query('update staff_lists set staff_name = ?, position_lists_position_id = ? where staff_id = ?', [name, position, staffId], function (err, result, fields) {
+      if (err) throw err;
+    });
+    con.query('select * from staff_lists where staff_id = ?', staffId, function (err, result, fields) {
+      if (err) throw err;
+      const resultHireData = result[0].hire_data;
+      const hireData = `${resultHireData.getUTCFullYear()}年${resultHireData.getUTCMonth() + 1}月${resultHireData.getUTCDate()}日`;
+      res.locals.hireData = hireData;
+      const birthdayData = result[0].birthday;
+      const birthday = `${birthdayData.getUTCFullYear()}年${birthdayData.getUTCMonth() + 1}月${birthdayData.getUTCDate()}日`;
+      res.locals.birthday = birthday;
+      if (req.body.action2) {
+        delete req.body.action2;
+        res.redirect(`/managers/updatePage/${staffId}`);
+      } else {
+        res.render('managers/updateComplete', { updateDate: result });
+      };
+    });
   },
   staffsList: (req, res) => {
     con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
@@ -192,6 +201,7 @@ module.exports = {
     });
   }
 };
+
 /* const str = 'ssshoko1211';
 const regex = RegExp(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,15}$/i);
 console.log(regex.test(str)); */

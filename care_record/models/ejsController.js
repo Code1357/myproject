@@ -7,9 +7,4 @@ module.exports = {
     res.locals.top = top;
     next();
   }
-  /* offLogin: function (req, res, next) {
-    const topLogin = 'topLogin';
-    res.locals.topLogin = topLogin;
-    next();
-  } */
 };

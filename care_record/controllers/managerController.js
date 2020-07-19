@@ -1,7 +1,8 @@
 'use strict';
+
 const con = require('../db/mysql');
 const passport = require('passport');
-const manager = require('../models/manager');
+
 // const json = require('../json/personalInformationProtectionLaw.json');
 // console.log(json);
 
@@ -21,7 +22,17 @@ module.exports = {
       failureFlash: 'ログイン失敗。社員番号かパスワードを確認してください。'
     }),
   info: (req, res) => {
-    res.render('managers/info');
+    const username = req.user.name;
+    con.query('select position_lists_position_id from staff_lists where employee_id = ?', username, (err, result, fields) => {
+      if (err) throw err;
+      const position = result[0].position_lists_position_id;
+      console.log(position);
+      if (position === 1) {
+        res.render('managers/info', { position1: 1 });
+      } else {
+        res.render('records/info', { position2: 2, position3: 3 });
+      }
+    });
   },
   logout: (req, res, next) => {
     req.logout(); // passportのメソッド
@@ -31,3 +42,10 @@ module.exports = {
   }
 
 };
+
+
+/* <% if ( ) { %>
+  <%- include('partials/m_header'); %>
+<% } else { %>
+  <%- include('partials/r_header'); %>
+  <% } %> */

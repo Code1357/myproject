@@ -7,7 +7,7 @@ const con = require('../db/mysql');
 module.exports = {
 
   // sqlを絡めた処理
-staffsModel: (req, res) => {
+/* staffsModel: (req, res) => {
     const name = req.user;
     const rename = (name['name']);
     console.log(rename);
@@ -21,5 +21,5 @@ staffsModel: (req, res) => {
       res.locals.obj2 = obj2;
       res.render('managers/info');
     });
-  }
+  } */
 };
