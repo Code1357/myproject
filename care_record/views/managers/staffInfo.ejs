@@ -23,18 +23,23 @@
     <td class="item" >社員番号：</td> <td class="info" ><%= staffEmployeeId %> </td>
   </tr>
   <tr>
+    <td class="item" >入社日：</td> <td class="info" ><%= hireData %> </td>
+  </tr>
+  <tr>
     <td class="item" >名前：</td> <td class="info" ><%=  staffName%> </td>
   </tr>
   <tr>
     <td class="item" >誕生日：</td> <td class="info" ><%=  birthday%> </td>
   </tr>
   <tr>
-    <td class="item" >役職：</td> <td class="info"> <%= position %> </td>
+    <td class="item" >性別：</td> <td class="info" ><%=  gender%> </td>
   </tr>
   <tr>
-    <td class="item" >性別：</td> <td class="info" ><%=  gender%> </td>
+    <td class="item" >役職：</td> <td class="info"> <%= position %> </td>
   </tr>
 </table>
 </div>
 
-<button type="submit"><a href="<%=`/managers/update/${staffId}`%>">修正</button>
+<button type="submit"><a href="<%=`/managers/updatePage/${staffId}`%>">修正</a></button>
+
+<p>※ 修正できるのは、名前・役職のみです</p>

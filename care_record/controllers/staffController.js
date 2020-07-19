@@ -105,10 +105,29 @@ module.exports = {
     const staffId = req.params.staff_id;
     con.query('select * from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
       if (err) throw err;
+      res.locals.staffId = staffId;
       const staffUpdate = result;
       res.locals.staffUpdate = staffUpdate;
+      const resultHireData = result[0].hire_data;
+      // console.log(resultHireData);
+      const hireData = `${resultHireData.getUTCFullYear()}/${resultHireData.getUTCMonth() + 1}/${resultHireData.getUTCDate()}`;
+      res.locals.hireData = hireData;
+      const birthdayData = result[0].birthday;
+      const birthday = `${birthdayData.getUTCFullYear()}/${birthdayData.getUTCMonth() + 1}/${birthdayData.getUTCDate()}`;
+      res.locals.birthday = birthday;
       res.render('managers/update');
     });
+  },
+  // 
+  update: (req, res) => {
+    const staffId = req.params.staff_id;
+   /*  con.query('update staff_lists set ? where id = ?', staffId, req.body.staff_name, function (err, result, fields) {
+      if (err) throw err; */
+      console.log(req.body);
+      console.log(req.body.staff_name);
+      console.log(req.body.position_lists_position_id);
+   /*  }); */
+   // 一度、インサートの時のconsoleを確かめる
   },
   staffsList: (req, res) => {
     con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
@@ -139,23 +158,31 @@ module.exports = {
             res.locals.staffName = staffName[0].staff_name;
             // console.log(res.locals.staffName);
 
-            con.query('select birthday from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+            con.query('select hire_data from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
               if (err) throw err;
-              const birthdayDate = result[0].birthday;
-              const birthday = `${birthdayDate.getUTCFullYear()}年${birthdayDate.getUTCMonth() + 1}月${birthdayDate.getUTCDate()}日`;
-              res.locals.birthday = birthday;
+              const resultHireData = result[0].hire_data;
+              // console.log(resultHireData);
+              const hireData = `${resultHireData.getUTCFullYear()}年${resultHireData.getUTCMonth() + 1}月${resultHireData.getUTCDate()}日`;
+              res.locals.hireData = hireData;
 
-              con.query('select s.staff_name, p.position from staff_lists as s join position_lists as p on s.position_lists_position_id = p.position_id where staff_id = ?', staffId, (err, result, fields) => {
+              con.query('select birthday from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
                 if (err) throw err;
-                const position = result[0].position;
-                res.locals.position = position;
+                const birthdayData = result[0].birthday;
+                const birthday = `${birthdayData.getUTCFullYear()}年${birthdayData.getUTCMonth() + 1}月${birthdayData.getUTCDate()}日`;
+                res.locals.birthday = birthday;
 
-                con.query('select s.staff_name, g.gender from staff_lists as s join genders as g on s.genders_gender_id = g.gender_id where staff_id = ?', staffId, (err, result, fields) => {
+                con.query('select s.staff_name, p.position from staff_lists as s join position_lists as p on s.position_lists_position_id = p.position_id where staff_id = ?', staffId, (err, result, fields) => {
                   if (err) throw err;
-                  // console.log(result);
-                  const gender = result[0].gender;
-                  res.locals.gender = gender;
-                  res.render('managers/staffInfo');
+                  const position = result[0].position;
+                  res.locals.position = position;
+
+                  con.query('select s.staff_name, g.gender from staff_lists as s join genders as g on s.genders_gender_id = g.gender_id where staff_id = ?', staffId, (err, result, fields) => {
+                    if (err) throw err;
+                    // console.log(result);
+                    const gender = result[0].gender;
+                    res.locals.gender = gender;
+                    res.render('managers/staffInfo');
+                  });
                 });
               });
             });

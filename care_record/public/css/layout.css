@@ -111,3 +111,8 @@ text-align: center;
 .newConfirmation {
   color: crimson;
 }
+
+.update_form {
+  border:none;
+background:none;
+}
