@@ -12,10 +12,7 @@
 
 <body>
   <header>
-    <%# header作成スペース %>
-  
-
-    <div class="flash">
+<div class="flash">
       <% if (flashMessages) { %>
       <% if (flashMessages.success) { %>
       <div class="flash success">
@@ -28,6 +25,14 @@
       <% } %>
       <% } %>
     </div>
+
+  <% if (loggedIn) { %>
+  <h3></h3>
+  <% } else { %>
+  <% if (!locals.top) { %>
+			<h3>ログイン</h3>
+		<% } %>
+    <% } %>
   </header>
 
   <div class="container">

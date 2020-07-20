@@ -30,7 +30,7 @@ module.exports = {
       if (position === 1) {
         res.render('managers/info', { position1: 1 });
       } else {
-        res.render('records/info', { position2: 2, position3: 3 });
+        res.render('careRecords/info', { position2: 2, position3: 3 });
       }
     });
   },
@@ -42,10 +42,3 @@ module.exports = {
   }
 
 };
-
-
-/* <% if ( ) { %>
-  <%- include('partials/m_header'); %>
-<% } else { %>
-  <%- include('partials/r_header'); %>
-  <% } %> */

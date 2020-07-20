@@ -2,7 +2,7 @@
 	<link href="/css/header.css" rel="stylesheet">
 </head>
 
-<div class="m_login">
+<div class="r_login">
 		<% if (loggedIn) { %>
 		<p class="staff_id">社員ID:<%= staffs.name %></p>
 		<% } %>
@@ -13,15 +13,14 @@
 	<p class="border"></p>
 </div>
 
-
 <div class="header_wrapper">
 	<div class="">
 
 		<% if (loggedIn) { %>
 		<ul class="nav2">
-			<li class="nav-title"><a>管理者 Page - スタッフ情報</a></li>
-			<li><a href="/managers/new">/ 新規登録</a></li>
-			<li><a href="/managers/staffsList">/ リスト</a></li>
+			<li class="nav-title"><a>Cera Staff Page - 利用者情報</a></li>
+			<li><a href="/careRecords/new">/ 新規登録</a></li>
+			<li><a href="/careRecords/userList">/ リスト</a></li>
 		</ul>
 		<% } %>
 	</div>

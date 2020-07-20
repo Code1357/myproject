@@ -7,7 +7,7 @@ const managerController = require('../controllers/managerController');
 const staffController = require('../controllers/staffController');
 
 // リクエストをパスを受付、処理実行を記述
-router.get('/login', /* ejsValue.offLogin, */ managerController.login);
+router.get('/login', managerController.login);
 router.post('/login', managerController.authenticate);
 router.get('/logout', managerController.logout);
 router.get('/info', managerController.info);

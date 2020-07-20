@@ -26,8 +26,8 @@
   margin-right: 20px;
 }
 
-.m_login {
-  height: 50px;
+.m_login, .r_login {
+  height: 2px;
   width: 100%;
   margin-bottom: none;
   padding: none;
@@ -44,7 +44,7 @@
 }
 
 .nav-title {
-  width: 220px;
+  width: 250px;
   text-align: left;
 }
 
