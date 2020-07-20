@@ -47,8 +47,8 @@ module.exports = {
       delete req.body.action2;
       const newUserConfirmation = JSON.parse(JSON.stringify(req.body));
       res.locals.newUserConfirmation = newUserConfirmation;
-      res.render('reRecords/new');
-    } else {  // 登録戻るどるできなーい！！！
+      res.render('careRecords/new');
+    } else {
       delete req.body.action;
       // console.log(req.body);
       const newUserConfirmation = JSON.parse(JSON.stringify(req.body));
@@ -58,7 +58,7 @@ module.exports = {
     };
   },
   create: (req, res) => {
-    const sql = 'insert into user_list set ?';
+    const sql = 'insert into user_lists set ?';
     con.query(sql, req.body, (error, results) => {
       if (error) {
         req.flash('error', '登録できませんでした,もう一度登録しなおしてください');
@@ -67,6 +67,146 @@ module.exports = {
         res.render('careRecords/newUserConfirmation');
       }
     });
-  }
+  },
+  updatePage: (req, res, next) => {
+    const userId = req.params.user_id;
+    con.query('select * from user_lists where user_id = ?', userId, (err, result, fields) => {
+      if (err) throw err;
+      res.locals.userId = userId;
+      const userUpdate = result;
+      res.locals.userUpdate = userUpdate;
+      const resultEntranceData = result[0].entrance_data;
+      // console.log(resultHireData);
+      const entranceData = `${resultEntranceData.getUTCFullYear()}/${resultEntranceData.getUTCMonth() + 1}/${resultEntranceData.getUTCDate()}`;
+      res.locals.entranceData = entranceData;
+      res.render('careRecords/update');
+    });
+  },
+  usersList: (req, res) => {
+    con.query('select * from user_lists order by user_name', (err, result, fields) => {
+      if (err) throw err;
+      const userList = result;
+      res.locals.userList = userList;
+      res.render('careRecords/usersList');
+    });
+  },
+  update: (req, res) => {
+    const userId = req.params.user_id;
+    const name = req.body.user_name;
+    const adl = req.body.adls_adl_id;
+    con.query('update user_lists set user_name = ?, adls_adl_id = ? where user_id = ?', [name, adl, userId], function (err, result, fields) {
+      if (err) throw err;
+    });
+    con.query('select * from user_lists where user_id = ?', userId, function (err, result, fields) {
+      if (err) throw err;
+      const resultEntranceData = result[0].entrance_data;
+      const entranceData = `${resultEntranceData.getUTCFullYear()}年${resultEntranceData.getUTCMonth() + 1}月${resultEntranceData.getUTCDate()}日`;
+      res.locals.entranceData = entranceData;
+      if (req.body.action2) {
+        delete req.body.action2;
+        res.redirect(`/careRecords/updatePage/${userId}`);
+      } else {
+        res.render('careRecords/updateComplete', { updateDate: result });
+      };
+    });
+  },
+  usersGet: (req, res) => {
+    con.query('select * from user_lists order by user_name', (err, result, fields) => {
+      if (err) throw err;
+      res.locals.userList = result;
+      {
+        const userId = req.params.user_id;
+        res.locals.userId = userId;
+        con.query('select user_name from user_lists where user_id = ?', userId, (err, result, fields) => {
+          if (err) throw err;
+          // console.log(staffName);
+          res.locals.userName = result[0].user_name;
+          // console.log(res.locals.staffName);
 
+          con.query('select entrance_data from user_lists where user_id = ?', userId, (err, result, fields) => {
+            if (err) throw err;
+            const resultEntranceData = result[0].entrance_data;
+            // console.log(resultHireData);
+            const entranceData = `${resultEntranceData.getUTCFullYear()}年${resultEntranceData.getUTCMonth() + 1}月${resultEntranceData.getUTCDate()}日`;
+            res.locals.entranceData = entranceData;
+
+            con.query('select u.user_name, a.adl from user_lists as u join adls as a on u.adls_adl_id = a.adl_id where user_id = ?', userId, (err, result, fields) => {
+              if (err) throw err;
+              const adl = result[0].adl;
+              res.locals.adl = adl;
+
+              con.query('select u.user_name, g.gender from user_lists as u join genders as g on u.genders_gender_id = g.gender_id where user_id = ?', userId, (err, result, fields) => {
+                if (err) throw err;
+                // console.log(result);
+                const gender = result[0].gender;
+                res.locals.gender = gender;
+                res.render('careRecords/userInfo');
+              });
+            });
+          });
+        });
+      }
+    });
+  },
+  recordPage: (req, res) => {
+    const newRecUserConfirmation = JSON.parse(JSON.stringify(req.body));
+      res.locals.newRecUserConfirmation = newRecUserConfirmation;
+    con.query('select * from user_lists order by user_name', (err, result, fields) => {
+      if (err) throw err;
+      res.locals.userList = result;
+      {
+        const userId = req.params.user_id;
+        res.locals.userId = userId;
+        con.query('select user_name from user_lists where user_id = ?', userId, (err, result, fields) => {
+          if (err) throw err;
+          // console.log(staffName);
+          res.locals.userName = result[0].user_name;
+          // console.log(res.locals.staffName);
+
+          con.query('select u.user_name, a.adl from user_lists as u join adls as a on u.adls_adl_id = a.adl_id where user_id = ?', userId, (err, result, fields) => {
+            if (err) throw err;
+            const adl = result[0].adl;
+            res.locals.adl = adl;
+
+            con.query('select u.user_name, g.gender from user_lists as u join genders as g on u.genders_gender_id = g.gender_id where user_id = ?', userId, (err, result, fields) => {
+              if (err) throw err;
+              // console.log(result);
+              const gender = result[0].gender;
+              res.locals.gender = gender;
+              res.render('careRecords/userRecord');
+            });
+          });
+        });
+      }
+    });
+  },
+  newRecordConfirmation: (req, res, next) => {
+    const userId = req.params.user_id;
+    if (req.body.action2) {
+      delete req.body.action2;
+      const newRecUserConfirmation = JSON.parse(JSON.stringify(req.body));
+      res.redirect(`/careRecords/recordPage/${userId}`, { newRecUserConfirmation: newRecUserConfirmation }); ///// ここの工夫！後一息！！
+      delete req.body.action;
+      // console.log(req.body);
+      // const newUserConfirmation = JSON.parse(JSON.stringify(req.body));
+      // res.locals.newUserConfirmation = newUserConfirmation;
+      // console.log(newConfirmation);
+      next();
+    };
+  },
+  recordCreate: (req, res) => {
+    const recordDate = req.body.record_date; // 記録日時
+    const record = req.body.record_data; // 記録内容
+    const staffId = req.user.name; // スタッフID
+    const userId = req.params.user_id; // 利用者のID
+    const sql = 'insert into care_records set recording_date = ?, care_record = ?, user_lists_user_id = ?, care_records_staff_id = ?';
+    con.query(sql, [recordDate, record, userId, staffId], (error, results) => {
+      if (error) {
+        req.flash('error', '登録できませんでした,もう一度登録しなおしてください');
+        res.redirect(`/careRecords/recordPage/${userId}`);
+      } else {
+        res.redirect(`/careRecords/users/${userId}`);
+      }
+    });
+  }
 };

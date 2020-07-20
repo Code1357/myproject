@@ -6,9 +6,12 @@ const careRecordController = require('../controllers/careRecordController');
 
 // リクエストをパスを受付、処理実行を記述
 router.get('/new', careRecordController.new);
-router.post('/create1', careRecordController.validate, careRecordController.newUserConfirmation, careRecordController.create);
-/* router.post('/create2', careRecordController.validate, careRecordController.newUserConfirmation2, careRecordController.create); */
-// router.get('/userList', staffController.staffsList);
-
+router.post('/create', careRecordController.validate, careRecordController.newUserConfirmation, careRecordController.create);
+router.get('/usersList', careRecordController.usersList);
+router.get('/users/:user_id', careRecordController.usersGet);
+router.get('/updatePage/:user_id', careRecordController.updatePage);
+router.post('/update/:user_id', careRecordController.update);
+router.get('/recordPage/:user_id', careRecordController.recordPage);
+router.post('/recordCreate/:user_id', careRecordController.newRecordConfirmation, careRecordController.recordCreate);
 
 module.exports = router; // routes/index.jsにloadさせる

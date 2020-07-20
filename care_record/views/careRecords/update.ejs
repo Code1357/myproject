@@ -1,0 +1,48 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/modal.css" rel="stylesheet">
+ <link href="/css/listinfo.css" rel="stylesheet">
+</head>
+
+<%- include('r_header'); %>
+
+<div id="mask" class="hidden"></div> <!-- 背景全体を暗くする -->
+
+<div class="data_form">
+
+  <form class="signup" action="<%=`/careRecords/update/${userId}`%>" method="POST">
+    
+    <label for="inputEntranceData">入所日</label>
+    <input type="" name="entrance_data" id="inputEntranceData" class="update_form" placeholder="入所日" value="<%= entranceData %>" readonly>
+    <br/>
+    <label for="inputUserName">名前</label>
+    <input type="text" name="user_name" id="inputUserName" class="form-control" placeholder="名前" value="<%= userUpdate[0].user_name %> ">
+    
+    <br/>
+    
+    <label for="inputGender">性別</label>
+    <input type="number" name="genders_gender_id" id="inputGender" class="update_form" value="<%= userUpdate[0].genders_gender_id %>" min="1" max="2" readonly>
+    <br />
+    <label for="inputAdl">ADL</label>
+    <input type="number" name="adls_adl_id" id="inputAdl" class="form-control" value="<%= userUpdate[0].adls_adl_id %>" min="1" max="3" required>
+    <br/>
+    
+    <section id="modal" class="hidden">
+      <h3>こちらの内容で更新しますか？</h3>
+       <p id="outputEntranceData"></p>
+      <p id="outputUserName"></p>
+      <p id="outputAdl"></p>
+      <p id="outputGender"></p>
+
+      <button id="close" class="btn" name='action2' value="ぼたん2だよ">戻る</button>
+      <button class="btn" name='action' value="ぼたんだよ" >更新</button>
+    </section>
+  </form>
+  <div id="open">
+   <div class="modal_on_btn">
+    <button id="open_modal">更新</button>
+     </div>
+  </div>
+
+  <script src="/js/modalUser.js"></script>

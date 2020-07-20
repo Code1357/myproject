@@ -1,4 +1,4 @@
-.staff_list {
+.staff_list, .user_list {
   width: 150px;
   height: 200px;
   margin-top: 70px;
@@ -11,7 +11,7 @@ text-align: left;
   border-color: lightslategrey;
 }
 
-.staff_list_in {
+.staff_list_in, .user_list_in {
   margin-left: 20px;
 }
 

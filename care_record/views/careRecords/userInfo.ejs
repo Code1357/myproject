@@ -1,0 +1,43 @@
+ 
+<head>
+    <link href="/css/listinfo.css" rel="stylesheet">
+</head>
+
+<%- include('r_header'); %>
+ 
+ <div class="user_list">
+ <div class="user_list_in">
+ <% userList.forEach(userList => { %>
+ <ul>
+ <li id="staff_list">
+ <a href="<%=`/careRecords/users/${userList.user_id}`%>">
+<%= userList.user_name %></a>
+</li>
+</ul>
+<% }); %>
+</div>
+</div>
+
+<button type="submit"><a href="<%=`/careRecords/recordPage/${userId}`%>">記録</a></button>
+
+<div class="userInfo" >
+<table>
+  <tr>
+    <td class="item" >入所日：</td> <td class="info" ><%= entranceData %> </td>
+  </tr>
+  <tr>
+    <td class="item" >利用者名前：</td> <td class="info" ><%=  userName%> </td>
+  </tr>
+  
+  <tr>
+    <td class="item" >性別：</td> <td class="info" ><%=  gender%> </td>
+  </tr>
+  <tr>
+    <td class="item" >ADL：</td> <td class="info"> <%= adl %> </td>
+  </tr>
+</table>
+</div>
+
+<button type="submit"><a href="<%=`/careRecords/updatePage/${userId}`%>">修正</a></button>
+
+<p>※ 修正できるのは、名前・ADLのみです</p>
