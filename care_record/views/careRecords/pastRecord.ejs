@@ -1,16 +1,50 @@
-<!DOCTYPE html>
-<html lang="ja">
+ 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <link href="/css/listinfo.css" rel="stylesheet">
 </head>
-<body>
-  <%- include('r_header'); %>
 
-  <%= careRecord %>
-<%= recordDate %>
+<%- include('r_header'); %>
 
-</body>
-</html>
+ <p>記録のページ</p>
 
+ <div class="user_list">
+ <div class="user_list_in">
+ <% userList.forEach(userList => { %>
+ <ul>
+ <li id="staff_list">
+ <a href="<%=`/careRecords/users/${userList.user_id}`%>">
+<%= userList.user_name %></a>
+</li>
+</ul>
+<% }); %>
+</div>
+</div>
+
+<div class="data_form">
+
+<form action="<%=`/careRecords/recordSearch/${userId}`%>">
+
+<p class="search_target">利用者名前：<%= userName%> 性別：<%= gender%> ADL：<%= adl %></p><br>
+
+<input type="date" name="search_date" id="inputSearch" class="searchDate" placeholder="" value="" required><br>
+
+</div>
+<div>
+ <% pastRecord.forEach(pastRecord => { %>
+
+<p><%= `${pastRecord.recording_date.getUTCFullYear()}-${pastRecord.recording_date.getUTCMonth()}-${pastRecord.recording_date.getUTCDate()}`; %></p><br>
+<p><%= pastRecord.care_record %></p><br>
+
+<%= pastRecord.care_records_staff_id // ここは入れ替え予定%>
+
+
+
+<p></p>
+
+
+ <% }); %>
+ </div><br>
+<button class="btn" >検索</button>
+
+  </form>
+</div>

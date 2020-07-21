@@ -236,24 +236,83 @@ module.exports = {
       }
     });
   },
-  search: (req, res) => {
-    const userId = req.params.user_id;
-    const searchDate = req.query.search_date;
-    con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
+  search: (req, res, next) => {
+    con.query('select * from user_lists order by user_name', (err, result, fields) => {
       if (err) throw err;
-      result.forEach(result => {
-        const recDate = result.recording_date;
-        const recordDate = `${recDate.getUTCFullYear()}-${recDate.getUTCMonth()}-${recDate.getUTCDate()}`;
-        const careRecord = result.care_record;
-        const staffId = result.care_records_staff_id;
-        
-        con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
-          if (err) throw err;
-          const staff = result[0].staff_name;
+      const userList = result;
+      res.locals.userList = userList;
 
-          res.render('careRecords/pastRecord', { recorder: staff, careRecord: careRecord, recordDate: recordDate });
+      const userId = req.params.user_id;
+      res.locals.userId = userId;
+      con.query('select user_name from user_lists where user_id = ?', userId, (err, result, fields) => {
+        if (err) throw err;
+        // console.log(staffName);
+        res.locals.userName = result[0].user_name;
+        // console.log(res.locals.staffName);
+
+        con.query('select u.user_name, a.adl from user_lists as u join adls as a on u.adls_adl_id = a.adl_id where user_id = ?', userId, (err, result, fields) => {
+          if (err) throw err;
+          const adl = result[0].adl;
+          res.locals.adl = adl;
+
+          con.query('select u.user_name, g.gender from user_lists as u join genders as g on u.genders_gender_id = g.gender_id where user_id = ?', userId, (err, result, fields) => {
+            if (err) throw err;
+            // console.log(result);
+            const gender = result[0].gender;
+            res.locals.gender = gender;
+
+            const searchDate = req.query.search_date;
+            con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
+              if (err) throw err;
+              console.log(result);
+              const pastRecord = result;
+              res.locals.pastRecord = pastRecord;
+
+              // ??? 名前の取得ができなくなってる,でも、これ出来たら解決しそう
+              const staffId = result.care_records_staff_id;
+              con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, searchDate], (err, result, fields) => {
+                if (err) throw err;
+                const oo = result;
+                console.log(oo);
+
+
+
+                res.render('careRecords/pastRecord');
+              });
+            });
+          });
         });
       });
     });
-  }
+    /* const userId = req.params.user_id;
+    const searchDate = req.query.search_date;
+    con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
+      if (err) throw err;
+      console.log(result);
+      const pastRecord = result; */
+
+       /* result.forEach(result => {
+         const recDate = result.recording_date;
+         const recordDate = `${recDate.getUTCFullYear()}-${recDate.getUTCMonth()}-${recDate.getUTCDate()}`;
+         const careRecord = result.care_record;
+         const staffId = result.care_records_staff_id;
+         
+         con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_usesr_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
+           if (err) throw err;
+           console.log(result); */
+      /* const staff = result[0].staff_name;
+      console.log(staff);
+      console.log(userId);
+      console.log(recDate); */
+
+      // res.locals.a = { staff, careRecord, recordDate };
+     
+      // next();
+      /* }); */
+
+    /*  }); */
+  }/* ,
+  pastRecordShow: (req, res, next) => {
+    res.render('careRecords/pastRecord');
+  } */
 };
