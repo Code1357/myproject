@@ -1,5 +1,6 @@
 'use strict';
 
+
 const con = require('../db/mysql');
 const careRecord = require('../models/careRecord'); // ../models/userをload
 
@@ -150,7 +151,7 @@ module.exports = {
   },
   recordPage: (req, res) => {
     const newRecUserConfirmation = JSON.parse(JSON.stringify(req.body));
-      res.locals.newRecUserConfirmation = newRecUserConfirmation;
+    res.locals.newRecUserConfirmation = newRecUserConfirmation;
     con.query('select * from user_lists order by user_name', (err, result, fields) => {
       if (err) throw err;
       res.locals.userList = result;
@@ -238,57 +239,21 @@ module.exports = {
   search: (req, res) => {
     const userId = req.params.user_id;
     const searchDate = req.query.search_date;
-    console.log(req.query.search_date);
     con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
       if (err) throw err;
-      res.locals.pastRecord = result;
-      console.log(result);
-      res.render('careRecords/pathRecord');
       result.forEach(result => {
-        const a = result.recording_date;
-        const b = result.care_records_staff_id.toString();
-        const c = [a, b];
-        console.log(c);
+        const recDate = result.recording_date;
+        const recordDate = `${recDate.getUTCFullYear()}-${recDate.getUTCMonth()}-${recDate.getUTCDate()}`;
+        const careRecord = result.care_record;
+        const staffId = result.care_records_staff_id;
+        
+        con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
+          if (err) throw err;
+          const staff = result[0].staff_name;
 
-        // or
-        console.log([result.care_records_staff_id.toString(), result.recording_date]);　//　でやってみる
-
+          res.render('careRecords/pastRecord', { recorder: staff, careRecord: careRecord, recordDate: recordDate });
+        });
       });
-      
-    
-
-     /*  const recordingDate = `${resultEntranceData.getUTCFullYear()}年${resultEntranceData.getUTCMonth() + 1}月${resultEntranceData.getUTCDate()}日`;
-            res.locals.entranceData = entranceData; */
-
-
-// joinする
-      /* con.query('select u.user_name, g.gender from user_lists as u join genders as g on u.genders_gender_id = g.gender_id where user_id = ?', userId, (err, result, fields) => {
-        if (err) throw err; */
-
     });
   }
 };
-
-
-/*
-[
-  TextRow {
-    user_lists_user_id: 1,                     // 利用者氏名は、user_id活用にて別sqlでレンダリング
-    recording_date: 2020-07-20T21:21:00.000Z,  // 
-    care_record: 'おはようございます。',          // 
-    care_records_staff_id: 777777              // 連想配列から抽出し、joinで記録者名を取得
-  },
-  TextRow {
-    user_lists_user_id: 1,
-    recording_date: 2020-07-21T02:26:00.000Z,
-    care_record: 'こんにちわ。',
-    care_records_staff_id: 777777
-  },
-  TextRow {
-    user_lists_user_id: 1,
-    recording_date: 2020-07-21T10:21:00.000Z,
-    care_record: 'こんばんわ。',
-    care_records_staff_id: 777777
-  }
-]
-*/

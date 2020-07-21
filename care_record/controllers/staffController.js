@@ -191,6 +191,8 @@ module.exports = {
                     const gender = result[0].gender;
                     res.locals.gender = gender;
                     res.render('managers/staffInfo');
+                    // この特定のエラーは、同じ要求に対して複数の応答を送信しようとするたびに発生し、通常は不適切な非同期コードが原因です。
+                    // https://stackoverflow.com/questions/52122272/err-http-headers-sent-cannot-set-headers-after-they-are-sent-to-the-client
                   });
                 });
               });
