@@ -1,7 +1,7 @@
 'use strict';
 
 const con = require('../db/mysql');
-
+const httpStatus = require('http-status-codes');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -138,15 +138,28 @@ module.exports = {
       };
     });
   },
-  staffsList: (req, res) => {
+  staffsList: (req, res, next) => {
+    /* if (!req.isAuthenticated()) {
+      req.flash('success', 'ログインセッションが切れ');
+      res.status(httpStatus.NO_CONTENT);
+      res.redirect('/managers/login');
+      next();
+    }; */
     con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
       if (err) throw err;
-      const staffList = result;
-      res.locals.staffList = staffList;
-      res.render('managers/staffsList');
+      else if (!req.isAuthenticated()) {
+        req.flash('success', 'ログインセッションが切れ');
+        res.status(httpStatus.NO_CONTENT);
+        res.redirect('/managers/login');
+        next();
+      } else {
+        const staffList = result;
+        res.locals.staffList = staffList;
+        res.render('managers/staffsList');
+      }
     });
   },
-  staffsGet: (req, res) => {
+  staffsGet: (req, res, next) => {
     con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
       if (err) throw err;
       const staffList = result;

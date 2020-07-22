@@ -84,6 +84,7 @@ app.use((req, res, next) => {
     next();
   }); */
   res.locals.flashMessages = req.flash();
+  console.log(req.isAuthenticated());
   res.locals.loggedIn = req.isAuthenticated();
   res.locals.staffs = req.user;
   next();

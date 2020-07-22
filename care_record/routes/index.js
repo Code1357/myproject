@@ -1,5 +1,6 @@
 'use strict';
 
+const isAuthenticated = require('../models/isAuthenticated');
 const router = require('express').Router(); // ExpressとRouterをload
 
 // const apiRoutes = require('./apiRoutes');
