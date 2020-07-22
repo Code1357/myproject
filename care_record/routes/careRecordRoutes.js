@@ -14,6 +14,9 @@ router.post('/update/:user_id', careRecordController.update);
 router.get('/recordPage/:user_id', careRecordController.recordPage);
 router.post('/recordCreate/:user_id', careRecordController.newRecordConfirmation, careRecordController.recordCreate);
 router.get('/searchPage/:user_id', careRecordController.searchPage);
-router.get('/recordSearch/:user_id', careRecordController.search/* , careRecordController.pastRecordShow */);
+router.get('/recordSearch/:user_id', careRecordController.search);
 
 module.exports = router; // routes/index.jsにloadさせる
+
+// put　と　記録時のヴァリデータをする
+// ログインユーザ意外がアクセスできないようにする

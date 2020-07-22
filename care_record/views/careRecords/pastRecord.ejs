@@ -32,10 +32,9 @@
 <div>
  <% pastRecord.forEach(pastRecord => { %>
 
-<p><%= `${pastRecord.recording_date.getUTCFullYear()}-${pastRecord.recording_date.getUTCMonth()}-${pastRecord.recording_date.getUTCDate()}`; %></p><br>
-<p><%= pastRecord.care_record %></p><br>
-
-<%= pastRecord.care_records_staff_id // ここは入れ替え予定%>
+<p><%= `${pastRecord.recording_date.getFullYear()}-${pastRecord.recording_date.getMonth() + 1}-${pastRecord.recording_date.getDate()}/${pastRecord.recording_date.getHours()}:${pastRecord.recording_date.getMinutes()}`; %></p>
+<p><%= pastRecord.care_record %></p>
+<p><%= pastRecord.care_records_staff_name %></p>
 
 
 
@@ -45,6 +44,10 @@
  <% }); %>
  </div><br>
 <button class="btn" >検索</button>
+
+
+
+
 
   </form>
 </div>

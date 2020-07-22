@@ -194,17 +194,25 @@ module.exports = {
     const record = req.body.record_data; // 記録内容
     const staffId = req.user.name; // スタッフID
     const userId = req.params.user_id; // 利用者のID
-    const sql = 'insert into care_records set recording_date = ?, care_record = ?, user_lists_user_id = ?, care_records_staff_id = ?';
-    con.query(sql, [recordDate, record, userId, staffId], (error, results) => {
-      if (error) {
-        req.flash('error', '登録できませんでした,もう一度登録しなおしてください');
-        console.log(results);
-        res.redirect(`/careRecords/recordPage/${userId}`);
-      } else {
-        req.flash('success', '記録の登録完了');
-        res.redirect(`/careRecords/users/${userId}`);
-      }
-    });
+// スタッフ名を検索
+    console.log(staffId);
+    con.query('select staff_name from staff_lists where employee_id = ? ', staffId, (err, result, fields) => {
+      if (err) throw err;
+      const staffName = result[0].staff_name;
+      console.log(staffName);
+
+      const sql = 'insert into care_records set recording_date = ?, care_record = ?, user_lists_user_id = ?, care_records_staff_id = ?, care_records_staff_name = ?';
+      con.query(sql, [recordDate, record, userId, staffId, staffName], (error, results) => {
+        if (error) {
+          req.flash('error', '登録できませんでした,もう一度登録しなおしてください');
+          console.log(results);
+          res.redirect(`/careRecords/recordPage/${userId}`);
+        } else {
+          req.flash('success', '記録の登録完了');
+          res.redirect(`/careRecords/users/${userId}`);
+        }
+      });
+     }); 
   },
   searchPage: (req, res) => {
     con.query('select * from user_lists order by user_name', (err, result, fields) => {
@@ -232,6 +240,7 @@ module.exports = {
               res.render('careRecords/recordSearch');
             });
           });
+          
         });
       }
     });
@@ -261,21 +270,30 @@ module.exports = {
             const gender = result[0].gender;
             res.locals.gender = gender;
 
+            // レコーディングテーブルから検索
             const searchDate = req.query.search_date;
-            con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
+            con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id, care_records_staff_name from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
               if (err) throw err;
               console.log(result);
               const pastRecord = result;
               res.locals.pastRecord = pastRecord;
 
               // ??? 名前の取得ができなくなってる,でも、これ出来たら解決しそう
-              const staffId = result.care_records_staff_id;
+            /*   const staffId = result.care_records_staff_id;
               con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, searchDate], (err, result, fields) => {
                 if (err) throw err;
                 const oo = result;
-                console.log(oo);
+                console.log(oo); */
 
-
+ /*     const staffId = result.care_records_staff_id;
+                const recDate = result.recording_date;
+                console.log(staffId, userId, recDate);
+                con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
+                  if (err) throw err;
+                  const oo = result;
+                  console.log(oo);
+                  res.locals.staff = result[0].staff_name;
+ */
 
                 res.render('careRecords/pastRecord');
               });
@@ -283,7 +301,7 @@ module.exports = {
           });
         });
       });
-    });
+   /*  }); */
     /* const userId = req.params.user_id;
     const searchDate = req.query.search_date;
     con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
@@ -297,7 +315,7 @@ module.exports = {
          const careRecord = result.care_record;
          const staffId = result.care_records_staff_id;
          
-         con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_usesr_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
+         con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
            if (err) throw err;
            console.log(result); */
       /* const staff = result[0].staff_name;
