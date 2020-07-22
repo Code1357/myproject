@@ -11,7 +11,7 @@
 
 <div class="data_form">
 
-  <form class="signup" action="<%=`/managers/update/${staffId}`%>" method="POST">
+  <form class="signup" action="<%=`/managers/update/${staffId}/update?_method=PUT`%>" method="POST">
     <label for="inputEmployee">社員番号</label>
     <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="update_form"
       placeholder="社員番号" value="<%= staffUpdate[0].employee_id %>" readonly>

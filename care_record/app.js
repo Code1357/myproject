@@ -14,6 +14,7 @@ const bcrypt = require('bcrypt');
 const expressValidator = require('express-validator');
 const router = require('./routes/index'); // ./routes/indexをload
 
+
 // mysql -> databaseに接続
 con.connect((err) => {
   if (err) throw err;
@@ -88,9 +89,19 @@ app.use((req, res, next) => {
   next();
 });
 
+/* app.use((err, req, res, next) => {
+  if (err) {
+    req.flash('error', '再ログインをお願いいたします');
+    res.redirect('/');
+  }
+}); */
+
 app.use('/', router); // ( load済, -> routes/index)
 
 // サーバー監視
 app.listen(app.get('port'), () => {
   console.log(`port${app.get('port')}を監視しています`);
 });
+
+
+// https://knimon-software.github.io/www.passportjs.org/guide/basic-digest/

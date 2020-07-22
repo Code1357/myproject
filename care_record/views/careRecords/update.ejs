@@ -11,7 +11,7 @@
 
 <div class="data_form">
 
-  <form class="signup" action="<%=`/careRecords/update/${userId}`%>" method="POST">
+  <form class="signup" action="<%=`/careRecords/update/${userId}/update?_method=PUT`%>" method="POST">
     
     <label for="inputEntranceData">入所日</label>
     <input type="" name="entrance_data" id="inputEntranceData" class="update_form" placeholder="入所日" value="<%= entranceData %>" readonly>

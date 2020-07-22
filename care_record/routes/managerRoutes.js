@@ -17,6 +17,6 @@ router.post('/create2', staffController.validate, staffController.newConfirmatio
 router.get('/staffsList', staffController.staffsList);
 router.get('/staffs/:staff_id', staffController.staffsGet);
 router.get('/updatePage/:staff_id', staffController.updatePage);
-router.post('/update/:staff_id', staffController.update);
+router.put('/update/:staff_id/update', staffController.update);
 
 module.exports = router; // routes/index.jsにloadさせる

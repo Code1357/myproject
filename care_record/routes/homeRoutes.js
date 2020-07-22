@@ -8,3 +8,6 @@ const ejsValue = require('../models/ejsController');
 router.get('/', ejsValue.offTop, homeController.index);
 
 module.exports = router; // routes/index.jsにloadさせる
+
+
+// ログインなしでも入れるか検証用のURL http://localhost:3000/careRecords/usersList

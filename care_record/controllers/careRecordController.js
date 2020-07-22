@@ -189,12 +189,33 @@ module.exports = {
       next();
     };
   },
+  recordValidate: (req, res, next) => {
+    const userId = req.params.user_id;
+    console.log(userId);
+    req.check('record_date')
+      .isBefore().withMessage('未来の日時は入力できません')
+      .not().isEmpty().withMessage('記録虹時は必ず入力してください');
+    req.check('record_data')
+      .not().isEmpty().withMessage('記録は必ず記入してから登録してください');
+    req.getValidationResult().then(error => {
+      if (!error.isEmpty()) {
+        // console.log(error.isEmpty()); // true or false
+        // console.log(error.array());
+        const messages = error.array().map(e => e.msg); // error配列オブジェクトを配列に吐き出す
+        req.flash('error', messages);
+        res.redirect(`/careRecords/recordPage/${userId}`);
+        // next('route');
+      } else {
+        next();
+      }
+    });
+  },
   recordCreate: (req, res) => {
     const recordDate = req.body.record_date; // 記録日時
     const record = req.body.record_data; // 記録内容
     const staffId = req.user.name; // スタッフID
     const userId = req.params.user_id; // 利用者のID
-// スタッフ名を検索
+    // スタッフ名を検索
     console.log(staffId);
     con.query('select staff_name from staff_lists where employee_id = ? ', staffId, (err, result, fields) => {
       if (err) throw err;
@@ -212,7 +233,7 @@ module.exports = {
           res.redirect(`/careRecords/users/${userId}`);
         }
       });
-     }); 
+    });
   },
   searchPage: (req, res) => {
     con.query('select * from user_lists order by user_name', (err, result, fields) => {
@@ -240,7 +261,6 @@ module.exports = {
               res.render('careRecords/recordSearch');
             });
           });
-          
         });
       }
     });
@@ -279,29 +299,29 @@ module.exports = {
               res.locals.pastRecord = pastRecord;
 
               // ??? 名前の取得ができなくなってる,でも、これ出来たら解決しそう
-            /*   const staffId = result.care_records_staff_id;
-              con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, searchDate], (err, result, fields) => {
-                if (err) throw err;
-                const oo = result;
-                console.log(oo); */
-
- /*     const staffId = result.care_records_staff_id;
-                const recDate = result.recording_date;
-                console.log(staffId, userId, recDate);
-                con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
+              /*   const staffId = result.care_records_staff_id;
+                con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, searchDate], (err, result, fields) => {
                   if (err) throw err;
                   const oo = result;
-                  console.log(oo);
-                  res.locals.staff = result[0].staff_name;
- */
+                  console.log(oo); */
 
-                res.render('careRecords/pastRecord');
-              });
+              /*     const staffId = result.care_records_staff_id;
+                             const recDate = result.recording_date;
+                             console.log(staffId, userId, recDate);
+                             con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
+                               if (err) throw err;
+                               const oo = result;
+                               console.log(oo);
+                               res.locals.staff = result[0].staff_name;
+              */
+
+              res.render('careRecords/pastRecord');
             });
           });
         });
       });
-   /*  }); */
+    });
+    /*  }); */
     /* const userId = req.params.user_id;
     const searchDate = req.query.search_date;
     con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
@@ -309,24 +329,24 @@ module.exports = {
       console.log(result);
       const pastRecord = result; */
 
-       /* result.forEach(result => {
-         const recDate = result.recording_date;
-         const recordDate = `${recDate.getUTCFullYear()}-${recDate.getUTCMonth()}-${recDate.getUTCDate()}`;
-         const careRecord = result.care_record;
-         const staffId = result.care_records_staff_id;
-         
-         con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
-           if (err) throw err;
-           console.log(result); */
-      /* const staff = result[0].staff_name;
-      console.log(staff);
-      console.log(userId);
-      console.log(recDate); */
+    /* result.forEach(result => {
+      const recDate = result.recording_date;
+      const recordDate = `${recDate.getUTCFullYear()}-${recDate.getUTCMonth()}-${recDate.getUTCDate()}`;
+      const careRecord = result.care_record;
+      const staffId = result.care_records_staff_id;
+      
+      con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
+        if (err) throw err;
+        console.log(result); */
+    /* const staff = result[0].staff_name;
+    console.log(staff);
+    console.log(userId);
+    console.log(recDate); */
 
-      // res.locals.a = { staff, careRecord, recordDate };
-     
-      // next();
-      /* }); */
+    // res.locals.a = { staff, careRecord, recordDate };
+
+    // next();
+    /* }); */
 
     /*  }); */
   }/* ,

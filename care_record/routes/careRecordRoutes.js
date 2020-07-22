@@ -10,13 +10,13 @@ router.post('/create', careRecordController.validate, careRecordController.newUs
 router.get('/usersList', careRecordController.usersList);
 router.get('/users/:user_id', careRecordController.usersGet);
 router.get('/updatePage/:user_id', careRecordController.updatePage);
-router.post('/update/:user_id', careRecordController.update);
+router.put('/update/:user_id/update', careRecordController.update);
 router.get('/recordPage/:user_id', careRecordController.recordPage);
-router.post('/recordCreate/:user_id', careRecordController.newRecordConfirmation, careRecordController.recordCreate);
+router.post('/recordCreate/:user_id', careRecordController.recordValidate, careRecordController.newRecordConfirmation, careRecordController.recordCreate);
 router.get('/searchPage/:user_id', careRecordController.searchPage);
 router.get('/recordSearch/:user_id', careRecordController.search);
 
 module.exports = router; // routes/index.jsにloadさせる
 
-// put　と　記録時のヴァリデータをする
+
 // ログインユーザ意外がアクセスできないようにする
