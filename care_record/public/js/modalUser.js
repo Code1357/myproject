@@ -1,4 +1,5 @@
 'use strict';
+
 {
   const open = document.getElementById('open_modal');
   const close = document.getElementById('close');
@@ -23,7 +24,7 @@ oBtn.addEventListener('click', (e) => {
 
   const inputUserName = document.getElementById('inputUserName').value;
   const outputUserName = `名前：${inputUserName}`;
- 
+
   const inputGender = document.getElementById('inputGender').value;
   if (inputGender == 1) {
     const outputGender = '性別：男性';

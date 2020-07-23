@@ -1,53 +1,42 @@
- 
 <head>
-    <link href="/css/listinfo.css" rel="stylesheet">
+  <link href="/css/listinfo.css" rel="stylesheet">
 </head>
 
 <%- include('r_header'); %>
 
- <p>記録のページ</p>
+<p>記録のページ</p>
 
- <div class="user_list">
- <div class="user_list_in">
- <% userList.forEach(userList => { %>
- <ul>
- <li id="staff_list">
- <a href="<%=`/careRecords/users/${userList.user_id}`%>">
-<%= userList.user_name %></a>
-</li>
-</ul>
-<% }); %>
-</div>
+<div class="user_list">
+  <div class="user_list_in">
+    <% userList.forEach(userList => { %>
+    <ul>
+      <li id="staff_list">
+        <a href="<%=`/careRecords/users/${userList.user_id}`%>">
+          <%= userList.user_name %></a>
+      </li>
+    </ul>
+    <% }); %>
+  </div>
 </div>
 
 <div class="data_form">
 
-<form action="<%=`/careRecords/recordSearch/${userId}`%>">
+  <form action="<%=`/careRecords/recordSearch/${userId}`%>">
+    <p class="search_target">利用者名前：<%= userName%> 性別：<%= gender%> ADL：<%= adl %></p><br>
 
-<p class="search_target">利用者名前：<%= userName%> 性別：<%= gender%> ADL：<%= adl %></p><br>
-
-<input type="date" name="search_date" id="inputSearch" class="searchDate" placeholder="" value="" required><br>
+    <input type="date" name="search_date" id="inputSearch" class="searchDate" placeholder="" value="" required><br>
 
 </div>
 <div>
- <% pastRecord.forEach(pastRecord => { %>
+  <% pastRecord.forEach(pastRecord => { %>
 
-<p><%= `${pastRecord.recording_date.getFullYear()}-${pastRecord.recording_date.getMonth() + 1}-${pastRecord.recording_date.getDate()}/${pastRecord.recording_date.getHours()}:${pastRecord.recording_date.getMinutes()}`; %></p>
-<p><%= pastRecord.care_record %></p>
-<p><%= pastRecord.care_records_staff_name %></p>
-
-
-
-<p></p>
-
-
- <% }); %>
- </div><br>
-<button class="btn" >検索</button>
-
-
-
-
-
-  </form>
+  <p>
+    <%= `${pastRecord.recording_date.getFullYear()}-${pastRecord.recording_date.getMonth() + 1}-${pastRecord.recording_date.getDate()}/${pastRecord.recording_date.getHours()}:${pastRecord.recording_date.getMinutes()}`; %>
+  </p>
+  <p><%= pastRecord.care_record %></p>
+  <p><%= pastRecord.care_records_staff_name %></p>
+  <% }); %>
+</div><br>
+<button class="btn">検索</button>
+</form>
 </div>

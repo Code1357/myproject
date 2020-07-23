@@ -1,14 +1,10 @@
 'use strict';
 
-
 const con = require('../db/mysql');
 const httpStatus = require('http-status-codes');
-const careRecord = require('../models/careRecord'); // ../models/userをload
 
-// managerRoutesへ個別モジュールとしてexportするオブジェクト
 module.exports = {
 
-  // modelより個別処理を受け取り,経路別処理実行を記述
   new: (req, res) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -20,6 +16,7 @@ module.exports = {
       res.render('careRecords/new');
     }
   },
+
   validate: (req, res, next) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -44,18 +41,16 @@ module.exports = {
         });
       req.getValidationResult().then(error => {
         if (!error.isEmpty()) {
-          // console.log(error.isEmpty()); // true or false
-          // console.log(error.array());
           const messages = error.array().map(e => e.msg); // error配列オブジェクトを配列に吐き出す
           req.flash('error', messages);
           res.redirect('/careRecords/new');
-          // next('route');
         } else {
           next();
         }
       });
     }
   },
+
   newUserConfirmation: (req, res, next) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -69,14 +64,13 @@ module.exports = {
         res.render('careRecords/new');
       } else {
         delete req.body.action;
-        // console.log(req.body);
         const newUserConfirmation = JSON.parse(JSON.stringify(req.body));
         res.locals.newUserConfirmation = newUserConfirmation;
-        // console.log(newConfirmation);
         next();
       };
     }
   },
+
   create: (req, res) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -94,6 +88,7 @@ module.exports = {
       });
     }
   },
+
   updatePage: (req, res, next) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -107,13 +102,13 @@ module.exports = {
         const userUpdate = result;
         res.locals.userUpdate = userUpdate;
         const resultEntranceData = result[0].entrance_data;
-        // console.log(resultHireData);
         const entranceData = `${resultEntranceData.getUTCFullYear()}/${resultEntranceData.getUTCMonth() + 1}/${resultEntranceData.getUTCDate()}`;
         res.locals.entranceData = entranceData;
         res.render('careRecords/update');
       });
     }
   },
+
   usersList: (req, res) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -128,6 +123,7 @@ module.exports = {
       });
     }
   },
+
   update: (req, res) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -154,6 +150,7 @@ module.exports = {
       });
     }
   },
+
   usersGet: (req, res) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -168,25 +165,18 @@ module.exports = {
           res.locals.userId = userId;
           con.query('select user_name from user_lists where user_id = ?', userId, (err, result, fields) => {
             if (err) throw err;
-            // console.log(staffName);
             res.locals.userName = result[0].user_name;
-            // console.log(res.locals.staffName);
-
             con.query('select entrance_data from user_lists where user_id = ?', userId, (err, result, fields) => {
               if (err) throw err;
               const resultEntranceData = result[0].entrance_data;
-              // console.log(resultHireData);
               const entranceData = `${resultEntranceData.getUTCFullYear()}年${resultEntranceData.getUTCMonth() + 1}月${resultEntranceData.getUTCDate()}日`;
               res.locals.entranceData = entranceData;
-
               con.query('select u.user_name, a.adl from user_lists as u join adls as a on u.adls_adl_id = a.adl_id where user_id = ?', userId, (err, result, fields) => {
                 if (err) throw err;
                 const adl = result[0].adl;
                 res.locals.adl = adl;
-
                 con.query('select u.user_name, g.gender from user_lists as u join genders as g on u.genders_gender_id = g.gender_id where user_id = ?', userId, (err, result, fields) => {
                   if (err) throw err;
-                  // console.log(result);
                   const gender = result[0].gender;
                   res.locals.gender = gender;
                   res.render('careRecords/userInfo');
@@ -198,6 +188,7 @@ module.exports = {
       });
     }
   },
+
   recordPage: (req, res) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -214,18 +205,13 @@ module.exports = {
           res.locals.userId = userId;
           con.query('select user_name from user_lists where user_id = ?', userId, (err, result, fields) => {
             if (err) throw err;
-            // console.log(staffName);
             res.locals.userName = result[0].user_name;
-            // console.log(res.locals.staffName);
-
             con.query('select u.user_name, a.adl from user_lists as u join adls as a on u.adls_adl_id = a.adl_id where user_id = ?', userId, (err, result, fields) => {
               if (err) throw err;
               const adl = result[0].adl;
               res.locals.adl = adl;
-
               con.query('select u.user_name, g.gender from user_lists as u join genders as g on u.genders_gender_id = g.gender_id where user_id = ?', userId, (err, result, fields) => {
                 if (err) throw err;
-                // console.log(result);
                 const gender = result[0].gender;
                 res.locals.gender = gender;
                 res.render('careRecords/userRecord');
@@ -236,6 +222,7 @@ module.exports = {
       });
     }
   },
+
   newRecordConfirmation: (req, res, next) => {
     if (req.body.action2) {
       delete req.body.action2;
@@ -244,6 +231,7 @@ module.exports = {
       next();
     };
   },
+
   recordValidate: (req, res, next) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -259,18 +247,16 @@ module.exports = {
         .not().isEmpty().withMessage('記録は必ず記入してから登録してください');
       req.getValidationResult().then(error => {
         if (!error.isEmpty()) {
-          // console.log(error.isEmpty()); // true or false
-          // console.log(error.array());
           const messages = error.array().map(e => e.msg); // error配列オブジェクトを配列に吐き出す
           req.flash('error', messages);
           res.redirect(`/careRecords/recordPage/${userId}`);
-          // next('route');
         } else {
           next();
         }
       });
     }
   },
+
   recordCreate: (req, res) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -287,7 +273,6 @@ module.exports = {
         if (err) throw err;
         const staffName = result[0].staff_name;
         console.log(staffName);
-
         const sql = 'insert into care_records set recording_date = ?, care_record = ?, user_lists_user_id = ?, care_records_staff_id = ?, care_records_staff_name = ?';
         con.query(sql, [recordDate, record, userId, staffId, staffName], (error, results) => {
           if (error) {
@@ -302,6 +287,7 @@ module.exports = {
       });
     }
   },
+
   searchPage: (req, res) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -316,18 +302,13 @@ module.exports = {
           res.locals.userId = userId;
           con.query('select user_name from user_lists where user_id = ?', userId, (err, result, fields) => {
             if (err) throw err;
-            // console.log(staffName);
             res.locals.userName = result[0].user_name;
-            // console.log(res.locals.staffName);
-
             con.query('select u.user_name, a.adl from user_lists as u join adls as a on u.adls_adl_id = a.adl_id where user_id = ?', userId, (err, result, fields) => {
               if (err) throw err;
               const adl = result[0].adl;
               res.locals.adl = adl;
-
               con.query('select u.user_name, g.gender from user_lists as u join genders as g on u.genders_gender_id = g.gender_id where user_id = ?', userId, (err, result, fields) => {
                 if (err) throw err;
-                // console.log(result);
                 const gender = result[0].gender;
                 res.locals.gender = gender;
                 res.render('careRecords/recordSearch');
@@ -338,6 +319,7 @@ module.exports = {
       });
     }
   },
+
   search: (req, res, next) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -348,26 +330,19 @@ module.exports = {
         if (err) throw err;
         const userList = result;
         res.locals.userList = userList;
-
         const userId = req.params.user_id;
         res.locals.userId = userId;
         con.query('select user_name from user_lists where user_id = ?', userId, (err, result, fields) => {
           if (err) throw err;
-          // console.log(staffName);
           res.locals.userName = result[0].user_name;
-          // console.log(res.locals.staffName);
-
           con.query('select u.user_name, a.adl from user_lists as u join adls as a on u.adls_adl_id = a.adl_id where user_id = ?', userId, (err, result, fields) => {
             if (err) throw err;
             const adl = result[0].adl;
             res.locals.adl = adl;
-
             con.query('select u.user_name, g.gender from user_lists as u join genders as g on u.genders_gender_id = g.gender_id where user_id = ?', userId, (err, result, fields) => {
               if (err) throw err;
-              // console.log(result);
               const gender = result[0].gender;
               res.locals.gender = gender;
-
               // レコーディングテーブルから検索
               const searchDate = req.query.search_date;
               con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id, care_records_staff_name from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
@@ -375,81 +350,13 @@ module.exports = {
                 console.log(result);
                 const pastRecord = result;
                 res.locals.pastRecord = pastRecord;
-
-                // ??? 名前の取得ができなくなってる,でも、これ出来たら解決しそう
-                /*   const staffId = result.care_records_staff_id;
-                  con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, searchDate], (err, result, fields) => {
-                    if (err) throw err;
-                    const oo = result;
-                    console.log(oo); */
-
-                /*     const staffId = result.care_records_staff_id;
-                               const recDate = result.recording_date;
-                               console.log(staffId, userId, recDate);
-                               con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
-                                 if (err) throw err;
-                                 const oo = result;
-                                 console.log(oo);
-                                 res.locals.staff = result[0].staff_name;
-                */
-                var array = [];
-                var count = 0;
-
-                result.forEach(result => {
-                  const recDate = result.recording_date;
-                  const recordDate = `${recDate.getUTCFullYear()}-${recDate.getUTCMonth() + 1}-${recDate.getUTCDate()}`;
-                  const careRecord = result.care_record;
-                  const staffId = result.care_records_staff_id;
-                  con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
-                    if (err) throw err;
-                    console.log(result);
-                    const staff = result[0].staff_name;
-                    console.log(staff);
-                    console.log(userId);
-                    console.log(recDate);
-
-                    array[count] = { staff, recordDate, careRecord };
-                    count++;
-                    console.log(array);
-
-                    /*  res.render('careRecords/pastRecord'); */
-                  });
-                });
+                res.render('careRecords/pastRecord');
               });
             });
           });
         });
       });
-      /*  }); */
-      /* const userId = req.params.user_id;
-      const searchDate = req.query.search_date;
-      con.query('select user_lists_user_id, recording_date, care_record, care_records_staff_id from care_records where cast(recording_date as date ) = ? and user_lists_user_id = ?', [searchDate, userId], (err, result, fields) => {
-        if (err) throw err;
-        console.log(result);
-        const pastRecord = result; */
-
-      /* result.forEach(result => {
-        const recDate = result.recording_date;
-        const recordDate = `${recDate.getUTCFullYear()}-${recDate.getUTCMonth()}-${recDate.getUTCDate()}`;
-        const careRecord = result.care_record;
-        const staffId = result.care_records_staff_id;
-        con.query('select s.staff_name, c.care_records_staff_id from staff_lists as s join care_records as c on s.employee_id = c.care_records_staff_id where care_records_staff_id = ? and user_lists_user_id = ? and recording_date = ?', [staffId, userId, recDate], (err, result, fields) => {
-          if (err) throw err;
-          console.log(result); */
-      /* const staff = result[0].staff_name;
-      console.log(staff);
-      console.log(userId);
-      console.log(recDate); */
-
-      // res.locals.a = { staff, careRecord, recordDate };
-
-      // next();
-      /* }); */
-
-      /*  }); */
-    }/* ,
-  pastRecordShow: (req, res, next) => {
-    res.render('careRecords/pastRecord');
-  } */
+    }
   }
+
 };

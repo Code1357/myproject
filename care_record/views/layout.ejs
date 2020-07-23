@@ -4,15 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <%# 必要に応じてcssをloadする %>
-  <%#  必要に応じてscriptをloadする %>
+  <title>WEB Careシステム</title>
   <link href="/css/layout.css" rel="stylesheet">
 </head>
 
 <body>
   <header>
-<div class="flash">
+    <div class="flash">
       <% if (flashMessages) { %>
       <% if (flashMessages.success) { %>
       <div class="flash success">
@@ -26,13 +24,13 @@
       <% } %>
     </div>
 
-  <% if (loggedIn) { %>
-  <h3></h3>
-  <% } else { %>
-  <% if (!locals.top) { %>
-			<h3>ログイン</h3>
-      <a>-ログインしてください</a>
-		<% } %>
+    <% if (loggedIn) { %>
+    <h3></h3>
+    <% } else { %>
+    <% if (!locals.top) { %>
+    <h3>ログイン</h3>
+    <a>-ログインしてください</a>
+    <% } %>
     <% } %>
   </header>
 
@@ -41,10 +39,6 @@
   </div>
 
   <footer>
-    <%# footer作成スペース %>
-
-</form>
-</div>
 
     <div>
       <%- include('partials/footer'); %>
@@ -53,6 +47,3 @@
 </body>
 
 </html>
-
-<%# ejs活用参考URL：https://ejs.co %>
-<%# Expressではres.localsに格納する事でビューに表示させれる %>

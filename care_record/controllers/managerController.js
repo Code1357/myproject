@@ -4,17 +4,12 @@ const con = require('../db/mysql');
 const httpStatus = require('http-status-codes');
 const passport = require('passport');
 
-// const json = require('../json/personalInformationProtectionLaw.json');
-// console.log(json);
-
-
-// managerRoutesへ個別モジュールとしてexportするオブジェクト
 module.exports = {
 
-  // modelより個別処理を受け取り,経路別処理実行を記述
   login: (req, res) => {
     res.render('managers/login');
   },
+
   authenticate: passport.authenticate('local',
     {
       successRedirect: '/managers/info',
@@ -22,6 +17,7 @@ module.exports = {
       failureRedirect: '/managers/login',
       failureFlash: 'ログイン失敗。社員番号かパスワードを確認してください。'
     }),
+
   info: (req, res) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
@@ -41,6 +37,7 @@ module.exports = {
       });
     }
   },
+
   logout: (req, res, next) => {
     req.logout(); // passportのメソッド
     req.flash('success', 'ログアウトしました。');

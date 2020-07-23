@@ -3,7 +3,6 @@
 // CSRF(csurf) 未実装
 // セキュアチェックリスト, https://blog.risingstack.com/node-js-security-checklist/
 
-// モジュール
 const express = require('express');
 const app = express();
 const con = require('./db/mysql');
@@ -16,19 +15,17 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const expressValidator = require('express-validator');
-const router = require('./routes/index'); // ./routes/indexをload
+const router = require('./routes/index');
 
-// mysql -> databaseに接続
+/** mysql,DBに接続 */
 con.connect((err) => {
   if (err) throw err;
   console.log('mysqlに接続できました');
 });
 
-// set
 app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 3000);
 
-// ミドルウェア
 app.use(helmet());
 app.use(methodOverride('_method', { methods: ['POST', 'GET'] })); // method-overrideの処理
 app.use(layouts);
@@ -44,16 +41,14 @@ app.use(session({
     maxAge: 4000000 // 4万mm秒(約1時間でcookie有効期限)
   }
 }));
-// 認証
+
+/** 認証 */
 passport.serializeUser(function (username, done) {
   done(null, username);
 });
-
 passport.deserializeUser(function (username, done) {
   done(null, { name: username });
 });
-//
-
 passport.use(new LocalStrategy(
   function (username, password, done) {
     const selectHash = 'select employee_id, hash from staff_lists where employee_id = ?';
@@ -73,39 +68,22 @@ passport.use(new LocalStrategy(
   }
 ));
 
-// passport(FlashMessageに記述必須)
+/**  passport(FlashMessageの前に記述必須) */
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(connectFlash()); // FlashMessageの箱
 app.use((req, res, next) => {
-  // const username2 = 777777;
-  // console.log(username2);
-  /* con.query('select * from staff_lists where employee_id = ?', username, (err, result, fields) => {
-    if (err) throw err;
-    const g = result;
-    console.log(g);
-    next();
-  }); */
   res.locals.flashMessages = req.flash();
-  console.log(req.isAuthenticated());
+  console.log(req.isAuthenticated()); // 認証,true or false check
   res.locals.loggedIn = req.isAuthenticated();
   res.locals.staffs = req.user;
   next();
 });
 
-/* app.use((err, req, res, next) => {
-  if (err) {
-    req.flash('error', '再ログインをお願いいたします');
-    res.redirect('/');
-  }
-}); */
-
-app.use('/', router); // ( load済, -> routes/index)
+app.use('/', router); // load済 -> routes/index
 
 // サーバー監視
 app.listen(app.get('port'), () => {
   console.log(`port${app.get('port')}を監視しています`);
 });
-
-// https://knimon-software.github.io/www.passportjs.org/guide/basic-digest/

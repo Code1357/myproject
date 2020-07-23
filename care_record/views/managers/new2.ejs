@@ -1,6 +1,4 @@
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="/css/modal.css" rel="stylesheet">
 </head>
 
@@ -11,36 +9,43 @@
 <div class="data_form2">
   <form class="signup" action="/managers/create2" method="POST">
     <label for="inputEmployee">社員番号</label>
-    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control" placeholder="社員番号" value="<%- newConfirmation.employee_id %>" autofocus>
+    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control"
+      placeholder="社員番号" value="<%- newConfirmation.employee_id %>" autofocus>
     <br />
     <label for="inputHereDate">入社日</label>
-    <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" value="<%- newConfirmation.hire_data %>" required>
+    <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日"
+      value="<%- newConfirmation.hire_data %>" required>
     <br />
     <label for="inputUsername">名前</label>
-    <input type="text" name="staff_name" id="inputUsername" class="form-control" placeholder="名前" value="<%- newConfirmation.staff_name %>">
+    <input type="text" name="staff_name" id="inputUsername" class="form-control" placeholder="名前"
+      value="<%- newConfirmation.staff_name %>">
     <br />
     <label for="inputPassword">Password</label>
-    <input type="password" name="hash" id="inputPassword" class="form-control" placeholder="password" value="<%- newConfirmation.hash %>" required>
+    <input type="password" name="hash" id="inputPassword" class="form-control" placeholder="password"
+      value="<%- newConfirmation.hash %>" required>
     <br />
     <label for="inputBirthday">生年月日</label>
-    <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日" value="<%- newConfirmation.birthday %>" required>
+    <input type="date" name="birthday" id="inputBirthday" class="form-control" placeholder="入社日"
+      value="<%- newConfirmation.birthday %>" required>
     <br />
     <label for="inputGender">性別</label>
-    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" value="<%- newConfirmation.genders_gender_id %>" min="1" max="2" required>
+    <input type="number" name="genders_gender_id" id="inputGender" class="form-control"
+      value="<%- newConfirmation.genders_gender_id %>" min="1" max="2" required>
     <br />
     <label for="inputPosition">役職</label>
-    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" value="<%- newConfirmation.position_lists_position_id %>" min="1" max="3" required>
+    <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control"
+      value="<%- newConfirmation.position_lists_position_id %>" min="1" max="3" required>
 
-    <br/>
+    <br />
     <div class="signup_btn">
-<button type="submit">登録</button>
-</div>
+      <button type="submit">登録</button>
+    </div>
   </form>
 
-<div class="reset">
-<form action="/managers/new" method=>
-<div class="reset_btn">
-<button type="submit">リセット</button>
-</div>
-</form>
-</div>
+  <div class="reset">
+    <form action="/managers/new" method=>
+      <div class="reset_btn">
+        <button type="submit">リセット</button>
+      </div>
+    </form>
+  </div>

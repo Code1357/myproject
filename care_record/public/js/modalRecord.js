@@ -1,4 +1,5 @@
 'use strict';
+
 {
   const open = document.getElementById('open_modal');
   const close = document.getElementById('close');
