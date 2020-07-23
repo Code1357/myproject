@@ -1,0 +1,15 @@
+.recorder {
+  width: 50%;
+  height: 500px;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.record_target {
+display: inline-block;
+}
+
+.recorderDate {
+  width: 250px;
+  margin-left: 20px;
+}

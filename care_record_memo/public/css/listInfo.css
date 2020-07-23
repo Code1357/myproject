@@ -1,0 +1,35 @@
+.staff_list, .user_list {
+  width: 150px;
+  height: 200px;
+  margin-top: 70px;
+  margin-left: 30px;
+ display: inline-block;
+text-align: left;
+  color: darkslategrey;
+  overflow: scroll;
+  border: 1px solid;
+  border-color: lightslategrey;
+}
+
+.staff_list_in, .user_list_in {
+  margin-left: 20px;
+}
+
+.staffInfo {
+  display: inline-block;
+  width: 70%;
+  height: 200px;
+}
+
+table {
+  
+  width: 100%;
+}
+
+.item {
+text-align: right;
+}
+
+.info {
+  text-align: left;
+}

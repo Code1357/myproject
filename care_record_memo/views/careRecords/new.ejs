@@ -1,0 +1,46 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/modal.css" rel="stylesheet">
+</head>
+<p>高齢者リスト</p>
+
+<%- include('r_header'); %>
+
+<div id="mask" class="hidden"></div> <!-- 背景全体を暗くする -->
+
+<div class="data_form">
+
+  <form class="signup" action="/careRecords/create" method="POST">
+    
+    <label for="inputEntranceData">入所日</label>
+    <input type="date" name="entrance_data" id="inputEntranceData" class="form-control" placeholder="入所日" value="<%- newUserConfirmation.entrance_data %>" required>
+    <br />
+    <label for="inputUserName">名前</label>
+    <input type="text" name="user_name" id="inputUserName" class="form-control" placeholder="利用者名前" value="<%- newUserConfirmation.user_name %>">
+    <br />
+    <label for="inputAdl">ADL</label>
+    <input type="number" name="adls_adl_id" id="inputAdl" class="form-control" value="<%- newUserConfirmation.adls_adl_id %>" min="1" max="3" required>
+    <br />
+    <label for="inputGender">性別</label>
+    <input type="number" name="genders_gender_id" id="inputGender" class="form-control" value="<%- newUserConfirmation.genders_gender_id %>" min="1" max="2" required>
+    <br/>
+    
+    <section id="modal" class="hidden">
+      <h3>こちらの内容で登録しますか？</h3>
+      <p id="outputEntranceData"></p>
+      <p id="outputUserName"></p>
+      <p id="outputAdl"></p>
+      <p id="outputGender"></p>
+
+      <button id="close" class="btn" name='action2' value="ぼたん2だよ">戻る</button>
+      <button class="btn" name='action' value="ぼたんだよ" >登録</button>
+    </section>
+  </form>
+  <div id="open">
+   <div class="modal_on_btn">
+    <button id="open_modal">登録</button>
+     </div>
+  </div>
+
+  <script src="/js/modalUser.js"></script>

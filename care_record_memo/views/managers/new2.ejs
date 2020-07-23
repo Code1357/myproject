@@ -6,14 +6,12 @@
 
 <%- include('m_header'); %>
 
-<div id="mask" class="hidden"></div> <!-- 背景全体を暗くする -->
+<p class="data_from_flash">以下の内容で登録して良いでしょうか？ </p>
 
-<div class="data_form">
-
-  <form class="signup" action="/managers/create1" method="POST">
+<div class="data_form2">
+  <form class="signup" action="/managers/create2" method="POST">
     <label for="inputEmployee">社員番号</label>
-    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control"
-      placeholder="社員番号" value="<%- newConfirmation.employee_id %>" autofocus>
+    <input type="number" minlength="6" maxlength="6" name="employee_id" id="inputEmployee" class="form-control" placeholder="社員番号" value="<%- newConfirmation.employee_id %>" autofocus>
     <br />
     <label for="inputHereDate">入社日</label>
     <input type="date" name="hire_data" id="inputHereDate" class="form-control" placeholder="入社日" value="<%- newConfirmation.hire_data %>" required>
@@ -32,29 +30,17 @@
     <br />
     <label for="inputPosition">役職</label>
     <input type="number" name="position_lists_position_id" id="inputPosition" class="form-control" value="<%- newConfirmation.position_lists_position_id %>" min="1" max="3" required>
+
     <br/>
-    <div class="modal_off_btn">
-    <button type="">モーダル無しで登録</button>
-     </div>
-    
-    <section id="modal" class="hidden">
-      <h3>こちらの内容で登録しますか？</h3>
-      <p id="outputEmployee"></p>
-      <p id="outputHereDate"></p>
-      <p id="outputUsername"></p>
-      <p id="outPassword"></p>
-      <p id="outputBirthday"></p>
-      <p id="outputGender"></p>
-      <p id="outputPosition"></p>
-
-      <button id="close" class="btn" name='action2' value="ぼたん2だよ">戻る</button>
-      <button class="btn" name='action' value="ぼたんだよ" >登録</button>
-    </section>
+    <div class="signup_btn">
+<button type="submit">登録</button>
+</div>
   </form>
-  <div id="open">
-   <div class="modal_on_btn">
-    <button id="open_modal">モーダルで登録</button>
-     </div>
-  </div>
 
-  <script src="/js/modal.js"></script>
+<div class="reset">
+<form action="/managers/new" method=>
+<div class="reset_btn">
+<button type="submit">リセット</button>
+</div>
+</form>
+</div>

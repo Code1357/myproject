@@ -1,0 +1,118 @@
+body {
+  width: 1280px;
+  width: 100%;
+  height: 800px;
+  margin: auto;
+}
+
+.container {
+  height: auto;
+  margin-top: 40px;
+}
+
+.flash {
+  width: 100%;
+  text-align: right;
+  top: 0px;
+  right: 0px;
+  margin: 2px;
+  color: crimson;
+
+}
+
+.info_compliance {
+  width: 45%;
+  height: 300px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+text-align: center;
+  color: brown;
+  overflow: scroll;
+  border: 1px solid;
+  border-color: lightslategrey;
+}
+
+.m_data_form {
+  text-align: center;
+  margin-top: 150px;
+}
+
+label {
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.m_btn_container, .modal_off_btn, .modal_on_btn, .signup_btn, .reset_btn {
+  width: 320px;
+  display: inline-block;
+  text-align: right;
+}
+
+.m_btn {
+  margin: 20px;
+}
+
+.top_index {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+}
+
+.manager_Start, .staff_start {
+  padding: 10px;
+}
+
+.data_form, .data_from_flash, .newConfirmation {
+  margin-top: 150px;
+  width: 100%;
+  text-align: center;
+}
+
+.signup, #open, .newConfirmation_employee {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+label {
+display: inline-block;
+text-align: right;
+width: 100px;
+margin-right: 0px;
+}
+
+input, .newConfirmation_list {
+  display: inline-block;
+  text-align: left;
+  width: 170px;
+margin-right: 0px;
+}
+
+.modal_off_btn, .modal_on_btn, .signup_btn, .reset_btn {
+  margin-top: 10px;
+}
+
+.reset {
+width: 100%;
+text-align: center;
+}
+
+.newConfirmation {
+  color: crimson;
+}
+
+.update_form {
+  border:none;
+background:none;
+}

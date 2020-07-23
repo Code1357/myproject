@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <%# 必要に応じてcssをloadする %>
+  <%#  必要に応じてscriptをloadする %>
+  <link href="/css/layout.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+<div class="flash">
+      <% if (flashMessages) { %>
+      <% if (flashMessages.success) { %>
+      <div class="flash success">
+        <%= flashMessages.success %>
+      </div>
+      <% } else if (flashMessages.error) { %>
+      <div class="flash error">
+        <%= flashMessages.error%>
+      </div>
+      <% } %>
+      <% } %>
+    </div>
+
+  <% if (loggedIn) { %>
+  <h3></h3>
+  <% } else { %>
+  <% if (!locals.top) { %>
+			<h3>ログイン</h3>
+      <a>-ログインしてください</a>
+		<% } %>
+    <% } %>
+  </header>
+
+  <div class="container">
+    <%- body %>
+  </div>
+
+  <footer>
+    <%# footer作成スペース %>
+
+</form>
+</div>
+
+    <div>
+      <%- include('partials/footer'); %>
+    </div>
+  </footer>
+</body>
+
+</html>
+
+<%# ejs活用参考URL：https://ejs.co %>
+<%# Expressではres.localsに格納する事でビューに表示させれる %>

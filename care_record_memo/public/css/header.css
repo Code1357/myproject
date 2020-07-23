@@ -1,0 +1,66 @@
+.header {
+  width: 1280px;
+  width: 100%;
+  margin: auto;
+}
+
+.m_title{
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.border {
+  border-bottom: 1px solid;
+  border-color: lightslategrey;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+.staff_id,
+.form_reset {
+  margin: 0px;
+  width: 250px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.m_login, .r_login {
+  height: 2px;
+  width: 100%;
+  margin-bottom: none;
+  padding: none;
+  text-align: right;
+  float: left;
+}
+
+.nav1, .nav2 {
+  width: 50%;
+  list-style: none;
+  overflow: hidden;
+  text-align: left;
+  display: inline-block;
+}
+
+.nav-title {
+  width: 250px;
+  text-align: left;
+}
+
+li {
+  width: 80px;
+  text-align: center;
+  display: inline-block;
+}
+
+.nav1, .nav2, li, a {
+  text-decoration: none;
+}
+
+ul {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 5px;
+  padding-left: 10px;
+}
