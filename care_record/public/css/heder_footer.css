@@ -1,29 +1,48 @@
-.header {
+.header, .logout {
   width: 1280px;
   width: 100%;
   margin: auto;
 }
 
-.m_title{
-  margin-top: 10px;
-  margin-bottom: 2px;
+.logout {
+  text-align: right;
 }
 
-.border {
+.logout_btn {
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.m_title, .r_title{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 5px;
+}
+
+.m_border, .r_border, .border {
   border-bottom: 1px solid;
   border-color: lightslategrey;
   margin-right: 5px;
   margin-left: 5px;
-  margin-top: 2px;
-  margin-bottom: 5px;
+  margin-top: 4px;
+  margin-bottom: 0px;
 }
 
-.staff_id,
-.form_reset {
-  margin: 0px;
+.border {
+  margin-top: 50px;
+}
+
+.staff_id, small {
   width: 250px;
   display: inline-block;
-  margin-right: 20px;
+  margin-top: 7px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  color: dimgrey;
+}
+small {
+  margin-top: 0px;
+  margin-right: 10px;
 }
 
 .m_login, .r_login {
@@ -37,14 +56,13 @@
 
 .nav1, .nav2 {
   width: 50%;
-  list-style: none;
   overflow: hidden;
   text-align: left;
   display: inline-block;
 }
 
 .nav-title {
-  width: 250px;
+  width: 200px;
   text-align: left;
 }
 
@@ -64,3 +82,11 @@ ul {
   margin-left: 5px;
   padding-left: 10px;
 }
+
+/* -------- リンク処理 */
+.nav_new {
+  color: teal;
+  }
+  .nav_new:hover {
+  color: darkkhaki;
+  }

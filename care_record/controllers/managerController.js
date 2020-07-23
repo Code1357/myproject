@@ -15,7 +15,7 @@ module.exports = {
       successRedirect: '/managers/info',
       successFlash: 'ログインに成功しました。',
       failureRedirect: '/managers/login',
-      failureFlash: 'ログイン失敗。社員番号かパスワードを確認してください。'
+      failureFlash: 'ログイン失敗。社員番号,パスワードを確認してください。'
     }),
 
   info: (req, res) => {

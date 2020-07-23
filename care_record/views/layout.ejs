@@ -6,10 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WEB Careシステム</title>
   <link href="/css/layout.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
 </head>
 
 <body>
   <header>
+  
     <div class="flash">
       <% if (flashMessages) { %>
       <% if (flashMessages.success) { %>
@@ -23,15 +25,20 @@
       <% } %>
       <% } %>
     </div>
-
-    <% if (loggedIn) { %>
-    <h3></h3>
+    
+    <div class="login_wrapper">
+    <div class="login_title">
+  <% if (loggedIn) { %>
+    <p class="none"></p>
     <% } else { %>
     <% if (!locals.top) { %>
-    <h3>ログイン</h3>
-    <a>-ログインしてください</a>
+    <h1 class="login_main" >ログイン</h1>
+    <p class="login_sub" >-ログインしてください</p>
     <% } %>
     <% } %>
+  </div>
+  </div>
+  
   </header>
 
   <div class="container">

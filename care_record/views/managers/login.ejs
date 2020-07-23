@@ -6,11 +6,12 @@
 
 </html>
 <div class="m_data_form">
+<p class="annotation"><small> 管理者は8からはじまる社員番号です<br> Care Staffは7からはじまる社員番号です<br><br> パスワードは半角英字1文字以上、<br>半角数字1文字以上を含み8桁〜15桁で作成されています</small></p>
   <form class="m_login_form" action="/managers/login" method="POST">
     <label for="username">社員番号</label>
-    <input type="text" class="m_form" name="username" id="username" placeholder="例.123456"><br>
-    <label for="m_password">Password</label>
-    <input type="password" class="m_form" name="password" id="m_password" placeholder="例.password"><br>
+    <input type="text" class="m_form" name="username" id="username" placeholder="6桁,半角英数字"><br>
+    <label for="m_password">パスワード</label>
+    <input type="password" class="m_form" name="password" id="m_password" placeholder="8桁〜15桁,半角英数字"><br>
     <div class="m_btn_container">
       <button type="submit" class="m_btn">login</button>
     </div>

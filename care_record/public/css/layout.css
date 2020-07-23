@@ -1,23 +1,107 @@
+/* 複数共通 */
 body {
   width: 1280px;
   width: 100%;
   height: 800px;
   margin: auto;
+    font-family: "M PLUS Rounded 1c";
+  background-color: lavenderblush;
 }
-
 .container {
   height: auto;
-  margin-top: 40px;
+}
+label {
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+  margin-right: 10px;
+}
+.m_data_form {
+  text-align: center;
+  margin-top: 130px;
+}
+.annotation {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.flash {
+/* index.ejs */
+.top_index {
   width: 100%;
-  text-align: right;
-  top: 0px;
-  right: 0px;
-  margin: 2px;
-  color: crimson;
+  display: inline-block;
+  text-align: center;
+  margin-top: 170px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* -------- リンク処理 */
+.start{
+text-decoration: none;
+color: teal;
+}
+.start:hover {
+color: darkkhaki;
+}
+.greeting {
+  text-align: center;
+color: orchid;
+}
+.greeting_title{
+  font-size: 35px;
+}
+.start, .greeting_sub {
+  font-size: 20px;
+}
 
+/* layout.ejs */
+.wrapper {
+width: 100%;
+}
+.login_main {
+  margin-top: 5px;
+  margin-bottom: 0px;
+  margin-left: 5px;
+  font-size: 25px;
+}
+.login_sub {
+  margin-top: 3px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  font-size: 15px;
+}
+.none {
+  margin: 0px;
+  font-size: 0px;
+  }
+.flash {
+  display: inline-block;
+  text-align: right;
+  margin-top: 2px;
+  margin-bottom: 0pX;
+  margin-left: 5px;
+  margin-right: 7px;
+  color: crimson;
+}
+
+/* login.ejs */
+.annotation{
+  width: 500px;
+  display: inline-block;
+  padding-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: lightcoral;
+}
+
+/*  -------- btn */
+.m_btn_container, .modal_off_btn, .modal_on_btn, .signup_btn, .reset_btn {
+  width: 370px;
+  display: inline-block;
+  text-align: right;
+}
+.m_btn {
+  margin: 20px;
 }
 
 .info_compliance {
@@ -37,38 +121,6 @@ text-align: center;
   border-color: lightslategrey;
 }
 
-.m_data_form {
-  text-align: center;
-  margin-top: 150px;
-}
-
-label {
-  width: 100px;
-  display: inline-block;
-  text-align: right;
-  margin-right: 10px;
-}
-
-.m_btn_container, .modal_off_btn, .modal_on_btn, .signup_btn, .reset_btn {
-  width: 320px;
-  display: inline-block;
-  text-align: right;
-}
-
-.m_btn {
-  margin: 20px;
-}
-
-.top_index {
-  width: 100%;
-  display: inline-block;
-  text-align: center;
-  margin-top: 200px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 20px;
-}
-
 .manager_Start, .staff_start {
   padding: 10px;
 }
@@ -83,13 +135,6 @@ label {
   width: 100%;
   margin: auto;
   text-align: center;
-}
-
-label {
-display: inline-block;
-text-align: right;
-width: 100px;
-margin-right: 0px;
 }
 
 input, .newConfirmation_list {
