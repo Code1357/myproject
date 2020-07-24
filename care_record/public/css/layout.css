@@ -104,21 +104,35 @@ width: 100%;
   margin: 20px;
 }
 
+/* login.ejs */
 .info_compliance {
-  width: 45%;
+  width: 50%;
   height: 300px;
   padding-left: 25px;
   padding-right: 25px;
   padding-top: 5px;
   padding-bottom: 5px;
-  margin-top: 100px;
+  margin-top: 0px;
   margin-left: auto;
   margin-right: auto;
-text-align: center;
-  color: brown;
+text-align: left;
+  color: dimgrey;
   overflow: scroll;
   border: 1px solid;
   border-color: lightslategrey;
+}
+.sample_compliance {
+font-size: 17px;
+}
+.compliance_title {
+  width: 55%;
+  margin-top: 90px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 15px;
+  color: dimgrey;
 }
 
 .manager_Start, .staff_start {

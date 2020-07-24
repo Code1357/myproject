@@ -1,25 +1,25 @@
-.header, .logout {
+.header,
+.logout {
   width: 1280px;
   width: 100%;
   margin: auto;
 }
-
 .logout {
   text-align: right;
 }
-
 .logout_btn {
   margin-top: 10px;
   margin-right: 20px;
 }
-
-.m_title, .r_title{
+.m_title,
+.r_title {
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: 5px;
 }
-
-.m_border, .r_border, .border {
+.m_border,
+.r_border,
+.border {
   border-bottom: 1px solid;
   border-color: lightslategrey;
   margin-right: 5px;
@@ -27,12 +27,11 @@
   margin-top: 4px;
   margin-bottom: 0px;
 }
-
 .border {
   margin-top: 50px;
 }
-
-.staff_id, small {
+.staff_id,
+small {
   width: 250px;
   display: inline-block;
   margin-top: 7px;
@@ -44,8 +43,8 @@ small {
   margin-top: 0px;
   margin-right: 10px;
 }
-
-.m_login, .r_login {
+.m_login,
+.r_login {
   height: 2px;
   width: 100%;
   margin-bottom: none;
@@ -53,29 +52,28 @@ small {
   text-align: right;
   float: left;
 }
-
-.nav1, .nav2 {
+.nav1,
+.nav2 {
   width: 50%;
   overflow: hidden;
   text-align: left;
   display: inline-block;
 }
-
 .nav-title {
-  width: 200px;
+  width: 220px;
   text-align: left;
 }
-
 li {
   width: 80px;
   text-align: center;
   display: inline-block;
 }
-
-.nav1, .nav2, li, a {
+.nav1,
+.nav2,
+li,
+a {
   text-decoration: none;
 }
-
 ul {
   margin-top: 3px;
   margin-bottom: 3px;
@@ -84,9 +82,11 @@ ul {
 }
 
 /* -------- リンク処理 */
-.nav_new {
+.nav_new_a,
+.nav_list_a {
   color: teal;
-  }
-  .nav_new:hover {
+}
+.nav_new_a:hover,
+.nav_list_a:hover {
   color: darkkhaki;
-  }
+}
