@@ -29,10 +29,14 @@ oBtn.addEventListener('click', (e) => {
   if (inputGender == 1) {
     const outputGender = '性別：男性';
     document.getElementById('outputGender').innerHTML = outputGender;
-  } else {
+  } else if (inputGender == 2) {
     const outputGender = '性別：女性';
     document.getElementById('outputGender').innerHTML = outputGender;
+  } else {
+    const outputGender = '性別：';
+    document.getElementById('outputGender').innerHTML = outputGender;
   };
+
   const inputAdl = document.getElementById('inputAdl').value;
   if (inputAdl == 1) {
     const outputAdl = 'ADL：自立';
@@ -40,10 +44,14 @@ oBtn.addEventListener('click', (e) => {
   } else if (inputAdl == 2) {
     const outputAdl = 'ADL：見守り';
     document.getElementById('outputAdl').innerHTML = outputAdl;
-  } else {
+  } else if (inputAdl == 3) {
     const outputAdl = 'ADL：要介護';
     document.getElementById('outputAdl').innerHTML = outputAdl;
+  } else {
+    const outputAdl = 'ADL：';
+    document.getElementById('outputAdl').innerHTML = outputAdl;
   };
+  document.getElementById('recMessage').innerHTML = '名前とADLはあとから更新(修正)可能です';
   document.getElementById('outputEntranceData').innerHTML = outputEntranceData;
   document.getElementById('outputUserName').innerHTML = outputUserName;
 });

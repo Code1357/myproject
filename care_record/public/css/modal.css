@@ -1,18 +1,7 @@
 /* モーダルレイアウト*/
-
-/* 文字、ボタンのスタイル */
 body {
   font-size: 16px;
 }
-
-/* #open{
-  cursor: pointer;
-  width: 200px;
-  text-align: center;
-  padding: 12px;
-  margin: 16px auto 0;
-  color: white;
-} */
 
 /* 背景全体を暗くして、操作できないようにする */
 #mask {
@@ -48,5 +37,12 @@ body {
 }
 
 #modal.hidden {
-  transform: translate(0, -500px);
+  transform: translate(0, -600px);
+}
+.output {
+text-align: left;
+padding-left: 55px;
+}
+#recMessage {
+  color: lightcoral;
 }

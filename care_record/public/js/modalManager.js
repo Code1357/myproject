@@ -32,10 +32,14 @@ oBtn.addEventListener('click', (e) => {
   if (inputGender == 1) {
     const outputGender = '性別：男性';
     document.getElementById('outputGender').innerHTML = outputGender;
-  } else {
+  } else if (inputGender == 2) {
     const outputGender = '性別：女性';
     document.getElementById('outputGender').innerHTML = outputGender;
+  } else {
+    const outputGender = '性別：';
+    document.getElementById('outputGender').innerHTML = outputGender;
   };
+
   const inputPosition = document.getElementById('inputPosition').value;
   if (inputPosition == 1) {
     const outputPosition = '役職：管理職';
@@ -43,10 +47,14 @@ oBtn.addEventListener('click', (e) => {
   } else if (inputPosition == 2) {
     const outputPosition = '役職：一般';
     document.getElementById('outputPosition').innerHTML = outputPosition;
-  } else {
+  } else if (inputPosition == 3) {
     const outputPosition = '役職：見習い';
     document.getElementById('outputPosition').innerHTML = outputPosition;
+  } else {
+    const outputPosition = '役職：';
+    document.getElementById('outputPosition').innerHTML = outputPosition;
   };
+  document.getElementById('recMessage').innerHTML = '名前と役職はあとから更新(修正)可能です';
   document.getElementById('outputEmployee').innerHTML = outputEmployee;
   document.getElementById('outputHereDate').innerHTML = outputHereDate;
   document.getElementById('outputUsername').innerHTML = outputUsername;
