@@ -1,25 +1,31 @@
 <head>
-  <link href="/css/listinfo.css" rel="stylesheet">
+    <link href="/css/listinfo.css" rel="stylesheet">
 </head>
 
 <%- include('r_header'); %>
 
+<div class="user_list_wrapper">
+<p class="users_list_title">利用者 一覧</p>
 <div class="user_list">
-  <div class="user_list_in">
-    <% userList.forEach(userList => { %>
-    <ul>
-      <li id="staff_list">
-        <a href="<%=`/careRecords/users/${userList.user_id}`%>">
-          <%= userList.user_name %></a>
-      </li>
-    </ul>
-    <% }); %>
-  </div>
+    <div class="user_list_in">
+        <% userList.forEach(userList => { %>
+        <ul class="user_list_ul">
+            <li id="user_list_inner">
+                <a class="user_list_name" href="<%=`/careRecords/users/${userList.user_id}`%>">
+                    <%= userList.user_name %></a>
+            </li>
+        </ul>
+        <% }); %>
+    </div>
+</div>
 </div>
 
-<button type="submit"><a href="<%=`/careRecords/recordPage/${userId}`%>">記録</a></button>
-<button type="submit"><a href="<%=`/careRecords/searchPage/${userId}`%>">検索</a></button>
 
+<div class="user_info">
+<button class="record_btn" type="submit"><a href="<%=`/careRecords/recordPage/${userId}`%>">記録</a></button>
+<button class="search_btn" type="submit"><a href="<%=`/careRecords/searchPage/${userId}`%>">／　検索</a></button>
+<button class="update_btn" type="submit"><a href="<%=`/careRecords/updatePage/${userId}`%>">／　利用者情報修正</a></button>
+<p class="annotation"><small class="annotation_list_user"> 修正できるのは、名前・ADLのみです</small></p>
 <div class="userInfo">
   <table>
     <tr>
@@ -41,7 +47,4 @@
     </tr>
   </table>
 </div>
-
-<button type="submit"><a href="<%=`/careRecords/updatePage/${userId}`%>">修正</a></button>
-
-<p>※ 修正できるのは、名前・ADLのみです</p>
+</div>

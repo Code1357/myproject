@@ -211,3 +211,12 @@ margin-left: 55px;
   border:none;
 background:none;
 }
+
+/* footer固定*/
+.body_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+footer {
+  margin-top: auto;
+}
