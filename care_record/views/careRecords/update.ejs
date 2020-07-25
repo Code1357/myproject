@@ -7,8 +7,8 @@
 
 <div id="mask" class="hidden"></div> <!-- 背景全体を暗くする -->
 
-<div class="data_form">
-
+<div class="data_form_update">
+<p class="annotation"><small class="annotation_staff_update"> 名前とADLのみ変更が可能です</small></p>
   <form class="signup" action="<%=`/careRecords/update/${userId}/update?_method=PUT`%>" method="POST">
 
     <label for="inputEntranceData">入所日</label>
@@ -23,11 +23,11 @@
 
     <label for="inputGender">性別</label>
     <input type="number" name="genders_gender_id" id="inputGender" class="update_form"
-      value="<%= userUpdate[0].genders_gender_id %>" min="1" max="2" readonly>
+      value="<%= userUpdate[0].genders_gender_id %>" min="1" max="2" placeholder="1:男,2:女" readonly>
     <br />
     <label for="inputAdl">ADL</label>
     <input type="number" name="adls_adl_id" id="inputAdl" class="form-control" value="<%= userUpdate[0].adls_adl_id %>"
-      min="1" max="3" placeholder="1〜3,半角英数字" required>
+      min="1" max="3" placeholder="1:自立,2:見守り,3:要介護" required>
     <br />
 
     <section id="modal" class="hidden">

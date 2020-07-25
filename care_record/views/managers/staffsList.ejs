@@ -4,15 +4,18 @@
 
 <%- include('m_header'); %>
 
+<div class="staff_list_wrapper">
 <div class="staff_list">
     <div class="staff_list_in">
+    <p class="staffs_list_titel">スタッフ 一覧</p>
         <% staffList.forEach(staffList => { %>
-        <ul>
-            <li id="staff_list">
-                <a href="<%=`/managers/staffs/${staffList.staff_id}`%>">
+        <ul class="staff_list_ul">
+            <li id="staff_list_inner">
+                <a class="staff_list_name" href="<%=`/managers/staffs/${staffList.staff_id}`%>">
                     <%= staffList.staff_name %></a>
             </li>
         </ul>
         <% }); %>
     </div>
+</div>
 </div>

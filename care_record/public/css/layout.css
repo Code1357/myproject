@@ -84,13 +84,22 @@ width: 100%;
 }
 
 /* login.ejs */
-.annotation{
-  width: 500px;
+.annotation_login, .annotation_staff, .annotation_staff_update {
+  width: 400px;
   display: inline-block;
   padding-bottom: 20px;
-  margin-left: auto;
+  margin-left: 100px;
   margin-right: auto;
-  text-align: center;
+  text-align: left;
+  color: lightcoral;
+}
+.annotation_staff_update {
+  width: 400px;
+  display: inline-block;
+  padding-bottom: 20px;
+  margin-left: 180px;
+  margin-right: auto;
+  text-align: left;
   color: lightcoral;
 }
 
@@ -161,18 +170,22 @@ font-size: 17px;
 /* new.ejs,new2.ejs,newConfirmation.ejs,update.ejs*/
 /* new.ejs,userRecord,recordSearch,update.ejs,pastRecord.ejs*/
 .data_form, .newConfirmation, .newUserConfirmation {
-  margin-top: 130px;
+  margin-top: 50px;
   width: 100%;
   text-align: center;
 }
-.data_from_flash, .newConfirmation, .newUserConfirmation {
-  margin-top: 90px;
+.data_from_flash {
+  margin-top: 130px;
   width: 100%;
   text-align: center;
   margin-left: 22px;
   color: crimson;
 }
-
+.data_form_update, .data_form_update{
+  margin-top: 120px;
+  width: 100%;
+  text-align: center;
+}
 .signup, #open, .newConfirmation_employee, .newUserConfirmation_user {
   width: 100%;
   margin: auto;
@@ -191,7 +204,7 @@ margin-right: 0px;
 margin-right: 0px;
 margin-left: 55px;
 }
-.newConfirmation {
+.newConfirmation, .newUserConfirmation {
   color: crimson;
 }
 .update_form {

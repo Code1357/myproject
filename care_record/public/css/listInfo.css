@@ -1,20 +1,59 @@
-.staff_list, .user_list {
-  width: 150px;
-  height: 200px;
-  margin-top: 70px;
+/* staffsList.ejs, usersList */
+.staff_list_wrapper, .user_list_wrapper {
+  width: 210px;
+  height: 540px;
+  margin-top: 20px;
   margin-left: 30px;
  display: inline-block;
-text-align: left;
-  color: darkslategrey;
+text-align: center;
   overflow: scroll;
   border: 1px solid;
   border-color: lightslategrey;
+  background-color: rgb(255, 209, 216);
+}
+.staff_list, .user_list {
+  width: 180px;
+  height: 530px;
+ margin-left: 10px;
+ margin-right: 10px;
+ display: inline-block;
+text-align: left;
+  overflow: scroll;
+background-color: rgb(255, 209, 216);
+}
+.staff_list_inner, .staff_list_ul {
+  width: 85%;
+  display: inline-block;
+ 
+  background-color: white;
+  border: 0.3px solid;
+  border-color: lightgrey;
+}
+.staff_list_name, .user_list_name {
+  display: inline-block;
+  text-align: left;
+  width: 153px;
+  font-size: 14px;
+}
+.staffs_list_titel, .users_list_titel {
+  display: inline-block;
+  margin-left: 3px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
-.staff_list_in, .user_list_in {
-  margin-left: 20px;
-}
 
+/* -------- リンク処理 */
+.staff_list_name, .user_list_name {
+  text-decoration: none;
+  color: teal;
+  }
+.staff_list_name:hover, .user_list_name:hover {
+  color: darkkhaki;
+  }
+
+
+/*  */
 .staffInfo {
   display: inline-block;
   width: 70%;
