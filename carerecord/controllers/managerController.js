@@ -29,7 +29,6 @@ module.exports = {
       con.query(loginSQL.login, username, (err, result) => {
         if (err) throw err;
         const position = result[0].position_lists_position_id;
-        console.log(position);
         if (position === 1) {
           res.render('managers/info', { position1: 1 });
         } else {

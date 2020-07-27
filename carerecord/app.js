@@ -1,11 +1,5 @@
 'use strict';
 
-// CSRF(csurf) 未実装
-// セキュアチェックリスト, https://blog.risingstack.com/node-js-security-checklist/
-// レスポンシブ必要
-// JQuery(カレンダー)
-// model化(classの導入)
-
 const express = require('express');
 const app = express();
 const con = require('./db/mysql');
@@ -60,8 +54,8 @@ passport.use(new LocalStrategy(
       const hash = result;
       const map1 = hash.map(value => value.employee_id.toString());
       const map2 = hash.map(value => value.hash);
-      const hashd = map2[0];
-      const authenticationHash = bcrypt.compareSync(password, hashd); // hashと入力passを照合,trueかfalse
+      const hash2 = map2[0];
+      const authenticationHash = bcrypt.compareSync(password, hash2); // hashと入力passを照合,trueかfalse
       if (map1.includes(username) && authenticationHash === true) { // username,password紐付きはinputのname
         return done(null, username);
       }
@@ -78,7 +72,7 @@ app.use(passport.session());
 app.use(connectFlash()); // FlashMessageの箱
 app.use((req, res, next) => {
   res.locals.flashMessages = req.flash();
-  console.log(req.isAuthenticated()); // 認証,true or false check
+  // console.log(req.isAuthenticated()); // 認証,true or false check
   res.locals.loggedIn = req.isAuthenticated();
   res.locals.staffs = req.user;
   next();

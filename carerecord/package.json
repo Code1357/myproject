@@ -1,5 +1,5 @@
 {
-  "name": "careRecord",
+  "name": "carerecord",
   "version": "1.0.0",
   "description": "介護記録のWebアプリ",
   "main": "app.js",
