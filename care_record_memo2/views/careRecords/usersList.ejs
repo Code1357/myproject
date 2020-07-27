@@ -1,0 +1,21 @@
+<head>
+    <link href="/css/listinfo.css" rel="stylesheet">
+</head>
+
+<%- include('r_header'); %>
+
+<div class="user_list_wrapper">
+<p class="users_list_title">利用者 一覧</p>
+<div class="user_list">
+    <div class="user_list_in">
+        <% userList.forEach(userList => { %>
+        <ul class="user_list_ul">
+            <li id="user_list_inner">
+                <a class="user_list_name" href="<%=`/careRecords/users/${userList.user_id}`%>">
+                    <%= userList.user_name %></a>
+            </li>
+        </ul>
+        <% }); %>
+    </div>
+</div>
+</div>

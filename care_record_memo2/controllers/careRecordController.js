@@ -89,14 +89,14 @@ module.exports = {
     }
   },
 
-  updatePage: (req, res) => {
+  updatePage: (req, res, next) => {
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
       res.status(httpStatus.NO_CONTENT);
       res.redirect('/managers/login');
     } else {
       const userId = req.params.user_id;
-      con.query(careRecordSQL.selectUserInfo, userId, (err, result) => {
+      con.query(careRecordSQL.selectUserInfo, userId, (err, result, fields) => {
         if (err) throw err;
         res.locals.userId = userId;
         const userUpdate = result;
@@ -115,7 +115,7 @@ module.exports = {
       res.status(httpStatus.NO_CONTENT);
       res.redirect('/managers/login');
     } else {
-      con.query(careRecordSQL.orderByName, (err, result) => {
+      con.query(careRecordSQL.orderByName, (err, result, fields) => {
         if (err) throw err;
         const userList = result;
         res.locals.userList = userList;
@@ -133,10 +133,10 @@ module.exports = {
       const userId = req.params.user_id;
       const name = req.body.user_name;
       const adl = req.body.adls_adl_id;
-      con.query(careRecordSQL.updateUserInfo, [name, adl, userId], function (err, result) {
+      con.query(careRecordSQL.updateUserInfo, [name, adl, userId], function (err, result, fields) {
         if (err) throw err;
       });
-      con.query(careRecordSQL.selectUserInfo, userId, function (err, result) {
+      con.query(careRecordSQL.selectUserInfo, userId, function (err, result, fields) {
         if (err) throw err;
         const resultEntranceData = result[0].entrance_data;
         const entranceData = `${resultEntranceData.getUTCFullYear()}年${resultEntranceData.getUTCMonth() + 1}月${resultEntranceData.getUTCDate()}日`;
@@ -157,26 +157,25 @@ module.exports = {
       res.status(httpStatus.NO_CONTENT);
       res.redirect('/managers/login');
     } else {
-      con.query(careRecordSQL.orderByName, (err, result) => {
+      con.query(careRecordSQL.orderByName, (err, result, fields) => {
         if (err) throw err;
-        const userList = result;
-        res.locals.userList = userList;
+        res.locals.userList = result;
         {
           const userId = req.params.user_id;
           res.locals.userId = userId;
-          con.query(careRecordSQL.selectUserName, userId, (err, result) => {
+          con.query(careRecordSQL.selectUserName, userId, (err, result, fields) => {
             if (err) throw err;
             res.locals.userName = result[0].user_name;
-            con.query(careRecordSQL.selectEntranceDate, userId, (err, result) => {
+            con.query(careRecordSQL.selectEntranceDate, userId, (err, result, fields) => {
               if (err) throw err;
               const resultEntranceData = result[0].entrance_data;
               const entranceData = `${resultEntranceData.getUTCFullYear()}年${resultEntranceData.getUTCMonth() + 1}月${resultEntranceData.getUTCDate()}日`;
               res.locals.entranceData = entranceData;
-              con.query(careRecordSQL.selectAdlJoin, userId, (err, result) => {
+              con.query(careRecordSQL.selectAdlJoin, userId, (err, result, fields) => {
                 if (err) throw err;
                 const adl = result[0].adl;
                 res.locals.adl = adl;
-                con.query(careRecordSQL.selectGenderJoin, userId, (err, result) => {
+                con.query(careRecordSQL.selectGenderJoin, userId, (err, result, fields) => {
                   if (err) throw err;
                   const gender = result[0].gender;
                   res.locals.gender = gender;
@@ -198,21 +197,20 @@ module.exports = {
     } else {
       const newRecUserConfirmation = JSON.parse(JSON.stringify(req.body));
       res.locals.newRecUserConfirmation = newRecUserConfirmation;
-      con.query(careRecordSQL.orderByName, (err, result) => {
+      con.query(careRecordSQL.orderByName, (err, result, fields) => {
         if (err) throw err;
-        const userList = result;
-        res.locals.userList = userList;
+        res.locals.userList = result;
         {
           const userId = req.params.user_id;
           res.locals.userId = userId;
-          con.query(careRecordSQL.selectUserName, userId, (err, result) => {
+          con.query(careRecordSQL.selectUserName, userId, (err, result, fields) => {
             if (err) throw err;
             res.locals.userName = result[0].user_name;
-            con.query(careRecordSQL.selectAdlJoin, userId, (err, result) => {
+            con.query(careRecordSQL.selectAdlJoin, userId, (err, result, fields) => {
               if (err) throw err;
               const adl = result[0].adl;
               res.locals.adl = adl;
-              con.query(careRecordSQL.selectGenderJoin, userId, (err, result) => {
+              con.query(careRecordSQL.selectGenderJoin, userId, (err, result, fields) => {
                 if (err) throw err;
                 const gender = result[0].gender;
                 res.locals.gender = gender;
@@ -271,7 +269,7 @@ module.exports = {
       const userId = req.params.user_id; // 利用者のID
       // スタッフ名を検索
       console.log(staffId);
-      con.query(careRecordSQL.selectStaffName, staffId, (err, result) => {
+      con.query(careRecordSQL.selectStaffName, staffId, (err, result, fields) => {
         if (err) throw err;
         const staffName = result[0].staff_name;
         console.log(staffName);
@@ -295,20 +293,20 @@ module.exports = {
       res.status(httpStatus.NO_CONTENT);
       res.redirect('/managers/login');
     } else {
-      con.query(careRecordSQL.orderByName, (err, result) => {
+      con.query(careRecordSQL.orderByName, (err, result, fields) => {
         if (err) throw err;
         res.locals.userList = result;
         {
           const userId = req.params.user_id;
           res.locals.userId = userId;
-          con.query(careRecordSQL.selectUserName, userId, (err, result) => {
+          con.query(careRecordSQL.selectUserName, userId, (err, result, fields) => {
             if (err) throw err;
             res.locals.userName = result[0].user_name;
-            con.query(careRecordSQL.selectAdlJoin, userId, (err, result) => {
+            con.query(careRecordSQL.selectAdlJoin, userId, (err, result, fields) => {
               if (err) throw err;
               const adl = result[0].adl;
               res.locals.adl = adl;
-              con.query(careRecordSQL.selectGenderJoin, userId, (err, result) => {
+              con.query(careRecordSQL.selectGenderJoin, userId, (err, result, fields) => {
                 if (err) throw err;
                 const gender = result[0].gender;
                 res.locals.gender = gender;
@@ -327,26 +325,26 @@ module.exports = {
       res.status(httpStatus.NO_CONTENT);
       res.redirect('/managers/login');
     } else {
-      con.query(careRecordSQL.orderByName, (err, result) => {
+      con.query(careRecordSQL.orderByName, (err, result, fields) => {
         if (err) throw err;
         const userList = result;
         res.locals.userList = userList;
         const userId = req.params.user_id;
         res.locals.userId = userId;
-        con.query(careRecordSQL.selectUserName, userId, (err, result) => {
+        con.query(careRecordSQL.selectUserName, userId, (err, result, fields) => {
           if (err) throw err;
           res.locals.userName = result[0].user_name;
-          con.query(careRecordSQL.selectAdlJoin, userId, (err, result) => {
+          con.query(careRecordSQL.selectAdlJoin, userId, (err, result, fields) => {
             if (err) throw err;
             const adl = result[0].adl;
             res.locals.adl = adl;
-            con.query(careRecordSQL.selectGenderJoin, userId, (err, result) => {
+            con.query(careRecordSQL.selectGenderJoin, userId, (err, result, fields) => {
               if (err) throw err;
               const gender = result[0].gender;
               res.locals.gender = gender;
               // レコーディングテーブルから検索
               const searchDate = req.query.search_date;
-              con.query(careRecordSQL.careRecordSearch, [searchDate, userId], (err, result) => {
+              con.query(careRecordSQL.careRecordSearch, [searchDate, userId], (err, result, fields) => {
                 if (err) throw err;
                 console.log(result);
                 const pastRecord = result;

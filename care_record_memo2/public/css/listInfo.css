@@ -1,0 +1,100 @@
+/* staffsList.ejs, usersList, staffInfo.ejs, userInfo.ejs */
+/* userRecord, recordSearch.ejs, pastRecord.ejs */
+.staff_list_wrapper,
+.user_list_wrapper {
+  float: left;
+  width: 210px;
+  height: 565px;
+  margin-top: 20px;
+  margin-left: 30px;
+  text-align: center;
+  border: 1px solid;
+  border-color: lightslategrey;
+  background-color: rgb(255, 209, 216);
+}
+.staff_list,
+.user_list {
+  width: 180px;
+  height: 530px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-block;
+  text-align: left;
+  overflow: scroll;
+  background-color: rgb(255, 209, 216);
+}
+.staff_list_inner,
+.user_list_inner,
+.staff_list_ul,
+.user_list_ul {
+  width: 85%;
+  display: inline-block;
+  background-color: white;
+  border: 0.3px solid;
+  border-color: lightgrey;
+}
+.staff_list_name,
+.user_list_name {
+  display: inline-block;
+  text-align: left;
+  width: 153px;
+  font-size: 14px;
+}
+.staffs_list_title,
+.users_list_title {
+  display: inline-block;
+  margin-left: -20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.annotation_list, .annotation_list_user
+{
+  color: lightcoral; 
+}
+
+/* -------- リンク処理 */
+.staff_list_name,
+.user_list_name {
+  text-decoration: none;
+  color: teal;
+}
+.staff_list_name:hover,
+.user_list_name:hover {
+  color: darkkhaki;
+}
+
+/* staffInfo.ejs, userInfo.ejs*/
+/* userRecord, recordSearch.ejs, pastRecord.ejs */
+.staff_info {
+  margin-top: 18px;
+  display: inline-block;
+  margin-left: 0px;
+  margin-left: 20%;
+  
+}
+.user_info {
+  margin-top: 20px;
+  display: inline-block;
+  margin-left: 0px;
+  margin-left: 20%;
+}
+.annotation_list, .annotation_list_user {
+  margin-top: 26px;
+}
+
+table {
+  width: 100%;
+}
+
+.item {
+  text-align: right;
+}
+
+.info {
+  text-align: left;
+}
+.record_btn, .update_btn, .search_btn {
+ border-style: none;
+ background-color: transparent;
+ font-size: 14px;
+}

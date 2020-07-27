@@ -1,0 +1,232 @@
+/* 複数共通 */
+body {
+  width: 1280px;
+  width: 100%;
+  height: 800px;
+  margin: auto;
+    font-family: "M PLUS Rounded 1c";
+  background-color: lavenderblush;
+}
+.container {
+  height: auto;
+}
+label {
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+  margin-right: 10px;
+}
+.m_data_form {
+  text-align: center;
+  margin-top: 130px;
+}
+.annotation {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* index.ejs */
+.top_index {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  margin-top: 170px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* -------- リンク処理 */
+.start{
+text-decoration: none;
+color: teal;
+}
+.start:hover {
+color: darkkhaki;
+}
+.greeting {
+  text-align: center;
+color: orchid;
+}
+.greeting_title{
+  font-size: 35px;
+}
+.start, .greeting_sub {
+  font-size: 20px;
+}
+
+/* layout.ejs */
+.wrapper {
+width: 100%;
+}
+.login_main {
+  margin-top: 5px;
+  margin-bottom: 0px;
+  margin-left: 5px;
+  font-size: 25px;
+}
+.login_sub {
+  margin-top: 3px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  font-size: 15px;
+}
+.none {
+  margin: 0px;
+  font-size: 0px;
+  }
+.flash {
+  display: inline-block;
+  text-align: left;
+  margin-top: 2px;
+  margin-bottom: 0pX;
+  margin-left: 5px;
+  margin-right: 7px;
+  color: crimson;
+}
+
+/* login.ejs,etc */
+.annotation_login, .annotation_staff {
+  width: 400px;
+  display: inline-block;
+  padding-bottom: 20px;
+  margin-left: 100px;
+  margin-right: auto;
+  text-align: left;
+  color: lightcoral;
+}
+.annotation_staff_update {
+  width: 400px;
+  display: inline-block;
+  padding-bottom: 20px;
+  margin-left: 180px;
+  margin-right: auto;
+  text-align: left;
+  color: lightcoral;
+}
+
+.annotation_user_update {
+  width: 400px;
+  display: inline-block;
+  padding-bottom: 20px;
+  margin-left: 220px;
+  margin-right: auto;
+  text-align: left;
+  color: lightcoral;
+}
+
+/*  -------- btn */
+.m_btn_container, .modal_off_btn, .modal_on_btn, .modal_to_btn, .signup_btn, .reset_btn {
+  width: 370px;
+  display: inline-block;
+  text-align: right;
+}
+.reset {
+  width: 100%;
+  text-align: center;
+  }
+.m_btn {
+  margin: 20px;
+}
+.modal_off_btn, .modal_to_btn, .signup_btn {
+  margin-top: 7px;
+  margin-right: 50px;
+}
+.modal_on_btn, .reset_btn {
+  margin-top: 2px;
+  margin-right: 50px;
+}
+.reset_btn_text {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.modal_on_btn_text{
+  padding-left: 13px;
+  padding-right: 12px;
+}
+.modal_btn {
+  margin-left: 30px;
+}
+
+/* login.ejs */
+.info_compliance {
+  width: 50%;
+  height: 300px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+text-align: left;
+  color: dimgrey;
+  overflow: scroll;
+  border: 1px solid;
+  border-color: lightslategrey;
+}
+.sample_compliance {
+font-size: 17px;
+}
+.compliance_title {
+  width: 55%;
+  margin-top: 90px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 15px;
+  color: rgb(170, 68, 218);
+}
+
+/* new.ejs,new2.ejs,newConfirmation.ejs,update.ejs*/
+/* new.ejs,userRecord,recordSearch,update.ejs,pastRecord.ejs*/
+.data_form, .newConfirmation, .newUserConfirmation {
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+}
+.data_from_flash {
+  margin-top: 130px;
+  width: 100%;
+  text-align: center;
+  margin-left: 22px;
+  color: crimson;
+}
+.data_form_update, .data_form_update{
+  margin-top: 120px;
+  width: 100%;
+  text-align: center;
+}
+.signup, #open, .newConfirmation_employee, .newUserConfirmation_user {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+input {
+  display: inline-block;
+  text-align: left;
+  width: 170px;
+margin-right: 0px;
+}
+.newConfirmation_list, .newUserConfirmation_list {
+  display: inline-block;
+  text-align: left;
+  width: 200px;
+margin-right: 0px;
+margin-left: 55px;
+}
+.newConfirmation, .newUserConfirmation {
+  color: crimson;
+}
+.update_form {
+  border:none;
+background:none;
+}
+
+/* footer固定*/
+.body_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+footer {
+  margin-top: auto;
+}

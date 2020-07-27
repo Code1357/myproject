@@ -1,0 +1,83 @@
+.data_form_user_record, .data_form_user_search {
+  margin-top: 18px;
+  padding-left: 300px;
+  width: 100%;
+  text-align: left;
+ 
+}
+.modal_btn_area {
+  text-align: center;
+}
+.recorder {
+  resize: none;
+  width: 50%;
+  height: 428px;
+  margin-top: 1px;
+  margin-left: 0px;
+  display: inline-block;
+}
+
+
+.recorderDate, .searchDate {
+  width: 250px;
+}
+.record_target, .search_target {
+  margin-bottom: 0px;
+font-size: 14px;
+}
+
+.search_btn_record_page {
+  border-style: none;
+ background-color: transparent;
+ font-size: 14px;
+}
+
+.reset_btn, .modal_to_btn_record {
+width: 70px;
+float: left;
+margin: 0px;
+}
+.search_page_search_btn {
+margin-top: 6px;
+}
+
+.search_result {
+  width: 50%;
+  height: 410px;
+  padding-left: 25px;
+  padding-right: 25px;
+padding-top: 10px;
+  padding-bottom: 5px;
+  margin-top: 6px;
+  margin-left: 300px;
+  color: dimgrey;
+  overflow: scroll;
+  border: 1px solid;
+  border-color: lightslategrey;
+  background-color: rgb(250, 248, 232);
+}
+.result_date, .result_care_record, .result_care_records_staff_name{
+margin: 0px;
+}
+
+.result_border {
+  border-bottom: 1px solid;
+  border-color: lightslategrey;
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.result_date, .result_care_records_staff_name {
+font-size: 12px;
+}
+.result_date {
+  float: left;
+  color: rgb(109, 25, 46);
+}
+.result_care_records_staff_name {
+  color: darkgreen;
+}
+.result_care_record {
+font-size: 14px;
+}

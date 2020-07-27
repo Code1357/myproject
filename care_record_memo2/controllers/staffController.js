@@ -130,7 +130,7 @@ module.exports = {
       res.redirect('/managers/login');
     } else {
       const staffId = req.params.staff_id;
-      con.query(staffSQL.selectInfo, staffId, (err, result) => {
+      con.query(staffSQL.selectInfo, staffId, (err, result, fields) => {
         if (err) throw err;
         res.locals.staffId = staffId;
         const staffUpdate = result;
@@ -155,10 +155,10 @@ module.exports = {
       const staffId = req.params.staff_id;
       const name = req.body.staff_name;
       const position = req.body.position_lists_position_id;
-      con.query(staffSQL.updateName, [name, position, staffId], function (err, result) {
+      con.query(staffSQL.updateName, [name, position, staffId], function (err, result, fields) {
         if (err) throw err;
       });
-      con.query(staffSQL.selectInfo, staffId, function (err, result) {
+      con.query(staffSQL.selectInfo, staffId, function (err, result, fields) {
         if (err) throw err;
         const resultHireData = result[0].hire_data;
         const hireData = `${resultHireData.getUTCFullYear()}年${resultHireData.getUTCMonth() + 1}月${resultHireData.getUTCDate()}日`;
@@ -183,7 +183,7 @@ module.exports = {
       res.redirect('/managers/login');
       next();
     } else {
-      con.query(staffSQL.orderByName, (err, result) => {
+      con.query(staffSQL.orderByName, (err, result, fields) => {
         if (err) throw err;
         const staffList = result;
         res.locals.staffList = staffList;
@@ -199,39 +199,39 @@ module.exports = {
       res.status(httpStatus.NO_CONTENT);
       res.redirect('/managers/login');
     } else {
-      con.query(staffSQL.orderByName, (err, result) => {
+      con.query(staffSQL.orderByName, (err, result, fields) => {
         if (err) throw err;
         const staffList = result;
         res.locals.staffList = staffList;
         {
           const staffId = req.params.staff_id;
-          con.query(staffSQL.selectEmployeeId, staffId, (err, result) => {
+          con.query(staffSQL.selectEmployeeId, staffId, (err, result, fields) => {
             if (err) throw err;
             const staffEmployeeId = result;
             res.locals.staffEmployeeId = staffEmployeeId[0].employee_id;
             res.locals.staffId = staffId;
-            con.query(staffSQL.selectName, staffId, (err, result) => {
+            con.query(staffSQL.selectName, staffId, (err, result, fields) => {
               if (err) throw err;
               const staffName = result;
               res.locals.staffName = staffName[0].staff_name;
-              con.query(staffSQL.selectHireDate, staffId, (err, result) => {
+              con.query(staffSQL.selectHireDate, staffId, (err, result, fields) => {
                 if (err) throw err;
                 const resultHireData = result[0].hire_data;
                 const hireData = `${resultHireData.getUTCFullYear()}年${resultHireData.getUTCMonth() + 1}月${resultHireData.getUTCDate()}日`;
                 res.locals.hireData = hireData;
 
-                con.query(staffSQL.selectBirthday, staffId, (err, result) => {
+                con.query(staffSQL.selectBirthday, staffId, (err, result, fields) => {
                   if (err) throw err;
                   const birthdayData = result[0].birthday;
                   const birthday = `${birthdayData.getUTCFullYear()}年${birthdayData.getUTCMonth() + 1}月${birthdayData.getUTCDate()}日`;
                   res.locals.birthday = birthday;
 
-                  con.query(staffSQL.selectJoinPosition, staffId, (err, result) => {
+                  con.query(staffSQL.selectJoinPosition, staffId, (err, result, fields) => {
                     if (err) throw err;
                     const position = result[0].position;
                     res.locals.position = position;
 
-                    con.query(staffSQL.selectJoinGender, staffId, (err, result) => {
+                    con.query(staffSQL.selectJoinGender, staffId, (err, result, fields) => {
                       if (err) throw err;
                       const gender = result[0].gender;
                       res.locals.gender = gender;
