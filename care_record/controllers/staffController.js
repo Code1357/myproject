@@ -4,6 +4,7 @@ const con = require('../db/mysql');
 const httpStatus = require('http-status-codes');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const staffSQL = require('../models/staff');
 
 module.exports = {
 
@@ -37,8 +38,8 @@ module.exports = {
       req.check('staff_name')
         .not().isEmpty().withMessage('社員名は、必ず入力してください');
       req.check('hash')
-        .matches(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,15}$/i).withMessage('半角英字を1文字以上、数字を1つ以上含む、8~15文字の間で作成してください')
-        .not().isEmpty().withMessage('パスワードは必ず入力してください');
+        .matches(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,15}$/i).withMessage('パスワードは、半角英字を1文字以上、数字を1つ以上含む、8~15文字の間で作成してください')
+        .not().isEmpty().withMessage('パスワードは、必ず入力してください');
       req.check('birthday')
         .isBefore().withMessage('未来の誕生日は入力できません')
         .not().isEmpty().withMessage('誕生日は、必ず入力してください');
@@ -111,8 +112,7 @@ module.exports = {
       const pass = req.body.hash;
       const hash = bcrypt.hashSync(pass, saltRounds);
       req.body.hash = hash;
-      const sql = 'insert into staff_lists set ?';
-      con.query(sql, req.body, (error, results) => {
+      con.query(staffSQL.info, req.body, (error, results) => {
         if (error) {
           req.flash('error', '登録できませんでした,既に登録されている社員IDです');
           res.redirect('/managers/new');
@@ -130,7 +130,7 @@ module.exports = {
       res.redirect('/managers/login');
     } else {
       const staffId = req.params.staff_id;
-      con.query('select * from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+      con.query(staffSQL.selectInfo, staffId, (err, result, fields) => {
         if (err) throw err;
         res.locals.staffId = staffId;
         const staffUpdate = result;
@@ -155,10 +155,10 @@ module.exports = {
       const staffId = req.params.staff_id;
       const name = req.body.staff_name;
       const position = req.body.position_lists_position_id;
-      con.query('update staff_lists set staff_name = ?, position_lists_position_id = ? where staff_id = ?', [name, position, staffId], function (err, result, fields) {
+      con.query(staffSQL.updateName, [name, position, staffId], function (err, result, fields) {
         if (err) throw err;
       });
-      con.query('select * from staff_lists where staff_id = ?', staffId, function (err, result, fields) {
+      con.query(staffSQL.selectInfo, staffId, function (err, result, fields) {
         if (err) throw err;
         const resultHireData = result[0].hire_data;
         const hireData = `${resultHireData.getUTCFullYear()}年${resultHireData.getUTCMonth() + 1}月${resultHireData.getUTCDate()}日`;
@@ -183,7 +183,7 @@ module.exports = {
       res.redirect('/managers/login');
       next();
     } else {
-      con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
+      con.query(staffSQL.orderByName, (err, result, fields) => {
         if (err) throw err;
         const staffList = result;
         res.locals.staffList = staffList;
@@ -199,39 +199,39 @@ module.exports = {
       res.status(httpStatus.NO_CONTENT);
       res.redirect('/managers/login');
     } else {
-      con.query('select * from staff_lists order by staff_name', (err, result, fields) => {
+      con.query(staffSQL.orderByName, (err, result, fields) => {
         if (err) throw err;
         const staffList = result;
         res.locals.staffList = staffList;
         {
           const staffId = req.params.staff_id;
-          con.query('select employee_id from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+          con.query(staffSQL.selectEmployeeId, staffId, (err, result, fields) => {
             if (err) throw err;
             const staffEmployeeId = result;
             res.locals.staffEmployeeId = staffEmployeeId[0].employee_id;
             res.locals.staffId = staffId;
-            con.query('select staff_name from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+            con.query(staffSQL.selectName, staffId, (err, result, fields) => {
               if (err) throw err;
               const staffName = result;
               res.locals.staffName = staffName[0].staff_name;
-              con.query('select hire_data from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+              con.query(staffSQL.selectHireDate, staffId, (err, result, fields) => {
                 if (err) throw err;
                 const resultHireData = result[0].hire_data;
                 const hireData = `${resultHireData.getUTCFullYear()}年${resultHireData.getUTCMonth() + 1}月${resultHireData.getUTCDate()}日`;
                 res.locals.hireData = hireData;
 
-                con.query('select birthday from staff_lists where staff_id = ?', staffId, (err, result, fields) => {
+                con.query(staffSQL.selectBirthday, staffId, (err, result, fields) => {
                   if (err) throw err;
                   const birthdayData = result[0].birthday;
                   const birthday = `${birthdayData.getUTCFullYear()}年${birthdayData.getUTCMonth() + 1}月${birthdayData.getUTCDate()}日`;
                   res.locals.birthday = birthday;
 
-                  con.query('select s.staff_name, p.position from staff_lists as s join position_lists as p on s.position_lists_position_id = p.position_id where staff_id = ?', staffId, (err, result, fields) => {
+                  con.query(staffSQL.selectJoinPosition, staffId, (err, result, fields) => {
                     if (err) throw err;
                     const position = result[0].position;
                     res.locals.position = position;
 
-                    con.query('select s.staff_name, g.gender from staff_lists as s join genders as g on s.genders_gender_id = g.gender_id where staff_id = ?', staffId, (err, result, fields) => {
+                    con.query(staffSQL.selectJoinGender, staffId, (err, result, fields) => {
                       if (err) throw err;
                       const gender = result[0].gender;
                       res.locals.gender = gender;

@@ -3,6 +3,9 @@
 const con = require('../db/mysql');
 const httpStatus = require('http-status-codes');
 const passport = require('passport');
+// const Read = require('../models/isAuthenticated');
+// const { mode } = require('../models/isAuthenticated');
+const loginSQL = require('../models/login');
 
 module.exports = {
 
@@ -19,13 +22,15 @@ module.exports = {
     }),
 
   info: (req, res) => {
+    /* const read = new Read();
+    read.read2(); */
     if (!req.isAuthenticated()) {
       req.flash('success', 'ログインセッションが切れ');
       res.status(httpStatus.NO_CONTENT);
       res.redirect('/managers/login');
     } else {
       const username = req.user.name;
-      con.query('select position_lists_position_id from staff_lists where employee_id = ?', username, (err, result, fields) => {
+      con.query(loginSQL.login, username, (err, result, fields) => {
         if (err) throw err;
         const position = result[0].position_lists_position_id;
         console.log(position);

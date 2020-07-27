@@ -2,6 +2,9 @@
 
 // CSRF(csurf) 未実装
 // セキュアチェックリスト, https://blog.risingstack.com/node-js-security-checklist/
+// レスポンシブ必要
+// JQuery(カレンダー)
+// model化(classの導入)
 
 const express = require('express');
 const app = express();

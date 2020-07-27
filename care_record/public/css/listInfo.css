@@ -66,10 +66,11 @@
 /* staffInfo.ejs, userInfo.ejs*/
 /* userRecord, recordSearch.ejs, pastRecord.ejs */
 .staff_info {
-  margin-top: 70px;
+  margin-top: 18px;
   display: inline-block;
   margin-left: 0px;
   margin-left: 20%;
+  
 }
 .user_info {
   margin-top: 20px;
@@ -77,7 +78,7 @@
   margin-left: 0px;
   margin-left: 20%;
 }
-.annotation_list_user {
+.annotation_list, .annotation_list_user {
   margin-top: 26px;
 }
 
@@ -92,16 +93,8 @@ table {
 .info {
   text-align: left;
 }
-
-/* .update_btn {
-  display: inline-block;
-  margin-left: 190px;
-  margin-top: 10px;
-} */
 .record_btn, .update_btn, .search_btn {
  border-style: none;
  background-color: transparent;
  font-size: 14px;
 }
-
-/* userRecord, recordSearch.ejs, pastRecord.ejs */

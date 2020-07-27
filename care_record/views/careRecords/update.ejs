@@ -8,11 +8,11 @@
 <div id="mask" class="hidden"></div> <!-- 背景全体を暗くする -->
 
 <div class="data_form_update">
-<p class="annotation"><small class="annotation_staff_update"> 名前とADLのみ変更が可能です</small></p>
+<p class="annotation"><small class="annotation_user_update"> 名前とADLのみ変更が可能です</small></p>
   <form class="signup" action="<%=`/careRecords/update/${userId}/update?_method=PUT`%>" method="POST">
 
     <label for="inputEntranceData">入所日</label>
-    <input type="" name="entrance_data" id="inputEntranceData" class="update_form" placeholder="入所日"
+    <input type="" name="entrance_data" id="inputEntranceData" class="update_form" placeholder=""
       value="<%= entranceData %>" readonly>
     <br />
     <label for="inputUserName">名前</label>
